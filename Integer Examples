@@ -19,3 +19,12 @@ system.debug('My age is :'+ age);
 
 Example 4:
 ----------
+Integer primInteger = 3;
+system.debug(primInteger);
+//Output: 3
+
+Example 5:
+---------
+Integer i=1;
+system.debug('The value of i is :' + i);
+//The value of i is :1
