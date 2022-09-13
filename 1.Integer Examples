@@ -28,3 +28,9 @@ Example 5:
 Integer i=1;
 system.debug('The value of i is :' + i);
 //The value of i is :1
+
+Example 6:
+----------
+Integer quantity = 100;
+System.debug('The value of the quantity variable is:'+ quantity);
+//The value of the quantity variable is: 100
