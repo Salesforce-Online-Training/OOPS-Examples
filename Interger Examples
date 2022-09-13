@@ -3,3 +3,19 @@ Example 1:
 Integer barrelNumbers = 1000;
 system.debug(' The value of barrelNumbers : '+barrelNumbers);
 //Output: The Value of barrelNumbers: 1000
+
+Example 2:
+----------
+Integer x;
+x = 10;
+system.debug('The value of X is :'+ x);
+// Output: The value of X is : 10
+
+Example 3:
+---------
+Integer age=18;
+system.debug('My age is :'+ age);
+//Output: My age is : 18
+
+Example 4:
+----------
