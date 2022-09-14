@@ -40,6 +40,70 @@ Example 4:
 List<Integer> rollNumbers = new List<Integer>{001,002,003,004,001};
 system.debug('RollNumbers are :' + rollNumbers);
 //Output: RollNumbers are :(1, 2, 3, 4, 1)
-                                                          Set Method in List
-                                                          ------*****-------
+                                                          
+Example 5:Apex Class that contains all the list methods with example
+-------------------------------------------------------------------
+public class ListMethodsExample {
+    public void methodInList(){
+        // I want to store team members names 
+        list<string> TeamList = new list<string>{'Kohli','Rohit'};
+            system.debug('The elements in the List'+TeamList); //Kohli, Rohit
+        
+        // 1.Add: Use Add Method to add elements to list
+        TeamList.add('Rahane');
+        TeamList.add('Karthik');
+        system.debug('The elements in the List'+TeamList); //Kohli, Rohit,Rahane,Karthik
+        
+        // 2.Set : Use Set method to add elements at a specific Index
+        TeamList.set(3,'Pant');
+        system.debug('The elements in the List'+TeamList); //Kohli, Rohit,Rahane,Pant
+        
+        // 3.Size: Use size method to get count of elements in the list
+        Integer count = TeamList.size();
+        system.debug('The size of the list is '+ count); //4
+        
+        // 4.Contains: Use Contains method to check whether element is present in the list or not
+        Boolean checkvalue=  TeamList.contains('Rahane');
+        system.debug('Rahane element is Present:'+ checkvalue); //true
+        
+        // 5.isEmpty: Use this method to check whether list has elements or not
+        Boolean listempty = TeamList.isEmpty();
+        system.debug('Does list has no elements ?' + listempty);  //false
+        
+        // 6.Remove: Use this method to remove elements at a specific Index
+        TeamList.remove(3);
+        system.debug('The elements in the List'+TeamList);   //Kohli, Rohit, Rahane
+        list<string> TeamList2 = new list<string>{'Yuvraj','Kaif'};
+            
+        // 7.AddAll: Using this method we can add one list or set to another list
+        TeamList2.AddAll(TeamList);
+        System.debug('The elements in the List'+TeamList2); //Yuvraj, Kaif, Kohli, Rohit, Rahane
+        
+        // 8.Clone: Copy elements from one list to another list
+        list<string> TeamList3 = TeamList2.clone();
+        system.debug('The elements in the List' + TeamList3); //Yuvraj, Kaif, Kohli, Rohit, Rahane
+        
+        // 9.get: Use this method to get the element based on the Index
+        system.debug('The elements in the Index position 2 of TeamList3 :' + TeamList3.get(2)); //Kohli
+        system.debug('The elements in the Index position 2 of TeamList3 :' + TeamList3[2]); //Kohli
+        
+        // 10.Clear: Use this method to delete all the elements in the list
+        TeamList3.clear();
+        system.debug('The elements in the List :' + TeamList3); //()
+    }
+}
+
+Execute the below code in the anonymous window:
+-----------------------------------------------
+ListMethodsExample obj = new ListMethodsExample();
+obj.methodInList();
+
+Example 6: How to use Assert in the list
+----------------------------------------
+List<Integer> num= new List<Integer>();
+num.add(10);
+system.debug('The number is :'+ num); //10
+system.debug('The value at Index position zero is' + num[0]); //10
+integer x = num[0];
+system.assertEquals(10,x);  //true
 
