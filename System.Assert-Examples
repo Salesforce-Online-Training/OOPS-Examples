@@ -1,0 +1,36 @@
+Assertion:
+----------
+   1.Assertions are the conditions based on which the execution of the program either continues or terminates.
+   2.If the condition is True, then the program execution continues. If False, the execution of the program will Terminates.
+   3.The message in the system.assert will only be displayed if the statement is false.If true, then it will not display the message.
+   4.Syntax: System.assert(Condition);
+
+Example 1:
+---------
+List<Integer> num= new List<Integer>();
+num.add(10);
+system.debug('The number is :'+ num);
+system.debug('The value at Index position zero is' + num[0]);
+integer x = num[0];
+system.assertEquals(10,x);
+
+Example 2:
+----------
+System.assert(system.today().year()==2022);
+
+Integer i=0;
+Integer j=1;
+system.assert(i==0,'Yes I value is True');
+
+//Output: Nothing
+
+Example 4:
+---------
+Integer i=0;
+Integer j=1;
+System.assert(i==0);
+System.assert(i==0,'Yes I value is True');  
+system.assertEquals(i,j);  //This statement is false, so the program will terminate at this line
+system.assertEquals(i,j,'Both are equal'); //This statement is false, so the program will terminate at this line
+system.assertNotEquals(i,j );
+system.assertNotEquals(i,j,'Yes the expression is True');
