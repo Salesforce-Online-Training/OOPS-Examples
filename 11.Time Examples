@@ -1,2 +1,6 @@
 Example 1:
 ---------
+time t = datetime.now().time();
+system.debug(t);
+                            Output:15:35:44.761Z
+
