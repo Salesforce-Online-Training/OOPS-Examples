@@ -1,0 +1,18 @@
+Example 1: I want to store colors in a List
+---------
+list<String> colors = new list<string>();
+colors.add('Blue');
+colors.add('Red');
+colors.add('Yellow');
+system.debug('The color are :'+ colors);
+                                         //Output: The color are :(Blue, Red, Yellow)
+Example 2:  I want to store Salaries in a List
+---------
+list<Double> Salaries = new list<Double>();
+Salaries.add(10000000);
+Salaries.add(20000000);
+Salaries.add(30000000);
+system.debug('The Salaries are :'+ Salaries);
+                                    // Output: The Salaries are :(1.0E7, 2.0E7, 3.0E7)
+Example 3:
+---------
