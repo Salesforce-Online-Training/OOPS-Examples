@@ -1,0 +1,36 @@
+                                                                String Methods
+                                                                ----***------
+Example 1:
+---------
+String s1 = 'xyzw';
+String s2 = 'xyz';
+Boolean s3= s1.contains(s2);
+system.assertEquals(true, s3);
+
+Example 2: toUpperCase() Method
+--------------------------------
+String className = 'Saelesforce Online Training';
+String Name = className.toUpperCase();
+System.debug('Name is :' + Name);
+System.assertEquals('SAELESFORCE ONLINE TRAINING', Name);
+//Output:Name is :SAELESFORCE ONLINE TRAINING
+
+Example 3: toLowerCase() Method
+-------------------------------
+String className = 'SALESFORCE ONLINE TRAINING';
+String Name = className.tolowerCase();
+System.debug('Name is :' + Name);
+System.assertEquals('salesforce online training', Name);
+
+Examples4: ContainsAny() Method
+-------------------------------
+String s ='hello';
+Boolean b1 = s.containsAny('hx');
+Boolean b2 = s.containsAny('x');
+system.assertEquals(true, b1);
+system.assertEquals(false, b2);
+
+
+Note: Practice few other methods in String : https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_string.htm
+      For Date method : https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_date.htm
+
