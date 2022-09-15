@@ -1,0 +1,24 @@
+Map:
+---
+   1.Map is a Key,Value pair
+   2.Key is one datatype and value is one datatype
+   3.Key should be unique and value can be duplicate
+   4.Syntax: Map<key,value> mapName = new Map<key,value>();
+                                                               Map Example
+                                                               ---***----
+Examples:
+--------
+1.To store emp id and emp Name:
+Map<id,String> mapEmployees = new Map<id,String>();
+
+2.To store emp id and emp Salary
+Map<id,Decimal> mapIDSalEmp = new Map<id,Decimal>();
+
+3.To check stu id and check fee paid or not
+Map<id, Boolean> mapIDFee = new Map<id,Boolean>();
+
+4.To store Account ID and Account
+Map<id,Account> mapAcc = new Map<id,Account>();
+
+5.To store Account ID and List of Account Details
+Map<id,List<Account>> mapAccount = new Map<id,List<Account>();
