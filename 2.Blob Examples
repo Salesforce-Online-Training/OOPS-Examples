@@ -1,2 +1,6 @@
 Example 1:
 ---------
+String testString='test string';
+Blob myBlob=blob.valueOf(testString);
+system.debug('--testString--' + testString);
+------------
