@@ -10,3 +10,67 @@ Set:
 Set<String> colors = new Set<string>();
 Set<Double> Salaries = new Set<Double>();
 Set<ID> SFIds = new Set<ID>();
+                                                                              Set Methods
+                                                                              ----***----
+Apex Class:
+----------
+public class SetMethodsExample {
+    public void methodsInSet(){
+        Set<integer> setMarks1 = new Set<integer>();
+        
+        // 1.Add: Use this method when you want to add elements to the set
+        setMarks1.add(20);
+        setMarks1.add(70);
+        setMarks1.add(99);
+        
+        // 2.Size: Use size method to get count of elements in the list
+        Integer count = setMarks1.size();
+        system.debug('The size of the list is '+ count); //3
+        
+        // 3.isEmpty: Use this method to check whether set has elements or not
+        Boolean listempty = setMarks1.isEmpty();
+        system.debug('Does list has no elements ?' + listempty);  //false
+        
+        // 4.Remove: Use this method to remove elements from the set
+        setMarks1.remove(99);
+        system.debug('The elements in the List'+setMarks1);
+        
+        Set<integer> setMarks2 = new Set<integer>{45,55};
+            
+        // 5.AddAll: Using this method we can add one list or set to another list
+        setMarks2.AddAll(setMarks1);
+        System.debug('The elements in the List'+setMarks2);
+        
+        // 6.Clear: Use this method to delete all the elements in the list
+        setMarks2.clear();
+        system.debug('The elements in the List :' + setMarks2); //()
+        
+        // 7.RemoveAll: Removes the elements in the specified list from the set if they are present.
+        Set<integer> myset = new Set<integer>{1,2,3};
+        list<integer> mylist = new list<integer>{1,3};
+        boolean result = myset.removeAll(mylist);
+        system.assertEquals(true, result);
+        system.debug('My set is :'+ myset);
+        
+        Integer result2 = myset.size();
+        system.assertEquals(1, result2);
+        
+        // 8.RetainAll : Whatever elements are list if same elements are present in set then it will retain those common values only
+        Set<integer> myset4 = new Set<integer>{1,2,3};
+        list<integer> mylist4 = new list<integer>{1,3};
+        myset4.retainAll(mylist4);
+        system.debug('My set4 is :'+ myset4);
+        system.debug('My list4 is :'+ mylist4);
+    }       
+}
+
+Execute the below code in the anonymous window:
+----------------------------------------------
+SetMethodsExample obj = new SetMethodsExample();
+obj.methodsInSet();
+
+
+                                                                              
+                                                                              
+                                                                              
+                                                          
