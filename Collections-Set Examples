@@ -10,6 +10,19 @@ Set:
 Set<String> colors = new Set<string>();
 Set<Double> Salaries = new Set<Double>();
 Set<ID> SFIds = new Set<ID>();
+
+                                                                              Set with Duplicate value
+                                                                              --------******-----------
+Example: Set will not store duplicate values and does not follow Insertion order
+-------
+Set<String> teamMembers = new Set<String>();
+teamMembers.add('Sachin');
+teamMembers.add('Sehwag');
+teamMembers.add('Dravid');
+teamMembers.add('Sachin');
+system.debug('The teamMember Names are :' + teamMembers);
+//Output: The teamMember Names are :(Dravid,Sachin, Sehwag)
+
                                                                               Set Methods
                                                                               ----***----
 Apex Class:
