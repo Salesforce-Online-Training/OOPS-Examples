@@ -1,2 +1,35 @@
-Example 1:
+Example 1: Adds the specified number of days to a Datetime.
 ---------
+Datetime myDateTime = Datetime.newInstance(2022, 09, 15);
+Datetime newDateTime = myDateTime.addDays(2);
+Datetime expected = Datetime.newInstance(2022, 09, 19);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime); 
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-09-15 07:00:00
+//Output: newDateTime :2022-09-17 07:00:00
+//Output: expected :2022-09-19 07:00:00
+
+Example 2: Add Hours(additionalHours)
+----------
+DateTime myDateTime = DateTime.newInstance(2022, 1, 31, 7, 8, 16);
+DateTime newDateTime = myDateTime.addHours(3);
+DateTime expected = DateTime.newInstance(2022, 1, 31, 10, 8, 16);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime);
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-01-31 15:08:16
+//Output: newDateTime :2022-01-31 18:08:16
+//Output: expected :2022-01-31 18:08:16
+
+Example 3: Add Months(AdditionalMonths)
+---------
+DateTime myDateTime = DateTime.newInstance(2022, 7, 7, 7, 8, 12);
+DateTime newDateTime = myDateTime.addMonths(1);
+DateTime expected = DateTime.newInstance(2022, 8, 7, 7, 8, 12);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime);
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-07-07 14:08:12
+//Output: newDateTime :2022-08-07 14:08:12
+//Output: expected :2022-08-07 14:08:12 
