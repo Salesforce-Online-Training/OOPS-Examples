@@ -43,3 +43,11 @@ colors[1] = 'Blue';
 colors[2] = 'Yellow';
 string s1 = colors.remove(2);
 system.assertEquals('Yellow', s1);
+
+Example 6: Compare two sets an then check their size is equal or not
+--------------------------------------------------------------------
+set<integer> myset = new set<integer>();
+myset.add(10);
+myset.add(20);
+set<integer> myset2 = new set<integer>(myset);
+system.assert(myset2.size()==2);
