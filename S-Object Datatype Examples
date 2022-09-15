@@ -1,0 +1,41 @@
+S-object: 
+--------
+    1.S-object stands for Salesforce Object
+    2. S-object refers to both Standard and custom object
+    3.Syntax: Sobject objName = new Sobject();
+    
+Examples
+---------
+Account acc = new Account();
+Case cs = new Case();
+Student__c std = new Student__c();
+Employee__c emp = new Employee__c();
+
+Example 1:
+---------
+contact con = new contact();
+con.firstName ='Sandeep';
+con.lastName = 'Kumar';
+con.email = 'sandeep@kumar.com';
+con.phone = '8885989899';
+con.birthdate = date.newInstance(2022, 10, 5);
+system.debug('Contact details are :'+ con);
+//Output: Contact details are :Contact:{FirstName=Sandeep, LastName=Kumar, Email=sandeep@kumar.com, Phone=8885989899, Birthdate=2022-10-05 00:00:00}
+
+Example 2: Another way to pass variables 
+---------
+contact cont = new contact(LastName = 'Sandeep', Phone = '9848394391');
+system.debug('Contact details are :'+ cont);
+//Output: Contact details are :Contact:{LastName=Sandeep, Phone=9848394391}
+
+Example 3:
+---------
+Student__c std = new Student__c(Name = 'XYZ', Email_Id__c='anji@gmail.com');
+system.debug('Student details are :'+ std);
+//Output:Student details are :Student__c:{Name=XYZ, Email_Id__c=anji@gmail.com}
+
+Example 4:
+---------
+Trainer__c tr = new Trainer__c(Name='Anji',Trainer_Salary__c = 1000);
+system.debug('The Trainer details are :'+ tr);
+//Output:The Trainer details are :Trainer__c:{Name=Anji, Trainer_Salary__c=1000}
