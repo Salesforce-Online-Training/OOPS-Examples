@@ -1,3 +1,6 @@
 Set:
 ----
-   1.
+   1.Set is a collection of similar elements
+   2.Set will not maintain Insertion order
+   3.Set will not allow duplicates
+   4.Set is un-ordered
