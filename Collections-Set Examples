@@ -5,4 +5,8 @@ Set:
    3.Set will not allow duplicates
    4.Set is un-ordered
    5.Syntax: Set<Datatype> setName = new Set<Datatype>();
-   
+                                                                             Set Examples
+                                                                             ----**------
+Set<String> colors = new Set<string>();
+Set<Double> Salaries = new Set<Double>();
+Set<ID> SFIds = new Set<ID>();
