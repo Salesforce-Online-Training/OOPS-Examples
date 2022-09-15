@@ -34,3 +34,12 @@ system.assertEquals(i,j);  //This statement is false, so the program will termin
 system.assertEquals(i,j,'Both are equal'); //This statement is false, so the program will terminate at this line
 system.assertNotEquals(i,j );
 system.assertNotEquals(i,j,'Yes the expression is True');
+
+Example 5: I want to know which element is removed through system.assert
+------------------------------------------------------------------------
+List<string> colors = new string[3];
+colors[0] = 'Red';
+colors[1] = 'Blue';
+colors[2] = 'Yellow';
+string s1 = colors.remove(2);
+system.assertEquals('Yellow', s1);
