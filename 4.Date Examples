@@ -1,1 +1,30 @@
+Date:
+-----
+   1.This variable type indicates a date. This can only store the date and not the time.
+ 
+Example 1: To daisplay date, month
+---------
+Date myDate = Date.newInstance(2022, 09, 15);
+Date newDate = mydate.addDays(2);
+date newDate1 = myDate.addMonths(3);
+system.debug('myDate :'+myDate);
+system.debug('newDate :'+newDate);
+system.debug('newDate1 :'+newDate1);
+//Output: myDate : 2022-09-15 00:00:00
+//Output: newDate : 2022-09-17 00:00:00
+//Output: newDate : 12022-12-15 00:00:00
 
+Example2:The following example finds the number of days in the month of February in the year 2022.
+--------
+Integer numberOfDays = date.daysInMonth(2022, 2);
+system.debug('NumberOfDays in Febuary: '+numberOfDays);
+//Output: NumberOfDays in Febuary: 28
+
+Example 3:
+---------
+date myDate = date.newInstance(2001, 3, 21);
+String dayString = myDate.format();
+system.debug('myDate :'+ myDate);
+system.debug('dayString :'+ dayString);
+//Output: myDate :2001-03-21 00:00:00
+//Output: dayString :3/21/2001
