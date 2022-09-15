@@ -22,3 +22,60 @@ Map<id,Account> mapAcc = new Map<id,Account>();
 
 5.To store Account ID and List of Account Details
 Map<id,List<Account>> mapAccount = new Map<id,List<Account>();
+
+                                                               Map class with their method
+                                                               --------*******-----------
+public class MapMethodExample {
+    public void methodsInMap(){
+        
+        //1.Map to store empid and empName
+        Map<integer, string> empMap = new Map<integer, string>{01 =>'Anji', 02 =>'Santosh'};
+        system.debug('The emp details are :' + empMap);  //The emp details are :{1=Anji, 2=Santosh}
+        
+        //2.Size: Use this method to get size of the Map
+        Integer mapCount = empMap.size();
+        system.debug('The map size is :' + mapCount); //The map size is :2
+        
+        //3.Put:Use this method to add elements to the Map
+        empMap.put(03,'Geeta');
+        empMap.put(04,'Sangeetha');
+        system.debug('The emp details are :' + empMap); //The emp details are :{1=Anji, 2=Santosh, 3=Geeta, 4=Sangeetha}
+        
+        //4.keySet: If you want to key all the key's from the Map
+        set<Integer> Keyvalues= empMap.keySet(); // We are using set because key's cannot be duplicate
+        System.debug('The key are :'+ keyvalues);  //The key are :{1, 2, 3, 4}
+        
+        //5.Value: To get all values from the Map
+        List<String> Keyvalues1= empMap.values();
+        System.debug('The values are :'+ keyvalues1); //The values are :(Anji, Santosh, Geeta, Sangeetha)
+        
+        //6.ContainsKey: I want to know whether key exist in the Map or not
+        Boolean keypresent = empMap.containsKey(2);
+        system.debug('The key is present? :' + keypresent); //True
+        
+        //7.get: By passing the key if we want to get value then use get method
+        String value =empMap.get(2);
+        system.debug('The value at 2 key is :'+ value);  //Santosh
+        
+        Map<integer, string> empMap1 = new Map<integer, string>{05 =>'Naveen', 06 =>'Ranith'};
+        
+        //8.PutAll: If we want to add one Map to another Map
+        empMap.putAll(empMap1);
+        system.debug('The new Map contains :' + empMap ); //The new Map contains :{1=Anji, 2=Santosh, 3=Geeta, 4=Sangeetha, 5=Naveen, 6=Ranith}
+        
+        //9.isEmpty: If you want to whether elments present in the Map or not
+        Boolean isMapempty= empMap.isEmpty();
+        system.debug('==isMapempty== :' + isMapempty); //false
+        
+        //10.Clear: To remove elements from the Map
+        empMap.clear();
+        system.debug('emp map contains :'+ empMap); //0
+        
+    }
+
+}
+
+Execute the below code in the Anonymous window
+---------------------------------------------
+MapMethodExample obj = new MapMethodExample();
+obj.methodsInMap();
