@@ -107,3 +107,21 @@ system.debug('The value at Index position zero is' + num[0]); //10
 integer x = num[0];
 system.assertEquals(10,x);  //true
 
+Example 7: getSobjectType()
+----------------------------
+// Create a generic sObject variable.
+SObject sObj = Database.query('SELECT Id FROM Account LIMIT 1');
+
+// Verify if that sObject  variable is an Account token.
+System.assertEquals(
+   Account.sObjectType, 
+   sObj.getSObjectType());
+
+// Create a list of generic sObjects.
+List<sObject> q = new Account[]{};
+
+// Verify if the list of sObjects 
+// contains Account tokens.
+System.assertEquals(
+   Account.sObjectType, 
+   q.getSObjectType());
