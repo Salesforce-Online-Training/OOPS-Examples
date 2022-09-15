@@ -1,6 +1,29 @@
+Blob:
+----
+    The Blob is a collection of Binary data which is stored as object. This will be used when we want to store the attachment in salesforce into a variable. This 
+    data type converts the attachments into a single object. If the blob is to be converted into a string, then we can make use of the toString and the valueOf methods
+    for the same.
+
 Example 1:
 ---------
 String testString='test string';
 Blob myBlob=blob.valueOf(testString);
-system.debug('--testString--' + testString);
-------------
+system.debug('--testString-- :' + testString);
+//Output: --testString-- : test string
+
+Example 2:This method will convert the blob back in to string
+---------
+String myString = 'test string';
+Blob myBlob = Blob.valueof(myString);
+String newString=myBlob.toString();
+System.debug(newString); 
+//Output:test string
+
+Example3:This method will count the number of characters in blob object 
+--------
+String testString='test string';
+Blob myBlob=blob.valueOf(testString);
+Integer size=myBlob.size();
+system.debug(size);
+//Output:11
+
