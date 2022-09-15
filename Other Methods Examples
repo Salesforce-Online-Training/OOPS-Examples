@@ -30,6 +30,10 @@ Boolean b2 = s.containsAny('x');
 system.assertEquals(true, b1);
 system.assertEquals(false, b2);
 
+Example 5: Method to get Today's Date
+-------------------------------------
+Date todaydate = system.today();
+system.debug('Todays date is :' + todaydate);
 
 Note: Practice few other methods in String : https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_string.htm
       For Date method : https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_date.htm
