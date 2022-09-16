@@ -62,6 +62,10 @@ Patient to Doctor to Owner Relationship Query
 --------------------------------------------
 SELECT Doctor_Allocated_Lookup__c,Id,Doctor_Allocated_Lookup__r.Name,Doctor_Allocated_Master_Detail__r.Name, Name, Doctor_Allocated_Lookup__r.Owner.Name FROM Patient__c
 
+Example: SOQL Query to get all the Student and Trainer details whose Lookup date is not NUll
+-------
+SELECT Email_Id__c,Fee_Paid__c,Id,Name,State__c,Trainer_Allocated_Lookup__c,Trainer_Allocated_Lookup__r.Name FROM Student__c WHERE Trainer_Allocated_Lookup__r.Trainer_Salary__c != Null
+
 
 
 
