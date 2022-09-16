@@ -187,3 +187,20 @@ Note: The Semi-Comma (;) symbol represent the AND Operator, If you want to use O
 SELECT Id,Name,Salary__c,Specialization__c FROM Doctor__c WHERE Specialization__c EXCLUDES ('ABS', 'MBBS')
 
 Note: Generally we use INCLUDES and EXCLUDES for Multi-Select Picklist field Only.
+
+Example: Get account details whose Name = United Oil & Gas, UK
+-------
+Account acc = [Select id,Name,Rating,phone FROM Account Where Name = 'United Oil & Gas, UK'];
+system.debug('Account Name is :' + acc);
+
+Binding Variables: For the above example we can use Binding variables : Single Record
+-----------------
+String accName = 'United Oil & Gas, UK';
+Account acc = [Select id,Name,Rating,phone FROM Account Where Name =: accName];
+system.debug('Account Name is :' + acc);
+
+Binding Variables: For the above example we can use Binding variables : Group of Records
+------------------
+List<String> accName = new List<String>{'United Oil & Gas,Singapore','Express Logistics and Transport'};
+List<Account> lstAccs = [SELECT id, Name, phone, Rating FROM Account WHERE Name IN:accName];
+System.debug('Account Names are : '+ lstAccs);
