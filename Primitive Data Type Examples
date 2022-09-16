@@ -5,4 +5,144 @@ What are different types of Data Types in Salesforce?
         2.Collection Data Types: List, Set and Map
         3.S-Object Data Types
         
+                                                                       Integer Data Type Examples:
+                                                                       ---------------------------
+Example 1:
+---------
+Integer barrelNumbers = 1000;
+system.debug(' The value of barrelNumbers : '+barrelNumbers);
+//Output: The Value of barrelNumbers: 1000
 
+Example 2:
+----------
+Integer x;
+x = 10;
+system.debug('The value of X is :'+ x);
+// Output: The value of X is : 10
+
+Example 3:
+---------
+Integer age=18;
+system.debug('My age is :'+ age);
+//Output: My age is : 18
+
+Example 4:
+----------
+Integer primInteger = 3;
+system.debug(primInteger);
+//Output: 3
+
+Example 5:
+---------
+Integer i=1;
+system.debug('The value of i is :' + i);
+//The value of i is :1
+
+Example 6:
+----------
+Integer quantity = 100;
+System.debug('The value of the quantity variable is:'+ quantity);
+//The value of the quantity variable is: 100
+                                                                             Time Data Type Examples
+                                                                             -----------------------
+Example 1:
+---------
+time t = datetime.now().time();
+system.debug(t);
+//Output:15:35:44.761Z
+                                                                              Blob Data Type Examples
+                                                                              -----------------------
+The Blob is a collection of Binary data which is stored as object. This will be used when we want to store the attachment in salesforce into a variable. This 
+data type converts the attachments into a single object. If the blob is to be converted into a string, then we can make use of the toString and the valueOf methods
+for the same.
+
+Example 1:
+---------
+String testString='test string';
+Blob myBlob=blob.valueOf(testString);
+system.debug('--testString-- :' + testString);
+//Output: --testString-- : test string
+
+Example 2:This method will convert the blob back in to string
+---------
+String myString = 'test string';
+Blob myBlob = Blob.valueof(myString);
+String newString=myBlob.toString();
+System.debug(newString); 
+//Output:test string
+
+Example3:This method will count the number of characters in blob object 
+--------
+String testString='test string';
+Blob myBlob=blob.valueOf(testString);
+Integer size=myBlob.size();
+system.debug(size);
+//Output:11
+                                                                              Date Data Type
+                                                                              --------------
+This variable type indicates a date. This can only store the date and not the time.
+ 
+Example 1: To daisplay date, month
+---------
+Date myDate = Date.newInstance(2022, 09, 15);
+Date newDate = mydate.addDays(2);
+date newDate1 = myDate.addMonths(3);
+system.debug('myDate :'+myDate);
+system.debug('newDate :'+newDate);
+system.debug('newDate1 :'+newDate1);
+//Output: myDate : 2022-09-15 00:00:00
+//Output: newDate : 2022-09-17 00:00:00
+//Output: newDate : 12022-12-15 00:00:00
+
+Example2:The following example finds the number of days in the month of February in the year 2022.
+--------
+Integer numberOfDays = date.daysInMonth(2022, 2);
+system.debug('NumberOfDays in Febuary: '+numberOfDays);
+//Output: NumberOfDays in Febuary: 28
+
+Example 3:
+---------
+date myDate = date.newInstance(2001, 3, 21);
+String dayString = myDate.format();
+system.debug('myDate :'+ myDate);
+system.debug('dayString :'+ dayString);
+//Output: myDate :2001-03-21 00:00:00
+//Output: dayString :3/21/2001
+                                                                      Date Time Examples
+                                                                      ------------------
+Example 1: Adds the specified number of days to a Datetime.
+---------
+Datetime myDateTime = Datetime.newInstance(2022, 09, 15);
+Datetime newDateTime = myDateTime.addDays(2);
+Datetime expected = Datetime.newInstance(2022, 09, 19);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime); 
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-09-15 07:00:00
+//Output: newDateTime :2022-09-17 07:00:00
+//Output: expected :2022-09-19 07:00:00
+
+Example 2: Add Hours(additionalHours)
+----------
+DateTime myDateTime = DateTime.newInstance(2022, 1, 31, 7, 8, 16);
+DateTime newDateTime = myDateTime.addHours(3);
+DateTime expected = DateTime.newInstance(2022, 1, 31, 10, 8, 16);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime);
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-01-31 15:08:16
+//Output: newDateTime :2022-01-31 18:08:16
+//Output: expected :2022-01-31 18:08:16
+
+Example 3: Add Months(AdditionalMonths)
+---------
+DateTime myDateTime = DateTime.newInstance(2022, 7, 7, 7, 8, 12);
+DateTime newDateTime = myDateTime.addMonths(1);
+DateTime expected = DateTime.newInstance(2022, 8, 7, 7, 8, 12);
+System.debug('myDateTime :'+myDateTime);
+System.debug('newDateTime :'+newDateTime);
+System.debug('expected :'+expected);
+//Output: myDateTime :2022-07-07 14:08:12
+//Output: newDateTime :2022-08-07 14:08:12
+//Output: expected :2022-08-07 14:08:12 
+                                                                             
