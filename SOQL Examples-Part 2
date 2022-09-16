@@ -49,3 +49,5 @@ List<String> accName = new List<String>{'United Oil & Gas,Singapore','Express Lo
 List<Account> lstAccs = [SELECT id, Name, phone, Rating FROM Account WHERE Name IN:accName];
 System.debug('Account Names are : '+ lstAccs);
 
+
+
