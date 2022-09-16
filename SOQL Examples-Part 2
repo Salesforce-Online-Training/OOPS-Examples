@@ -66,6 +66,10 @@ Example: SOQL Query to get all the Student and Trainer details whose Lookup date
 -------
 SELECT Email_Id__c,Fee_Paid__c,Id,Name,State__c,Trainer_Allocated_Lookup__c,Trainer_Allocated_Lookup__r.Name FROM Student__c WHERE Trainer_Allocated_Lookup__r.Trainer_Salary__c != Null
 
+Example: SOQL Query to get all the Student and Trainer details whose Lookup date is not NUll and Specialization = ABS GBS 
+-------
+SELECT Doctor_Allocated_Lookup__c,Doctor_Allocated_Master_Detail__c,Doctor_Allocated__c,Id,Name FROM Patient__c WHERE Doctor_Allocated_Master_Detail__r.Specialization__c INCLUDES ('ABS','GBS')
+
 
 
 
