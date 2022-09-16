@@ -1,0 +1,8 @@
+Data Type: A data type specifies the type of data that a variable can store
+
+What are different types of Data Types in Salesforce?
+        1.Primitive Data Types: Integer, String, Blob, Boolean, Date, Date Time, Time, Double, ID,Long and Decimal
+        2.Collection Data Types: List, Set and Map
+        3.S-Object Data Types
+        
+
