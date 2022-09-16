@@ -1,0 +1,165 @@
+SOQL:
+----
+  1.SOQL stands for Salesforce object Query language.
+  2.These are similar to SQL queries.
+  3.SOQL's are used to fetch the data from the S-objects (Standard or Custom objects).
+  4.Using SOQL, we can also fetch data from related objects (child or parent records) using relation fields.
+  5.SOQL's will return the result in the form of List<S-object> and Map<Id, S-object>.
+  6.SOQL will return maximum of 50,000 records in a single call.
+  7.Query: This is the statement written to fetch the records from the database based on the business requirement
+
+
+Syntax:
+------
+SELECT <field Names> from <OBJECTNAME>
+        [WHERE <Conditions>] 	                            // Optional
+        [GROUP BY <Column Names>]                         // Optional
+        [HAVING <Conditions>]	                            // Optional
+        [ORDER BY <Column Names>]	                        // Optional
+        [FOR UPDATE]			                                // Optional
+        [LIMIT <NumberOfRecordsTo Return>]                // Optional
+        [OFFSET <NumberOfRecordsToSkip>] 	                // Optional
+        [ALL ROWS]		                                    // Optional
+
+Query Example:
+--------------
+Q) Write a SOQL to fetch name, Industry from Account S-Object
+A)  SELECT Id, Name, Industry FROM Account
+
+Q) Write a SOQL to fetch LastName, FirstName from Contact 
+A)  SELECT Id, LastName, FirstName FROM Contact
+
+Q) Write a SOQL to fetch StageName, Amount from Opportunity
+A) SELECT Id, StageName, Amount FROM Opportunity
+
+SOQL Queries can be executed in 4 formats in Apex.
+----------------------------------------------------
+1.List<S-Object> result=[query statement];
+2.List<S-Object> result= Database.Query(Query Statement);
+3.Database.QueryLocator  result=Databse.getQueryLocator(Query Statement);
+4.Map<Id, S-Object> result=new Map<Id, S-Object>([Query Statement]);
+
+SOQL Examples using Apex:
+------------------------
+Q) Write a SOQL to fetch all the account records with Name, Industry fields?
+A) List<Account> result= [SELECT Id, Name, Industry FROM Account];
+
+Q) Write a SOQL to fetch all the contact records with LastName, FirstName fields?
+A) List<Contact> result= [SELECT Id, LastName, FirstName FROM Contact];
+
+Q) Write a SOQL query to fetch all the Opportunity records Name, StageName, CloseDate?
+A) List<Opportunity> opps= [SELECT Id, Name, StageName, CloseDate FROM Opportunity];
+
+Q) Write a SOQL query to fetch all user records with LastName, FirstName and Profile?
+A) List<User> users= [SELECT LastName, FirstName, Profile FROM User];
+
+Q) Write a SOQL query to fetch customer records with City, State, Phone?
+A) List<Customer__c>  result= [SELECT City__c, State__c, Phone__c FROM Customer__c];
+
+How to execute the SOQL queries?
+-------------------------------
+1.Debug anonymous block.
+2.Query Editor in the Developer console.
+3.Workbench to test the query result (Recommended for the testing).
+4.Within the Apex classes and triggers code.
+
+How to execute SOQL quiries through workbench?
+----------------------------------------------
+1.Workbench: Workbench is a third party used to test the data or perform apex logics and testing webservices. 
+2.Open the URL : https://workbench.developerforce.com/
+3.Select the environment as Sandbox /production (If you are using free developer edition then use Production) 
+4.Choose the API version
+5.Login with Salesforce account 
+6.Enter the Salesforce account username/password
+7.Select SOQL from dropdown list 
+8.Select the object
+9.Write the query
+    Ex: select Name, Industry from Account
+10.Execute
+// Output: It will display all the Account records
+
+Limit:
+------
+  1.Limit clause is used to restrict the number of rows to be returned by the SOQL Query Result.
+  2.Limit Clause is an optional statement in SOQL Query.
+  3.Limit statement should be the last statement in the SOQL Query
+  4.Syntax:  Limit <Number of Rows Returned>
+  5.Ex:	Limit 1 , Limit 10 , Limit 50
+  
+Example: Write query to fetch one Account record from Account object
+Account acc = [SELECT Id, Name, Industry FROM Account LIMIT 1];
+
+Example: Fetch 5 records from Account object 
+List<Account> result= [SELECT Id, Name, Industry FROM Account LIMIT 5];
+
+Example: Fetch 10 records from Case objects
+List<Case> result= [SELECT StageName, Priority FROM Case LIMIT 10];
+
+Offset: 
+-------
+   1.Offset clause is used to specify from which record result should be returned from query result.
+   2.Maximum offset value is 2000
+   3.Syntax: Offset <Row Number>
+   4.Ex:	Offset 1, Offset 10 , Offset 1000
+
+Example: Return all the opportunities from 5th records 
+List<Opportunity> oppList= [SELECT Name, StageName FROM opportunity OFFSET 5];
+
+Example: write SOQL to fetch all the accounts from 10th records
+List<Account> accs= [SELECT Id, Name FROM Account OFFSET 10];
+
+Note:If you using limit and offset together in a single SOQL query we have to use limit followed by offset
+Example: List<Account> accs= [SELECT Name, Industry FROM Account LIMIT 5 OFFSET 10];
+
+Order By:
+--------
+   1.Order by clause is used to sort the result in either Ascending or descending order.
+   2.Syntax: 	order by Field Name DESC| ASC
+   3.Order by Field1, Field2 DESC |ASC  (or) Order by Name ASC; (or) Order by Name, Industry DESC;
+   
+Example: Write a SOQL to fetch all the account records in the ascending order of Account Name?
+List<Account> accs=[SELECT Name, Industry FROM Account ORDERBY Name ASC];
+
+Example: Write a SOQL to fetch all the account records in the descending order of industry?
+List<Account> accs= [SELECT name FROM Account ORDERBY Industry DESC];
+
+Example: Write the SOQL to fetch last 10 opportunity records based on created date 
+List<Opportunity> opps= [SELECT Name FROM Opportunity ORDERBY CreatedDate DESC LIMIT 10];
+
+Example: Write a SOQL to fetch last 10 opportunities based on closeDate
+List<Opportunity> opps= [SELECT Name from Opportuntiy ORDERBY CloseDate DESC LIMIT 10];
+
+Limit:
+------
+   1.Like Operator in SOQL act as a Comparison operator for String Field Expression. Expression is true if the value in the specified fieldName matches
+   the characters of the text string in the specified value.
+
+Example:
+-------
+SELECT Id,Name,NumberOfEmployees,Phone FROM Account WHERE Name LIKE 'ed%'  (if % is wrritten towards end then it means it will fetch records which start with those specified characters)
+SELECT Id,Name,NumberOfEmployees,Phone FROM Account WHERE Name LIKE '%re'  (if % is wrritten first then it means it will fetch records which end with those specified characters)
+SELECT Id,Name,NumberOfEmployees,Phone FROM Account WHERE Name LIKE '%re%' (if % is written first and last it means it will fetch all the records which is either present first,last or in the middle of the string)
+
+Equal Operator:
+--------------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE Rating = 'Hot' (If you want to ge the exact match of the record then we use Equal)
+
+Not Equal Operator:
+------------------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE Rating != 'Hot'
+
+Greater than:
+------------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees > 1000
+
+Less than:
+----------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees < 1000
+
+Null Operator:
+-------------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees = Null
+
+Not Null Operator:
+-----------------
+SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees != Null
