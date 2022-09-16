@@ -163,3 +163,27 @@ SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmploye
 Not Null Operator:
 -----------------
 SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees != Null
+
+IN Operator:
+-------------
+SELECT id, Name, phone, Rating FROM Account WHERE Name IN('Grand Hotels & Resorts Ltd', 'Express Logistics and Transport')
+
+NOT IN Operator:
+----------------
+SELECT id, Name, phone, Rating FROM Account WHERE Name NOT IN('Grand Hotels & Resorts Ltd', 'Express Logistics and Transport')
+
+INCLUDES Operator: (Multi Select Picklist values)
+------------------
+SELECT Id,Name,Salary__c,Specialization__c FROM Doctor__c WHERE Specialization__c INCLUDES ('ABS')
+
+EXCLUDES Operator: (Multi Select Picklist values)
+------------------
+SELECT Id,Name,Salary__c,Specialization__c FROM Doctor__c WHERE Specialization__c EXCLUDES ('ABS')
+
+SELECT Id,Name,Salary__c,Specialization__c FROM Doctor__c WHERE Specialization__c INCLUDES ('ABS;MBBS')
+
+Note: The Semi-Comma (;) symbol represent the AND Operator, If you want to use OR operator then use Comma (,)
+
+SELECT Id,Name,Salary__c,Specialization__c FROM Doctor__c WHERE Specialization__c EXCLUDES ('ABS', 'MBBS')
+
+Note: Generally we use INCLUDES and EXCLUDES for Multi-Select Picklist field Only.
