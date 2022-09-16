@@ -31,5 +31,52 @@ system.debug('The elements in the Map are :'+ accMap);
 
 //Output: The elements in the Map are :{0015i00000P6P9SAAV=Hot, 0015i00000P6js1AAB=Hot, 0015i00000P6js2AAB=Hot, 0015i00000P6js3AAB=Hot, 0015i00000P6js4AAB=Hot, 0015i00000P6js5AAB=Hot, 0015i00000P6js6AAB=Hot, 0015i00000Q1DdIAAV=Hot, 0015i00000Q1DdwAAF=Hot}
 
+                                                                      Child to Parent SOQL Query
+                                                                      ------------***-----------
+Account and Contact object (Lookup relation with Cascading delete): Which mean we can create Contact without Account because in the background if we delete Account then
+associated child records will be deleted.
+
+SELECT Id,Name, AccountId, Account.Name, Account.Rating, Email FROM Contact
+
+SELECT id, CaseNumber, Status, ContactId, Contact.Name, Contact.LastName, Origin FROM Case
+
+Note: When you want to query parent object fields from the child object query, directly called Parentobject.fieldName
+-----
+
+Case to Contact to Account
+-------------------------
+SELECT id, CaseNumber, Status, ContactId, Contact.Name, Contact.LastName, Contact.AccountId, Contact.Account.Name, Origin FROM Case
+
+Case to Contact to Account to Owner
+-----------------------------------
+SELECT id, CaseNumber, Status, ContactId, Contact.Name, Contact.LastName, Contact.AccountId, Contact.Account.Name, Contact.Account.Owner.Name, Origin FROM Case
+
+Note: Upto 5 levels we can query the records
+----
+
+Patient to Doctor Relationship Query
+------------------------------------
+SELECT Doctor_Allocated_Lookup__c,Id,Doctor_Allocated_Lookup__r.Name,Doctor_Allocated_Master_Detail__r.Name, Name FROM Patient__c
+
+Patient to Doctor to Owner Relationship Query
+--------------------------------------------
+SELECT Doctor_Allocated_Lookup__c,Id,Doctor_Allocated_Lookup__r.Name,Doctor_Allocated_Master_Detail__r.Name, Name, Doctor_Allocated_Lookup__r.Owner.Name FROM Patient__c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
