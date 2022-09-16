@@ -145,4 +145,34 @@ System.debug('expected :'+expected);
 //Output: myDateTime :2022-07-07 14:08:12
 //Output: newDateTime :2022-08-07 14:08:12
 //Output: expected :2022-08-07 14:08:12 
-                                                                             
+                                                                         String Data Type Examples
+                                                                         -------------------------
+Example 1:
+---------
+String s = 'Hello Maximillian';
+system.debug('==S==:'+ s);
+//Output: ==S== : Hello Maximillian
+
+Example 2:
+---------
+String s = 'hello maximillian';
+String s2 = s.capitalize();
+System.debug('s :'+s);
+System.debug('s2 :'+s2);
+//Output: s :hello maximillian
+//Output: s2 :Hello maximillian
+
+                                                                            Long Data Type Example
+                                                                            ------------------------
+ Example 1:
+ ---------
+ Long companyRevenue = 21474838973344648L;
+system.debug('companyRevenue :'+companyRevenue);
+//Output:companyRevenue :21474838973344648L
+                                                                            Decimal Data Type Example
+                                                                            -------------------------
+Example 1:
+---------
+Decimal myDecimal = -6.02214129;
+System.debug('myDecimal :'+myDecimal);
+//Output: myDecimal : -6.02214129
