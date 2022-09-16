@@ -1,0 +1,22 @@
+Synchronous process: It means the operations will execute immediatly.
+Ex: Process Builder, Workflow action, validation rules
+
+Asynchronous Process: It means the operations will not execute immediatly. It will execute in the background
+
+Asychronous Apex Types:
+----------------------
+  1. @Future
+  2.Batch Apex
+  3.Schedule Apex
+  4.Queuable Apex
+
+@Future:
+-------
+1.Future method must be Static
+2.Future method return type is void
+3.We cannot pass S-object as parameter for any future method (If in case if you have requirement as such pass id as parameter)
+Example for the above statement: List<SObject>
+
+For suppose assume that I want to update account record using future apex.If I define the same it will execute in future (it will be in the Queue) and now assume that
+now I am updating the Phone value from 9999122343 to 123656743
+List<Account> lstAcc = 
