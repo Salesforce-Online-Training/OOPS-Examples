@@ -1,3 +1,10 @@
+List:
+-----
+     1.List of collection of similar elements
+     2.It is Index based
+     3.List will maintain the insertion order
+     4.Syntax: List<Datatype> listName = new List<Datatype>();
+
                                                                 List Examples
                                                                 -----***-----
 list<String> colors = new list<string>();
