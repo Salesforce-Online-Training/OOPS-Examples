@@ -1,0 +1,32 @@
+Use Case 1: Write a SOQL query and get all Account records whose NoOfEmployees greater than 1000 and convert the list into Map and get AccountName as Key and NoOfEmployees as Value and store it in Map?
+----------
+list<Account> listAcc = [SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees >1000];
+Map<String,Integer> accMap = new Map<String,Integer>();
+for( Account acc : listAcc){
+    accMap.put(acc.Name, acc.NumberOfEmployees);
+}
+system.debug('The elements in the Map are :'+ accMap);
+
+//Output: The elements in the Map are :{Burlington Textiles Corp of America=9000, Express Logistics and Transport=12300, Grand Hotels & Resorts Ltd=5600, TCS Company=50000, United Oil & Gas Corp.=145000, United Oil & Gas, Singapore=3000, United Oil & Gas, UK=24000, University of Arizona=39000}
+
+Use Case 2: Write a SOQL query and get all the Account records whose NoOfEmployees greater that 1000 and convert the list into Set and get Account ID and store it in Set?
+----------
+list<Account> listAcc = [SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE NumberOfEmployees >1000];
+Set<ID> accSet = new Set<id>();
+for( Account acc : listAcc){
+    accSet.Add(acc.id);
+}
+system.debug('The elements in the Set are :'+ accSet);
+
+//Output: The elements in the Set are :{0015i00000Lf23gAAB, 0015i00000Lf23jAAB, 0015i00000Lf23kAAB, 0015i00000Lf23lAAB, 0015i00000Lf23mAAB, 0015i00000Lf23nAAB, 0015i00000Lf23oAAB, 0015i00000OENimAAH}
+
+Use Case 3: Write a SOQL query and get all Account records whose Rating ='Hot' and convert the list into Map and get AccountID as Key and Rating as Value and store it in Map?
+----------
+list<Account> listAcc = [SELECT Id,Name,Rating,NumberOfEmployees,Phone FROM Account WHERE Rating = 'Hot'];
+Map<ID,String> accMap = new Map<ID,String>();
+for( Account acc : listAcc){
+    accMap.put(acc.ID, acc.Rating);
+}
+system.debug('The elements in the Map are :'+ accMap);
+
+//Output: The elements in the Map are :{0015i00000P6P9SAAV=Hot, 0015i00000P6js1AAB=Hot, 0015i00000P6js2AAB=Hot, 0015i00000P6js3AAB=Hot, 0015i00000P6js4AAB=Hot, 0015i00000P6js5AAB=Hot, 0015i00000P6js6AAB=Hot, 0015i00000Q1DdIAAV=Hot, 0015i00000Q1DdwAAF=Hot}
