@@ -81,7 +81,7 @@ Tip: Use For loop and if loop
                                                                       ------------***-----------
 Parent to Child : Account to Contact
 ------------------------------------
-Example 1:
+Example 1: Standard object
 ---------
 SELECT id,Name, (Select id, Name from contacts) from Account
 
@@ -100,8 +100,13 @@ for(Account acc : lstAccs){
 }
 system.debug('Map details are ::' + mapAccCons);
 
+Example 2: Custom object
+---------
+SELECT id,Name, (Select id, Name from Students__r) from Trainer__c
 
-
+Assignment:
+----------
+For suppose I have a SOQL query: SELECT id,Name, (Select id, Name from Students__r) from Trainer__c, Now I want to convert this list into Map and store TrainerID as key and List<Student Name> as value and store it in a Map
 
 
 
