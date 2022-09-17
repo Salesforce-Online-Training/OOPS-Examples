@@ -127,13 +127,3 @@ List<lead> leads = [select id,Name from Lead WHERE isdeleted = true ALL ROWS];
             system.debug('The leads are :' + l.Name);
         }
 FOR UPDATE: At time during deployments we will facing an issue called "unable to lock ROW" (Whe group fo users update the same record).
-
-
-
-
-
-
-
-
-
-
