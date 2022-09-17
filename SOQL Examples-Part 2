@@ -109,9 +109,24 @@ Assignment:
 For suppose I have a SOQL query: SELECT id,Name, (Select id, Name from Students__r) from Trainer__c, Now I want to convert this list into Map and store TrainerID as key and List<Student Name> as value and store it in a Map
 
 
+Usage of All Rows in SOQL: 
+-------------------------
+It is used to get all the records including deleted records from the recycle bin
+ALL ROWS will not be supported in workbench and in developer console but I can be used only in Apex class
 
+List<lead> leads = [select id,Name from Lead ALL ROWS];
+        for(lead l : leads){
+            system.debug('The leads are :' + l.Name);
+        }
+Note: In the above case we are getting all the lead records including deleted records.
+----- 
+I want to get only deleted record from the above logic
 
-
+List<lead> leads = [select id,Name from Lead WHERE isdeleted = true ALL ROWS];
+        for(lead l : leads){
+            system.debug('The leads are :' + l.Name);
+        }
+FOR UPDATE: At time during deployments we will facing an issue called "unable to lock ROW" (Whe group fo users update the same record).
 
 
 
