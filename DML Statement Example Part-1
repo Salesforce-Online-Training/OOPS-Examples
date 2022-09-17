@@ -1,0 +1,42 @@
+Data Manupulation Language (DML)
+--------------------------------
+DML statements are used to manupulate the data existing in the database and also create new records
+
+Different types of DML operation
+	1.Insert : create new records
+	2.Update : Modify the existing data
+	3.Delete : Remove the existing the data from Salesforce object
+	4.undelete : Get record from the recycle bin and inset back into the respective object.
+	5.upsert (Update+insert) : If records are available then update if not create new records.
+
+How to create a DML operation in salesforce?
+--------------------------------------------
+	Through Anonymous window, In Business class and Test classes too
+
+Insert Operation : Create new records:
+--------------------------------------
+Ex: Account acc = new Account(Name='Account1');
+    insert acc;
+
+Note: While creating any record it is always important to include data for mandatory fields for that respective object
+
+5.Update: Modify the existing records:
+
+Ex: Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
+	myaccount.billingCity='sydney';
+	update myaccount;
+6.Delete:
+	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
+	delete myaccount;
+7.Undelete:
+	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' ALL ROWS];
+	undelete myaccount;
+
+8.Upsert:
+	Account[] myaccount = [select id,Name,billingCity from Account where Name='Account1'];
+	for(Account acc : myaccount){
+    		acc.billingcity='austin';
+	}
+	Account newAcc = new Account(Name='Account2',billingcity='meblourne');
+	myaccount.add(newAcc);
+	upsert myaccount;
