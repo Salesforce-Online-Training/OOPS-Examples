@@ -77,7 +77,7 @@ Assignment:
 store it in a Map
 Tip: Use For loop and if loop
 
-                                                                      Child to Parent SOQL Query
+                                                                       Parent to Child SOQL Query
                                                                       ------------***-----------
 Parent to Child : Account to Contact
 ------------------------------------
