@@ -70,6 +70,35 @@ Example: SOQL Query to get all the Student and Trainer details whose Lookup date
 -------
 SELECT Doctor_Allocated_Lookup__c,Doctor_Allocated_Master_Detail__c,Doctor_Allocated__c,Id,Name FROM Patient__c WHERE Doctor_Allocated_Master_Detail__r.Specialization__c INCLUDES ('ABS','GBS')
 
+Assignment: 
+-----------
+1.Write a SOQL query between Opportunity and Account, OpportunityLineItem and Opportunity, QuoteLineIteam and Quote, Student and Staff?
+2.For suppose I have a SOQL query: Select id,Name,AccountId from Contact, Now I want to convert this list into Map and store accId as key and List<Contact> as value and
+store it in a Map
+Tip: Use For loop and if loop
+
+                                                                      Child to Parent SOQL Query
+                                                                      ------------***-----------
+Parent to Child : Account to Contact
+------------------------------------
+Example 1:
+---------
+SELECT id,Name, (Select id, Name from contacts) from Account
+
+Assignment:
+----------
+For suppose I have a SOQL query: SELECT id,Name, (Select id, Name from contacts) from Account, Now I want to convert this list into Map and store accId as key and List<Contacts> as value and store it in a Map
+
+List<Account> lstAccs = [SELECT id,Name, (Select id, Name from contacts) from Account];
+Map<id,List<Contact>> mapAccCons = new Map<id,List<Contact>>(); 
+for(Account acc : lstAccs){
+ if(acc.contacts.size()>0){
+  //system.debug('The Account ids are ::' + acc.id);
+  //system.debug('The contact details are ::' + acc.contacts);
+  mapAccCons.put(acc.Id, acc.contacts); 
+}
+}
+system.debug('Map details are ::' + mapAccCons);
 
 
 
