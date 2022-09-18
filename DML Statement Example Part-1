@@ -82,8 +82,28 @@ system.debug('The Updated Account details are:'+ myaccount);
 
 Note:Ideally the above approach is not a best approach to follow
 
+Example 3: Update all Account records whose Account Name starts with Exp with Rating from Hot to Cold
+---------
+List<Account> lstAcc = [select id,Name,Rating FROM Account WHERE Name like 'Exp%'];
+system.debug('The Number of Accounts:' + lstAcc.size());
+for(Account acc : lstAcc){
+  acc.Rating = 'Cold';
+}
+update lstAcc;
+Note: If we write DML operation inside the for each loop then it will throw 150 DML error.
+----
 
-//Output:The Updated Account details are:Account:{Id=0015i00000Qi6QMAAZ, Name=Account1, BillingCity=sydney, Rating=Hot}
+Upsert: Insert + Update
+------
+Account[] myaccount = [select id,Name,billingCity from Account where Name='Account1'];
+for(Account acc : myaccount){
+    acc.billingcity='austin';
+}
+Account newAcc = new Account(Name='Account2',billingcity='meblourne');
+myaccount.add(newAcc);
+upsert myaccount;
+
+
 6.Delete:
 	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
 	delete myaccount;
