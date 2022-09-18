@@ -1,0 +1,57 @@
+Example 1: 
+---------
+Lets say I want to create two Account records with Name and Phone as input paramater, When I try to insert those two records, a new custom validation rule is firing in between and blocking the Insertion of records creation.
+
+List<Account> lstAcc = New List<Account>();
+//Insert 1st record
+Account acc1 = new Account();
+acc1.name = 'Test Abc';
+acc1.phone ='1234321';
+lstAcc.add(acc1);
+
+//Insert 2nd record
+Account acc2 = new Account();
+acc2.name = 'Test';
+lstAcc.add(acc2);
+
+insert lstAcc;
+//Output:System.DmlException: Insert failed. First exception on row 1; first error: FIELD_CUSTOM_VALIDATION_EXCEPTION, Phonecannot be a Blank: [Phone]
+
+Note: In the above case one record has all the details we need to insert that record first and then throw an error message for the other record but it is blocking both the records Insertion.
+To eliminate the above issue we use Database.insert
+
+List<Account> lstAcc = New List<Account>();
+//Insert 1st record
+Account acc1 = new Account();
+acc1.name = 'Test Abc';
+acc1.phone ='1234321';
+lstAcc.add(acc1);
+
+//Insert 2nd record
+Account acc2 = new Account();
+acc2.name = 'Test';
+lstAcc.add(acc2);
+List<database.SaveResult> savRes = database.insert(lstAcc, false);
+system.debug('savRes ::'+ savRes);
+
+for(database.SaveResult sr:savRes){
+    //Operation was successful, so get the ID of the record that was processed
+    if(sr.isSuccess()){
+        system.debug('Successfully inserted Account. Account ID is:'+ sr.getid());
+    }
+    else{
+        //Operation failed, so get all errors
+        for(database.error err:sr.getErrors()){
+            system.debug('The following error has occured');
+            system.debug(err.getStatusCode() + ': '+err.getMessage());
+            system.debug('Account fields that effected this error: ' + err.getFields());
+    }
+}
+}
+
+//Output:
+savRes ::(Database.SaveResult[getErrors=();getId=0015i00000QiGaZAAV;isSuccess=true;], Database.SaveResult[getErrors=(Database.Error[getFields=(Phone);getMessage=Phonecannot be a Blank;getStatusCode=FIELD_CUSTOM_VALIDATION_EXCEPTION;]);getId=null;isSuccess=false;])
+Successfully inserted Account. Account ID is:0015i00000QiGaZAAV
+The following error has occured
+DEBUG|FIELD_CUSTOM_VALIDATION_EXCEPTION: Phonecannot be a Blank
+DEBUG|Account fields that effected this error: (Phone)
