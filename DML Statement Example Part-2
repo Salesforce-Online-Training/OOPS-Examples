@@ -1,3 +1,5 @@
+                                                                    Database.Insert
+                                                                    ---------------
 Example 1: 
 ---------
 Lets say I want to create two Account records with Name and Phone as input paramater, When I try to insert those two records, a new custom validation rule is firing in between and blocking the Insertion of records creation.
