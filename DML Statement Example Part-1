@@ -104,18 +104,49 @@ myaccount.add(newAcc);
 upsert myaccount;
 
 
-6.Delete:
-	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
-	delete myaccount;
-7.Undelete:
-	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' ALL ROWS];
-	undelete myaccount;
+6.Delete: Remove the existing records from the respective S-object
+--------
 
-8.Upsert:
-	Account[] myaccount = [select id,Name,billingCity from Account where Name='Account1'];
-	for(Account acc : myaccount){
-    		acc.billingcity='austin';
-	}
-	Account newAcc = new Account(Name='Account2',billingcity='meblourne');
-	myaccount.add(newAcc);
-	upsert myaccount;
+Example 1:
+---------
+List<Account> myaccount = [select id,Name,billingCity from Account where Name like 'Exp%' LIMIT 200];
+delete myaccount;
+
+Example 2:
+----------
+DELETE[select id,Name from Account where Name like 'Account%' LIMIT 10];
+
+Undelete:
+--------
+Account myaccount = [select id,Name,billingCity from Account where Name='Account1' ALL ROWS];
+undelete myaccount;
+
+Merge: Lets say you have two record on the same object with has common data and you want to combine them into one then use Merge statement
+-----
+
+Example 1:
+----------
+//Insert 1st record
+Account acc1 = new Account();
+acc1.name = 'Test Anji';
+acc1.phone ='1234321';
+insert acc1;
+
+//Insert 2nd record
+Account acc2 = new Account();
+acc2.name = 'Test';
+acc2.phone ='1234321';
+insert acc2;
+
+//Query the records and then merge the records
+Account masterAccount = [select id, name from Account where Name ='Test Anji' LIMIT 1];
+Account mergeAccount = [select id, name from Account where Name ='Test' LIMIT 1];
+merge masterAccount mergeAccount;
+
+Note:
+----
+1.In a single trascation how many DML statements can we perform: 150
+2.In a single transcation how many DML rows can we Insert : 10,000
+3.How many SOQL quiries we can perform in single transcation : 100
+4.Each SOQL query we can retrive maximum of how many records: 50K
+5.What is the maximum CPU time limit : 10 sec
