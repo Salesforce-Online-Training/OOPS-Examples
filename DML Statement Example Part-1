@@ -8,23 +8,82 @@ Different types of DML operation
 	3.Delete : Remove the existing the data from Salesforce object
 	4.undelete : Get record from the recycle bin and inset back into the respective object.
 	5.upsert (Update+insert) : If records are available then update if not create new records.
-
+        6.Merge: Lets say we have a parent record and child record and assumme that child record is duplicate and then you want merge parent and child then we use Merge.
+	
 How to create a DML operation in salesforce?
 --------------------------------------------
 	Through Anonymous window, In Business class and Test classes too
 
 Insert Operation : Create new records:
 --------------------------------------
-Ex: Account acc = new Account(Name='Account1');
-    insert acc;
+Example 1:
+---------
+Account acc = new Account(Name='Account1');
+insert acc;
+system.debug('The Account inserted is :'+acc);
+//Output:The Account inserted is :Account:{Name=Account1, Id=0015i00000Qi6QWAAZ}
+
+Example 2:
+---------
+Account acc = new Account(Name='Account2',phone='09893832', rating='Hot');
+insert acc;
+system.debug('The Account inserted is :'+acc);
+//Output: The Account inserted is :Account:{Name=Account2, Phone=09893832, Rating=Hot, Id=0015i00000Qi6QqAAJ}
 
 Note: While creating any record it is always important to include data for mandatory fields for that respective object
+-----
+Note: In a single transcation we can perform maximum of 150DML operations and for each DML operation we can perform 10k records creation.
+-----
 
-5.Update: Modify the existing records:
+Example2: DML Error: System.LimitException: Too many DML statements: 151
+--------
+for(Integer i=1;i<=200;i++){
+    Account acc = new Account();
+    acc.Name = 'Exp'+i;
+    acc.phone = '98374383';
+    acc.rating= 'Hot';
+    insert acc;
+}
+Output:System.LimitException: Too many DML statements: 151
+------
+To eliminate the above DML operation we need to use list and add the elements to the list and then print Insert operation outside of for loop.
 
-Ex: Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
-	myaccount.billingCity='sydney';
-	update myaccount;
+Example3:
+--------
+List<Account> accList = new List<Account>();
+for(Integer i=1;i<=200;i++){
+    Account acc = new Account();
+    acc.Name = 'Exp'+i;
+    acc.phone = '98374383';
+    acc.rating= 'Hot';
+    accList.add(acc);
+}
+insert accList;
+
+Update: Modify the existing records:
+------
+Example 1: 
+---------
+Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
+myaccount.billingCity='sydney';
+update myaccount;
+//Output:The Updated Account details are:Account:{Id=0015i00000Qi6QMAAZ, Name=Account1, BillingCity=sydney}
+
+If you know the Id of the record then we can use following code below.
+
+Example2:
+--------
+Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
+myaccount.id='0015i00000Qi6QMAAZ';
+myaccount.rating='Hot';
+update myaccount;
+system.debug('The Updated Account details are:'+ myaccount);
+//Output: The Updated Account details are:Account:{Id=0015i00000Qi6QMAAZ, Name=Account1, BillingCity=sydney, Rating=Hot}
+
+Note:Ideally the above approach is not a best approach to follow
+
+
+//Output:The Updated Account details are:Account:{Id=0015i00000Qi6QMAAZ, Name=Account1, BillingCity=sydney, Rating=Hot}
 6.Delete:
 	Account myaccount = [select id,Name,billingCity from Account where Name='Account1' LIMIT 1];
 	delete myaccount;
