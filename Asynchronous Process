@@ -1,0 +1,14 @@
+Asynchronous Process: 
+---------------------
+1.It means that a process operating independently of other process
+2.One method will not wait for another method to execute
+
+Difference between Asynchronous Process and Synchronous Process
+---------------------------------------------------------------
+                Asynchronous Process                                                         Synchronous Process
+                --------------------                                                         --------------------
+                1.Actions that will not block the Transcation or process                      1.Quick and Immediate actions
+                
+                2.Duration is not priority                                                    2.Transcations are immediate and serial
+                
+                3.Higher Governor Limit                                                       3.Normal Governor Limit
