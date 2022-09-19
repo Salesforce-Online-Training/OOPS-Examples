@@ -102,12 +102,12 @@ Trigger Context variables (TCV):
   
   2.All these four events (Insert,Update, Delete and Un-Delete can be placed in 2 different places.As we said the trigger is piece of code that gets fired either 
   before the DML operation is performed or after the DML operation is performed.
-	                            Before Event                       After Event 
-			                          Is Before  			                    Is After 
-                                              Is Insert 
-					                                    Is Update 
-					                                    Is delete 
-					                                    Is undelete
+	                            		Before Event                       After Event 
+			                          Is Before  			     Is After 
+                                              			Is Insert 
+					                        Is Update 
+					                        Is delete 
+					                        Is undelete
    3.What is this Is: When we write something with Is or Has it means these are Boolean type variable which defines it as either True or False.
    4.Syntax to call the Trigger events: Trigger.TCV
    
