@@ -5,19 +5,19 @@ Validation Rules:
 
 1.Workflows:
 ============
-Good:				                            | Bad:
-  a.Easy to use			                    |   a.It can perform only four action
-  b.Mature Technology		                |	      i.Assign a Task
-  c.Approval process can be used        |	      ii.Send an outbound message to an another software application
-  d.Auomate many businesses	            |	      iii.Update the field
-				                                |	      iv.Send a email,but it cannot Create or delete the records
-				                                |   b.Workflows can only be invoked when the record changes.The Save button must be engaged either on created or edited records.
-				                                |   c.No control on over execution order of workflows and support only one IF/THEN statements 
-				                                |   d.It can only access some fields on related master object.there has to be a Master detail relationship between objects.If you have lookup 
-		                                          relationship between objects you cannot apply lookup.
+Good:				                            		| Bad:
+  a.Easy to use			                    			|a.It can perform only four action
+  b.Mature Technology		                				i.Assign a Task
+  c.Approval process can be used       		      				ii.Send an outbound message to an another software application
+  d.Auomate many businesses	          	      				iii.Update the field
+				                              			iv.Send a email,but it cannot Create or delete the records
+				                                	|b.Workflows can only be invoked when the record changes.The Save button must be engaged either on created or edited records.
+				                                	|c.No control on over execution order of workflows and support only one IF/THEN statements 
+				                                	|d.It can only access some fields on related master object.there has to be a Master detail relationship between objects.If you have lookup 
+		                                          		relationship between objects you cannot apply lookup.
 2.Process builder:
 =================
-Good:							                                                                             Bad:
+Good:							                                       Bad:
   a.Process builder supports far more actions than workflow such as chatter                    |a.PB can create the records,but it cannot grab the ID of a newly
  post,updating the child records ,Creating record,it also support versioning                      created record and do something with it.
  which is very handy.So that we can have older version andnever version.
@@ -36,7 +36,7 @@ Good:							                                                                    
 
 3.Flow builder:
 --------------
-Good:							                                                                              Bad:
+Good:							                                          Bad:
   a.Fow supports user interaction.We can create screens where the user input                      |a.Complexity-coder code and system admins run away when they see
     the data into and then we can use input in the following flow very handy.                     flow builder.they do that because if you can use flow you really
                                                                                                   understand the coding from the high level.
