@@ -1,0 +1,75 @@
+Example 1: Write a Trigger on the Opportunity object and check for all event behoviour?
+
+//trigger    TriggerName   on   S-object (all 7 events)
+trigger OpportunityTrigger on Opportunity(before insert,before update,Before delete, after insert, after update,after delete, after undelete) {
+    //Before Insert
+    if(Trigger.isBefore && Trigger.isInsert){
+        system.debug('====Before Insert event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+    //After Insert
+    if(Trigger.isAfter && Trigger.isInsert){
+        system.debug('====After Insert event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');      
+    }
+    //Before Update
+    if(Trigger.isBefore && Trigger.isUpdate){
+        system.debug('====Before Update event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+    //After Update
+    if(Trigger.isAfter && Trigger.isUpdate){
+        system.debug('====After Update event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+    //Before Delete
+    if(Trigger.isBefore && Trigger.isDelete){
+        system.debug('====Before Delete event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+    //After Delete
+    if(Trigger.isBefore && Trigger.isDelete){
+        system.debug('====After Delete event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+    //After Undelete
+    if(Trigger.isBefore && Trigger.isUnDelete){
+        system.debug('====After Undelete event fired=====');
+        system.debug('===>Trigger.new ::' + Trigger.new);
+        system.debug('===>Trigger.newMap ::' + Trigger.newMap);
+        system.debug('===>Trigger.Old ::' + Trigger.Old);
+        system.debug('===>Trigger.oldMap ::' + Trigger.oldMap);
+        system.debug('===>Execution Ends Here');   
+    }
+}
+
+Scenario-1: 
+
+
+
+
+
