@@ -57,7 +57,7 @@ trigger OpportunityTrigger on Opportunity(before insert,before update,Before del
         system.debug('===>Execution Ends Here');   
     }
     //After Undelete
-    if(Trigger.isBefore && Trigger.isUnDelete){
+    if(Trigger.isAfter && Trigger.isUnDelete){
         system.debug('====After Undelete event fired=====');
         system.debug('===>Trigger.new ::' + Trigger.new);
         system.debug('===>Trigger.newMap ::' + Trigger.newMap);
@@ -67,7 +67,21 @@ trigger OpportunityTrigger on Opportunity(before insert,before update,Before del
     }
 }
 
-Scenario-1: 
+Scenario-1: Create a New Opportunity record with Name, Closed Date, Stage,Probability,Type,LeadSource and Click on Save
+----------  Which events will fire : Before Inset   and   After Insert
+                                         Trigger.New           Trigger.New and Trigger.NewMap
+
+Scenario-2: Edit the above created record by changing Stage,LeadSource and Click Save
+----------  Which events will fire:               Before Update                                       and                               After Update
+                                    Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap                    Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap
+    
+Scenario-3: Now Delete the above edited record.
+----------Which events will fire:                 Before Delete             and             After Delete
+                                            Trigger.old and Trigger.oldMap              Trigger.old and Trigger.old
+
+Scenario-4: Now Un-delete the same deleted record from the recycle bin
+---------- Which events will fire:                     After Un-delete
+                                             Trigger.New and Trigger.NewMap
 
 
 
