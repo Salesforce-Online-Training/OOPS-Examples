@@ -1,3 +1,32 @@
                                                                         Before Insert - Examples
                                                                         -----------------------
-Write a Trigger on the Account object to make Phone field mandatory?
+Q) Write a Trigger on the Account object to make Phone field mandatory?
+trigger AccountTrigger on Account (before insert) {
+    for(Account acc : Trigger.New){
+        if(acc.Phone == Null){
+            acc.addError('Phone number is Mandatory for every new record creation');
+        }
+    }
+}
+(Or)
+trigger AccountTrigger on Account (before insert) {
+    List<Account> lstacc = Trigger.New;
+    for(Account acc : lstacc){
+        if(acc.Phone == Null){
+            acc.phone.addError('Phone number is Mandatory for every new record creation');
+        }
+    }
+}
+-------------------
+Q) Write a Trigger on the Account object, If Phone is not Null and Fax is Null then get the Phone value under Fax field?
+trigger AccountTrigger2 on Account (before insert) {
+    for(Account acc:Trigger.new){
+        if(acc.Phone != Null && acc.Fax== Null){
+            acc.fax = acc.phone;
+        }
+    }
+}
+-------------------
+Q) Writter a Trigger on Account, If Account has cases associated to it then do not delete those Accounts?
+
+
