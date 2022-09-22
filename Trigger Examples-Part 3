@@ -1,32 +1,54 @@
                                                                         Before Insert - Examples
                                                                         -----------------------
-Q) Write a Trigger on the Account object to make Phone field mandatory?
 trigger AccountTrigger on Account (before insert) {
-    for(Account acc : Trigger.New){
-        if(acc.Phone == Null){
-            acc.addError('Phone number is Mandatory for every new record creation');
+    if(trigger.isBefore && (trigger.isInsert ||trigger.isupdate)){
+        //Q)1.Write a Trigger on the Account object to make Phone field mandatory?
+        List<Account> lstacc = Trigger.New;
+        for(Account acc : lstacc){
+            if(acc.Phone == Null){
+                acc.phone.addError('Phone number is Mandatory for every new record creation');
+            }
+        }
+        //Q)2.Write a Trigger on the Account object, If Phone is not Null and Fax is Null then get the Phone value under Fax field?
+        for(Account acc:Trigger.new){
+            if(acc.Phone != Null && acc.Fax== Null){
+                acc.fax = acc.phone;
+            }
+        }
+    }
+    if(Trigger.isBefore && trigger.isdelete){
+        //Q)3.Writter a Trigger on Account, If Account has cases associated to it then do not delete those Accounts?
+        //Step1: Get the Account Id and Account details in which you are going to delete and store it in OldMap (because those are existing records)
+        Map<id,Account> oldAccMap = Trigger.oldMap;
+        //Step2: Now write a SOQL query and get all the Account Keys in which you want to delete and along with its related Cases
+        List<Account> lstacc1 = [Select id,Name, (Select id, caseNumber from Cases) from Account Where id IN : oldAccMap.keyset()];
+        //Step3:Convert the above list into Map (and try to get Account Id and List of cases )
+        Map<id,list<case>> mapofAccCases = new Map<id,list<case>>();
+        //Step4:Now convert the list into Map and store Account Id's and List<cases> related to the Account
+        for(Account ac:lstacc1){
+            mapofAccCases.put(ac.id,ac.cases);
+        }
+        for(Account acc:Trigger.old){
+            if(mapofAccCases.containsKey(acc.Id)){
+                List<case> lstcases = mapofAccCases.get(acc.Id);
+                if(lstcases.size()>0){
+                    acc.addError('You cannot delete Accounts if cases exist');
+                }
+            }
         }
     }
 }
-(Or)
-trigger AccountTrigger on Account (before insert) {
-    List<Account> lstacc = Trigger.New;
-    for(Account acc : lstacc){
-        if(acc.Phone == Null){
-            acc.phone.addError('Phone number is Mandatory for every new record creation');
+
+Q)3.Writter a Trigger on Account, If Account has cases associated to it then do not delete those Accounts?
+trigger AccountTrigger3 on Account (before delete) {
+    for(Account acc : Trigger.old){
+        List<Case> lstCases = [SELECT id, CaseNumber FROM Case WHERE accountId =: acc.id];
+        if(lstCases.size()>0){
+            acc.addError('You cant delete account if cases already exist');
         }
     }
 }
--------------------
-Q) Write a Trigger on the Account object, If Phone is not Null and Fax is Null then get the Phone value under Fax field?
-trigger AccountTrigger2 on Account (before insert) {
-    for(Account acc:Trigger.new){
-        if(acc.Phone != Null && acc.Fax== Null){
-            acc.fax = acc.phone;
-        }
-    }
-}
--------------------
-Q) Writter a Trigger on Account, If Account has cases associated to it then do not delete those Accounts?
+Note: The above solution will also work but we should never write SOQL quiries inside the for loop and also for suppose you are attempting to delete 200 records while
+using data loader, from the above code for loop will execute 100 times because limit 100 SOQL and it will hit the governor limit
 
 
