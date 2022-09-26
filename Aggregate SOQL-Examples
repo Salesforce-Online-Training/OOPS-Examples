@@ -1,7 +1,7 @@
 Aggregate Quiries:
 -----------------
-                                                                                  COUNT
-                                                                                  -----
+COUNT
+-----
 Example 1: Query to get COUNT of records on Opportunity?
 ---------
 Integer count = [SELECT count() from Opportunity];
@@ -25,3 +25,50 @@ Example 4: Query to get COUNT of records on Opportunity Which has LeadSource val
 ----------
 SELECT count(LeadSource) from Opportunity Where LeadSource = 'Web'
 
+Example 5: Query to set SUM,MIN,MAX and Avg of Amount from an Opportunity
+---------
+ Aggregateresult agr =  [SELECT SUM(Amount),Max(Amount), Min(Amount), Avg(Amount) from Opportunity];
+system.debug('Aggregate result are ::'+ agr);
+
+//Output:Aggregate result are ::AggregateResult:{expr0=5646000.0, expr1=915000.00, expr2=1000.00, expr3=188200.0}
+Note:The output is also Index based                   0                 1              2                3
+
+Example 6:
+---------
+Aggregateresult agr =  [SELECT SUM(Amount),Max(Amount), Min(Amount), Avg(Amount) from Opportunity];
+system.debug('SUM is ::'+ agr.get('expr0'));
+system.debug('Min is ::'+ agr.get('expr1'));
+system.debug('Max is ::'+ agr.get('expr2'));
+system.debug('Avg is ::'+ agr.get('expr3'));
+
+//Output:SUM is ::5646000.0
+         Min is ::915000.00
+         Max is ::1000.00
+         Avg is ::188200.0
+
+Another approach to get aggregate results: Alias
+
+Example 7:
+---------
+Aggregateresult agr =  [SELECT SUM(Amount)sa,Max(Amount)ma, Min(Amount)mt, Avg(Amount)Aa from Opportunity];
+system.debug('SUM is ::'+ agr.get('sa'));
+system.debug('Min is ::'+ agr.get('ma'));
+system.debug('Max is ::'+ agr.get('mt'));
+system.debug('Avg is ::'+ agr.get('Aa'));
+
+//Output:SUM is ::5646000.0
+         Min is ::915000.00
+         Max is ::1000.00
+         Avg is ::188200.0
+Note: In the aggregate result we can only use SUM,COUNT,MIN,MAX and GROUP BY
+
+Example 8: Query to get SUM,MIN,MAX and AVG of Opportunity group by StageName
+---------
+SELECT stageName,SUM(Amount),Max(Amount), Min(Amount), Avg(Amount) FROM Opportunity GROUP BY stageName
+
+Example 9: Suppose I want to use direct fields apart from Aggregate field in the Aggregate SOQL?
+---------
+SELECT stageName,SUM(Amount),Max(Amount), Min(Amount), Avg(Amount), CloseDate FROM Opportunity GROUP BY stageName
+//Output: [object Object]: Field must be grouped or aggregated: CloseDate
+
+40Mins
