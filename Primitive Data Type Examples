@@ -151,8 +151,8 @@ System.debug('s2 :'+s2);
 //Output: s :hello maximillian
 //Output: s2 :Hello maximillian
 
-                                                                             Time Data Type Examples
-                                                                             -----------------------
+                                                                             		Time
+                                                                             		----
 Time: It stores Hours, Minutes, Seconds and Milli seconds
 Date: It stores Year, Month and Day
 Date Time: It stores both date and Times
@@ -168,8 +168,8 @@ time t = datetime.now().time();
 system.debug(t);
 //Output:15:35:44.761Z
                                                                             
-                                                                                Date Time
-                                                                                ---------
+                                                                               	   Date Time
+                                                                                   ---------
 It takes both date and time
 
 Example 1:
@@ -218,30 +218,9 @@ System.debug('expected :'+expected);
 //Output: myDateTime :2022-07-07 14:08:12
 //Output: newDateTime :2022-08-07 14:08:12
 //Output: expected :2022-08-07 14:08:12 
-
-
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            Blob Data Type Examples
-                                                                              -----------------------
+     
+                                                                            		Blob
+                                                                            		----
 The Blob is a collection of Binary data which is stored as object. This will be used when we want to store the attachment in salesforce into a variable. This 
 data type converts the attachments into a single object. If the blob is to be converted into a string, then we can make use of the toString and the valueOf methods
 for the same.
@@ -269,35 +248,39 @@ Integer size=myBlob.size();
 system.debug(size);
 //Output:11
 
+                                                                            		Decimal
+                                                                            		-------
+A number that includes a decimal point
 
-
-                                                                            Decimal Data Type Example
-                                                                            -------------------------
 Example 1:
 ---------
 Decimal myDecimal = -6.02214129;
 System.debug('myDecimal :'+myDecimal);
 //Output: myDecimal : -6.02214129
-                                                                             Boolean Data Type Example
-                                                                             -------------------------
+                                                                             		Boolean
+                                                                             		-------
+This variable can either be false, true or null
+
 Example:1
 ---------
 Boolean b = Boolean.valueOf('true');
 System.debug('b :'+ b);
 //Output: b :true
-                                                                              ID Data Type Example
-                                                                              ---------------------
+                                                                              		ID
+                                                                              		--
+A valid 18-alphanumeric character force.com record identifier.
+
 Example 1:
 ---------
 Id myId = Id.valueOf('001xa000003DIlo');
 system.debug('myId :'+myId);
 //Output:myId :001xa000003DIloAAG
-                                                                               Double Data Type Example
-                                                                             ------------------------
+                                                                               		Double
+                                                                             		------
+This is a 64-bit number with a decimal point.
+ 
 Example 1:
 ---------
 Double myDouble = 1261992;
 system.debug('myDouble :'+myDouble);
 //Output:myDouble :1261992
-
-
