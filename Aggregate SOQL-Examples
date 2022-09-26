@@ -1,1 +1,27 @@
+Aggregate Quiries:
+-----------------
+                                                                                  COUNT
+                                                                                  -----
+Example 1: Query to get COUNT of records on Opportunity?
+---------
+Integer count = [SELECT count() from Opportunity];
+system.debug('The Count is :'+ count);
+
+Note: For Total count use COUNT Function
+
+Example 2: Query to get COUNT of records on Opportunity Which has Amount value?
+---------
+SELECT count(Amount) from Opportunity
+            (Or)
+SELECT count() from Opportunity Where Amount != Null
+
+Note: COUNT(field) from a specific field
+
+Example 3: Query to get COUNT of records on Opportunity Which has Amount value?
+---------
+SELECT count(LeadSource) from Opportunity
+
+Example 4: Query to get COUNT of records on Opportunity Which has LeadSource value != Web?
+----------
+SELECT count(LeadSource) from Opportunity Where LeadSource = 'Web'
 
