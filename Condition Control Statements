@@ -1,0 +1,121 @@
+                                                                Simple Condition Control Statements
+                                                                -----------------------------------
+                                                                          If Statement
+                                                                          ------------
+Syntax:
+------
+if(condition){
+    //statements to be executed
+}
+
+Example 1:
+----------
+Integer age =18;
+if(age>=18){
+    system.debug('You are eligible to vote');
+}
+//Output:You are eligible to vote
+
+Example 2:
+---------
+Integer marks =55;
+if(marks>=35){
+    system.debug('You passed the exam');
+}
+//Output:You passed the exam
+
+                                                                                if-else condition
+                                                                                -----------------
+Syntax:
+------
+if(condition){
+//statments to be executed    
+}
+else{
+
+}
+
+Example 1:
+---------
+Integer Age = 20;
+if(age<=18){   // if condition ==> true
+    System.Debug('You are eligible to vote');
+}
+else {
+    System.Debug('You are not eligible to vote');
+}
+//Output: You are not eligible to vote
+
+Example 2:
+---------
+Integer marks=25;
+if(marks>=35){
+    system.debug('You passed the exam');
+}
+else{
+    system.debug('You are not qualified for the exam');
+}
+//Output: You are not qualified for the exam
+                                                                                  if-else-if condition
+                                                                                  ---------------------
+Syntax:
+-------
+if(condition){
+    
+}
+else
+    if(condition){
+        
+    }
+else
+    if(condition){
+        
+    }
+else{
+    
+}
+
+Example 1:
+---------
+integer a =10;
+integer b =20;
+integer c =30;
+integer d =40;
+if (a>b && a>c && a>d){
+    system.debug('A is Big');    
+}
+else
+    if(b>c && b>d){
+        system.debug('B is big');				
+    }
+else
+    if(c>d){
+        system.debug('C is big');
+    }
+else{
+    system.debug('D is big');
+}
+//Output: D is big
+
+Example 2:
+---------
+integer marks = 25;
+    if(marks >=35 && marks <=75){
+        system.debug('You are under C grade');
+    }
+else
+    if(marks >=75 && marks <=95){
+        system.debug('You are under B grade');
+    }
+else
+    if(marks >=95 && marks <=100){
+        system.debug('You are under A grade');
+    }
+else{
+    system.debug('You failed the exam');
+}
+
+                                                                                Nested if
+                                                                                ---------
+one IF function inside of another
+
