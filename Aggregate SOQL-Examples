@@ -17,7 +17,7 @@ SELECT count() from Opportunity Where Amount != Null
 
 Note: COUNT(field) from a specific field
 
-Example 3: Query to get COUNT of records on Opportunity Which has Amount value?
+Example 3: Query to get COUNT of records on Opportunity Which has LeadSource value?
 ---------
 SELECT count(LeadSource) from Opportunity
 
@@ -69,6 +69,10 @@ SELECT stageName,SUM(Amount),Max(Amount), Min(Amount), Avg(Amount) FROM Opportun
 Example 9: Suppose I want to use direct fields apart from Aggregate field in the Aggregate SOQL?
 ---------
 SELECT stageName,SUM(Amount),Max(Amount), Min(Amount), Avg(Amount), CloseDate FROM Opportunity GROUP BY stageName
-//Output: [object Object]: Field must be grouped or aggregated: CloseDate
+//Output: Error Message:[object Object]: Field must be grouped or aggregated: CloseDate
 
-40Mins
+Example 9: I want to store the query result?
+---------
+SELECT stageName,SUM(Amount),Max(Amount), Min(Amount), Avg(Amount), CloseDate FROM Opportunity GROUP BY stageName
+//Output:agr::(AggregateResult:{StageName=Qualification, expr0=null, expr1=null, expr2=null, expr3=null}, AggregateResult:{StageName=Needs Analysis, expr0=675000.0, expr1=675000.00, expr2=675000.00, expr3=675000.0}, AggregateResult:{StageName=Value Proposition, expr0=330000.0, expr1=250000.00, expr2=80000.00, expr3=165000.0}, AggregateResult:{StageName=Id. Decision Makers, expr0=110000.0, expr1=60000.00, expr2=15000.00, expr3=36666.666666666664}, AggregateResult:{StageName=Perception Analysis, expr0=120000
+
