@@ -1,0 +1,34 @@
+Q) What are Email services?
+    Email services are automated processes that use Apex classes to process the contents, headers, and attachments of inbound email.You can associate each email service
+    with one or more Salesforce-generated email addresses to which users can send messages for processing.
+
+There are two types of Email Services:
+  1.Outbound Email Services : Salesforce to Outside email
+  2.InBound Email Services : Outside Email to Salesforce
+  
+Outbound Email Service:
+----------------------
+        Suppose you want to send an email to your friend, for that you need ToAddress, ccAddress, Subject, Body and Attachments, similarly, In order to send an email
+using Apex in Salesforce, we have a pre defined class called Messaging.SingleEmailMessage.
+
+Apex Class Name : Messaging.SingleEMailMessage
+Object Creation:  Messaging.SingleEMailMessage msg = new Messaging.SingleEMailMessage();
+
+Apex Methods:
+       1.setToAddress();              : In this method we will pass email's of those whom you want to send.
+       2.setSubject();                : In this method we need to pass Subject of the email.
+       3.setPlaintextBody();          : In this method we need to pass Body of the email.
+       4.setAttachments();            : if we want to attach some documents then we use this method.
+Once everything is ready, Create a new object for Messaging email (as shown below) class and add Single Email Message to that list
+        List<Messaging.Email> emaillst = new List<Messaging.Email>();
+        emaillst.add(msg);
+Now In order to send emails we need to use the method : Messaging.sendEmail
+
+Apex Class:
+-----------
+
+
+Execute the below code in Anyonimous Window:
+--------------------------------------------
+OutboundEmailExample outemail = new OutboundEmailExample();
+outemail.sendEmail();
