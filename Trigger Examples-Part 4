@@ -1,0 +1,59 @@
+Q) Write a Trigger on Opportunity, When StageName changes from Negotiation/Review to Closed Won stage then update Opp Description with some data?
+------>>>> Apex Triggers
+
+trigger OpportunityTrigger1 on Opportunity (before update) {
+    OpportunityTrigger1Helper opphelper = new OpportunityTrigger1Helper();
+    opphelper.updateDescription(Trigger.new, Trigger.oldMap);
+}
+------>>>>>> Apex Class
+
+public class OpportunityTrigger1Helper {
+    public void updateDescription(List<Opportunity> lstOpp,Map<id,Opportunity> oldOppMap){
+        for(Opportunity opp : lstOpp){
+            if(opp.stagename == 'Closed Won' && oldOppMap.get(opp.id).stagename == 'Negotiation/Review'){
+                opp.Description = 'Your Opportunity is closed today ::' + system.today() + '::Please go ahead an create Order and Contract records';
+            }
+        }
+    }
+}
+
+Q) What is Recursive Trigger?
+A) If same Trigger is executing continously then we called that trigger are Recursive Trigger.
+
+trigger RecursiveTriggerExample on Account (After insert) {
+    list<account> acclst = new list<account>();
+    for(Account ac :Trigger.new){
+        Account newAcc = new Account();
+        newAcc.ParentId = ac.Id;
+        newAcc.Name = ac.Name + '_Child';
+        newAcc.Phone = ac.Phone;
+        acclst.add(newAcc);
+    }
+    insert acclst;
+}
+
+Note: if you execute the above class by creating an Account, When one Account is created, then it will create another Account as child, Again loop runs, creates new Account
+      and procedure goes on... and then it gives you an error called :: 'maximum trigger depth exceeded'.
+
+To avoid the above scenario create a new class and declare a new static variable as shown below
+
+trigger RecursiveTriggerExample on Account (After insert) {
+    list<account> acclst = new list<account>();
+    for(Account ac :Trigger.new){
+        Account newAcc = new Account();
+        newAcc.ParentId = ac.Id;
+        newAcc.Name = ac.Name + '_Child';
+        newAcc.Phone = ac.Phone;
+        acclst.add(newAcc);
+    }
+    
+    if(RecursiveCheck.check == false){
+       RecursiveCheck.check = True;
+        insert acclst; 
+    }
+    
+}
+------->>>>>
+public class RecursiveCheck {
+	public static boolean check = false;
+}
