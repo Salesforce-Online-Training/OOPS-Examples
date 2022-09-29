@@ -1,0 +1,136 @@
+Q) What are Email services?
+    Email services are automated processes that use Apex classes to process the contents, headers, and attachments of inbound email.You can associate each email service
+    with one or more Salesforce-generated email addresses to which users can send messages for processing.
+
+There are two types of Email Services:
+  1.Outbound Email Services : Salesforce to Outside email
+  2.InBound Email Services : Outside Email to Salesforce
+  
+Outbound Email Service:
+----------------------
+        Suppose you want to send an email to your friend, for that you need ToAddress, ccAddress, Subject, Body and Attachments, similarly, In order to send an email
+using Apex in Salesforce, we have a pre defined class called Messaging.SingleEmailMessage.
+
+Apex Class Name : Messaging.SingleEMailMessage
+Object Creation:  Messaging.SingleEMailMessage msg = new Messaging.SingleEMailMessage();
+
+Apex Methods:
+       1.setToAddress();              : In this method we will pass email's of those whom you want to send.
+       2.setSubject();                : In this method we need to pass Subject of the email.
+       3.setPlaintextBody();          : In this method we need to pass Body of the email.
+       4.setAttachments();            : if we want to attach some documents then we use this method.
+Once everything is ready, Create a new object for Messaging email (as shown below) class and add Single Email Message to that list
+        List<Messaging.Email> emaillst = new List<Messaging.Email>();
+        emaillst.add(msg);
+Now In order to send emails we need to use the method : Messaging.sendEmail
+
+Apex Class: With Plain Body Text
+-----------
+public class OutboundEmailExample {
+    public void sendEmail(){
+        //1.I want to send email to all the students which are created today
+        List<Students__c> lststd = [select id, Name, Email__c from Students__c where createddate = Today]; 
+        
+        //2.Definetly there will be more than one student record will be created today, get their email id's and store in a list
+        List<string> lstToAddress = new List<string>();
+        //3.Add ccAddress
+        List<string> lstCcAddress = new List<string>{'anji.gopanaboina@gmail.com'};
+            
+            //4.create a for loop and get their email id's to the above list
+            for(Students__c st : lststd){
+                lstToAddress.add(st.Email__c);
+            }
+        //5.Create a single email Message class
+        Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
+        //To specify toAddress
+        msg.setToAddresses(lstToAddress);
+        //To specify CcAddress
+        msg.setCcAddresses(lstCcAddress);
+        //To specify Subject
+        msg.setSubject('Invitation mail for Salesforce Online Training');
+        //To specify Body of the Email
+        msg.setPlainTextBody('Hello All, Thanks for Registring with us');
+        
+        //6.Now add the above single email messaging class to Email messaging class
+        List<Messaging.Email> msgemail = new List<Messaging.SingleEmailMessage>();
+        msgemail.add(msg);
+        
+        // 7.Now call the below class to send emails and pass Messaging email as input parameter and store it in the sendEmailResultClass
+        Messaging.SendEmailResult[] results = messaging.sendEmail(msgemail);
+        if(results[0].Success){
+            system.debug('The email was sent successfully');
+        }
+        else{
+            system.debug('The email is failed to send:' + results[0].errors[0].message);
+        }
+    }
+}
+
+Execute the below code in Anonymous Window:
+--------------------------------------------
+OutboundEmailExample outemail = new OutboundEmailExample();
+outemail.sendEmail();
+
+Testing: Goto the Student object and create 2 test records. Now run the above class from the anonymous window
+//Output: The email was sent successfully
+Note: In our developer Org we can only send 10 email per day.
+
+Assigment: Whenever contact is created in Salesforce, then send an email to contact.
+
+Example 2: With HTML Body Content
+---------
+
+Apex Class:
+----------
+
+public class OutboundEmailExample {
+    public void sendEmailwithHTMLBody(){
+        //1.I want to send email to all the students which are created today
+        List<Students__c> lststd = [select id, Name, Email__c from Students__c where createddate = Today]; 
+        
+        //2.Definetly there will be more than one student record will be created today, get their email id's and store in a list
+        List<string> lstToAddress = new List<string>();
+        //3.Add ccAddress
+        List<string> lstCcAddress = new List<string>{'anji.gopanaboina@gmail.com'};
+            
+            //4.create a for loop and get their email id's to the above list
+            for(Students__c st : lststd){
+                lstToAddress.add(st.Email__c);
+            }
+        //5.Create a single email Message class
+        Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
+        //To specify toAddress
+        msg.setToAddresses(lstToAddress);
+        //To specify CcAddress
+        msg.setCcAddresses(lstCcAddress);
+        //To specify Subject
+        msg.setSubject('Invitation mail for Salesforce Online Training');
+        //To specify HTMLBody of the Email
+        string htmlBody = '<H1> Hi Sir, <br/> </H1> <br/> Much awaiting course is Ready.';
+        htmlBody = htmlBody + '<p style="color:red"> Thank you for registring with us';
+        htmlBody = htmlBody + '<H1> Thanks and Regards, <br/> Anji </H1>';
+        msg.setHtmlBody(htmlBody);
+        
+        //6.Now add the above single email messaging class to Email messaging class
+        List<Messaging.Email> msgemail = new List<Messaging.SingleEmailMessage>();
+        msgemail.add(msg);
+        
+        // 7.Now call the below class to send emails and pass Messaging email as input parameter and store it in the sendEmailResultClass
+        Messaging.SendEmailResult[] results = messaging.sendEmail(msgemail);
+        if(results[0].Success){
+            system.debug('The email was sent successfully');
+        }
+        else{
+            system.debug('The email is failed to send:' + results[0].errors[0].message);
+        }
+    }
+}
+
+
+Execute the below code in Anonymous window
+------------------------------------------
+OutboundEmailExample outemail = new OutboundEmailExample();
+outemail.sendEmailwithHTMLBody;
+
+Testing: Goto the Student object and create 2 test records. Now run the above class from the anonymous window
+//Output: The email was sent successfully
