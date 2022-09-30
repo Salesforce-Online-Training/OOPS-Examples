@@ -134,3 +134,100 @@ outemail.sendEmailwithHTMLBody;
 
 Testing: Goto the Student object and create 2 test records. Now run the above class from the anonymous window
 //Output: The email was sent successfully
+
+Note: we cannot send single email message to outside of Salesforce, for that we need to add this to List<messaging.email> class and send then send.
+
+Example 3: I want to send an email to the external system with Attachment
+-------------------------------------------------------------------------
+If you want to send attachments from Salesforce to external system, we need to store attachments in Salesforce - Documents object and In lightning we use Files object
+Now goto the document object in Salesforce Classic and try to create a document record that includes the file upload and enable Externally available Image
+
+If you want send the document then we need to fetch the document into the apex class
+Document doc = [select id,Name,body from Document where Name = 'Salesforce Test Document'];
+
+Q) How to include the above document in the Messaging class?
+There is a class called : messaging.emailfileattachments
+Methods inside above class: setFileName and setBody
+
+//Create a class for uploading the documents
+Messaging.EmailFileAttachment emailattach = new Messaging.EmailFileAttachment();
+emailattach.setFileName(doc.Name);
+emailattach.setBody(doc.Body);
+
+Now I want to add the above EmailAttachment class to the singleEmailMessage class. How to add?
+so now add this to the SingleEmailmessage class
+ msg.setFileAttachments(List<Messaging.EmailFileAttachment> param1)
+But if you look at the above it is accepting List as Input parameter, for that create a list with Messaging.EmailFileAttachment as shown below
+List<Messaging.EmailFileAttachment> lstatt = new List<Messaging.EmailFileAttachment>();
+and then add it to the Email attach
+
+lstatt.add(emailattach);
+and Now pass this to the Messaging.EmailFielAttachment as shown below
+
+msg.setFileAttachments(lstatt);
+
+
+Apex class:
+-----------
+public class OutboundEmailExample {
+    public void sendEmailwithAttchments(){
+        //1.I want to send email to all the students which are created today
+        List<Students__c> lststd = [select id, Name, Email__c from Students__c where createddate = Today]; 
+        //Collect the document file record and store it in the document object 
+        Document doc = [select id,Name,body from Document where Name = 'Salesforce Test Document'];
+        List<Messaging.EmailFileAttachment> lstatt = new List<Messaging.EmailFileAttachment>();
+        //Create a class for uploading the documents
+        Messaging.EmailFileAttachment emailattach = new Messaging.EmailFileAttachment();
+        emailattach.setFileName(doc.Name);
+        emailattach.setBody(doc.Body);
+        lstatt.add(emailattach);
+        //2.Definetly there will be more than one student record will be created today, get their email id's and store in a list
+        List<string> lstToAddress = new List<string>();
+        //3.Add ccAddress
+        List<string> lstCcAddress = new List<string>{'anji.gopanaboina@gmail.com'};
+            
+            //4.create a for loop and get their email id's to the above list
+            for(Students__c st : lststd){
+                lstToAddress.add(st.Email__c);
+            }
+        //5.Create a single email Message class
+        Messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
+        //To specify toAddress
+        msg.setToAddresses(lstToAddress);
+        //To specify CcAddress
+        msg.setCcAddresses(lstCcAddress);
+        //To specify Subject
+        msg.setSubject('Invitation mail for Salesforce Online Training');
+        //To specify HTMLBody of the Email
+        string htmlBody = '<H1> Hi Sir, <br/> </H1> <br/> Much awaiting course is Ready.';
+        htmlBody = htmlBody + '<p style="color:red"> Thank you for registring with us';
+        htmlBody = htmlBody + '<H1> Thanks and Regards, <br/> Anji </H1>';
+        msg.setHtmlBody(htmlBody);
+        msg.setFileAttachments(lstatt);
+        //6.Now add the above single email messaging class to Email messaging class
+        List<Messaging.Email> msgemail = new List<Messaging.SingleEmailMessage>();
+        msgemail.add(msg);
+        
+        // 7.Now call the below class to send emails and pass Messaging email as input parameter and store it in the sendEmailResultClass
+        Messaging.SendEmailResult[] results = messaging.sendEmail(msgemail);
+        if(results[0].Success){
+            system.debug('The email was sent successfully');
+        }
+        else{
+            system.debug('The email is failed to send:' + results[0].errors[0].message);
+        }
+    }
+}
+
+Execute the code in the Anonymous window
+----------------------------------------
+OutboundEmailExample outemail = new OutboundEmailExample();
+outemail.sendEmailwithAttchments();
+
+
+
+
+
+
+
+
