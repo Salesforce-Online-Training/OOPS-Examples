@@ -244,15 +244,59 @@ Step 1: Create an Email template on the Account Object
                         Account Rating: {!Account.Rating}
                                                 Thanks and Regards,
                                                 {!Contact.OwnerFullName}
-       How to use Email Template in Apex?
+ How to use Email Template in Apex?
+ EmailTemplate et = [select id,name,body from EmailTemplate where Name = 'Account Info'];
+ 
+Step2: Lets goto the contact object and create a record with email id and call the same in the Apex class
+contact con = [select id,Name,email,AccountId from Contact where name = 'Krishna Prasad'];
        
-Step 2: How to use EmailTemplate method in the Messagining class
+Step3: Now create a Messaging.SingleEilMessage class and call the below methods
+       How to call EmailTemplate method in the Single email Messaging class
         a.setEmailTemplateID : Which email template you want to send
         b.setTargetObjectID: to whom you want to send
         c.WhatId:What Information you want to send
+EmailTemplate et = [select id,name,body from EmailTemplate where Name = 'Account Info'];
+contact con = [select id,Name,email,AccountId from Contact where name = 'Krishna Prasad'];
+messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
+msg.setTemplateId(et.id);
+msg.setTargetObjectId(con.id);
+msg.setWhatId(con.AccountId);
 
+Step4: Now create Messaging class and add this single email message to the email class
+List<Messaging.Email> lstmsg = new List<Messaging.Email>();
+lstmsg.add(msg);
 
+Steps5: To send an email call the class called Messaging.sendemail
+messaging.sendEmail(lstmsg);
 
+Apex class:
+-----------
+public class OutboundEmailTemplateExample {
+    public void sendEmailwithEmailTemplate(){
+        EmailTemplate et = [select id,name,body from EmailTemplate where Name = 'Account Info'];
+        contact con = [select id,Name,email,AccountId from Contact where name = 'Krishna Prasad'];
+        
+        List<Messaging.Email> lstmsg = new List<Messaging.Email>();
+        messaging.SingleEmailMessage msg = new Messaging.SingleEmailMessage();
+        msg.setTemplateId(et.id);
+        msg.setTargetObjectId(con.id);
+        msg.setWhatId(con.AccountId);
+        lstmsg.add(msg);
+        messaging.sendEmail(lstmsg);
+    }
+    
+}
 
+Execute the below code in the Anynomous window:
+-----------------------------------------------
+OutboundEmailTemplateExample outem = new OutboundEmailTemplateExample();
+outem.sendEmailwithEmailTemplate();
 
+Now when we execute the below code it will send an email to the desired contact
 
+Note: In the Task object
+WhoId:It refers to the person Ex: Lead and Contact
+WhatId: Refer to the company Ex:Opportunity,Account,Student__c...etc.
+
+Assignment: Whenever a case is create send am email using EmailTemplate using contact object.
+Assigment: Send an email to all the students who lastmodified = Today. (Email with Attachments)
