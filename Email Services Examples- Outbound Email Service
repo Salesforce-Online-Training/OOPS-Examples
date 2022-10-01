@@ -225,8 +225,34 @@ OutboundEmailExample outemail = new OutboundEmailExample();
 outemail.sendEmailwithAttchments();
 
 Assignment: I want to send email templates through Apex
+----------
+Note: if you want to send email templated from Salesforce to Outside, It is not possible. To which objects we can use to send email templates is User object, Contact and Lead object, I cannot
+other standard and custom objects.
 
-Note: if you want to send email templated from Salesforce to Outside, It is not possible
-To Whom we can send is User object, Contact and Lead object, I cannot send to Student object and other standard and custom object.
+In Messaging.singleEmailMessage class if I want to send Email template using Apex class then it is posssible through only Lead, contact and User object.
+
+Example3: I want to send Account information to the related contact information using Email Template by using Apex?
+--------
+Step 1: Create an Email template on the Account Object
+        Quick find ==> Classic Email Template ==> new Template ==> Text type ==> Enable Available For Use ==> Email Template Name:Account Info and Template Unique Name:
+        Account_Info, Description: Description, Subject: Account details, 
+        Email Body:
+                  Hi Sir,
+                        Please find your Account details below,
+                        Account Name : {!Account.Name}
+                        Account Phone: {!Account.Phone}
+                        Account Rating: {!Account.Rating}
+                                                Thanks and Regards,
+                                                {!Contact.OwnerFullName}
+       How to use Email Template in Apex?
+       
+Step 2: How to use EmailTemplate method in the Messagining class
+        a.setEmailTemplateID : Which email template you want to send
+        b.setTargetObjectID: to whom you want to send
+        c.WhatId:What Information you want to send
+
+
+
+
 
 
