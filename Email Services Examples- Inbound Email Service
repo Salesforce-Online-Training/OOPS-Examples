@@ -1,0 +1,102 @@
+Inbound Email Services:
+-----------------------
+If any one is trying to send a email from external system to Salesforce. If you want to handle the email coming from external system to salesforce we used Inbound email
+services class.
+
+For Implementing the Inbound email services we need an Interface called: messaging.InboundEmailHandler
+For the above Interface we have one method with two parameters : messaging.InboundEmailHandler(Messaging.InboundEmail, Messaging.InboundEnvelope)
+
+a.Messaging.InboundEmail :: It contains fromAddress, toAddress, subject, body, attachments..etc
+b.Messaging.InboundEnvelope :: It contains fromAddress and toAddress
+
+This method messaging.InboundEmailHandler has a return type :: Messaging.InboundEmailResult
+
+Example 1: If any contact send an email, capture that email and register as case in salesforce?
+----------
+Step1: Create an Apex class and implement Interface
+-----
+public class InboundEmailServiceExample implements Messaging.InboundEmailHandler {
+
+}
+
+Step2: Call the method inside the Interface and pass the input parameters and define the method result.
+-----
+public Messaging.InboundEmailResult handleInboundEmail(Messaging.InboundEmail email, Messaging.InboundEnvelope env){
+        Messaging.InboundEmailResult result = new Messaging.InboundEmailResult();
+        return result;
+    }
+    
+Step3: For example let's say one contact is sending an email to salesforce, to create case we need to capture his details right  
+-----
+       string tosub = email.subject;
+       string todes = email.plainTextBody;
+       string toadd = email.fromAddress;
+       contact con = [select id, name, email from Contact where email =: email.fromAddress];
+        try{
+           case cs = new case();
+           cs.Subject = tosub;
+           cs.Description = todes;
+           cs.ContactId = con.id;
+           cs.Status = 'New';
+           cs.Origin = 'Email';
+           insert cs;
+           result.success = true;
+        }
+        catch(exception e){
+            system.debug('The following error message has occured' + e.getMessage());
+           result.success = false; 
+        }
+        return result;
+
+Step4: For sending an email we need to give some email for our customers rights, let's create that now
+        Quick find ==> Email service under custom code ==> new Email Service ==> Name:SalesforceOnlineTraining, Apex class: Select your Apex class, Accept Attachments=All
+        Convert Text Attachments to Binary Attachments = Enable, Active = Enable
+        Click on Save and new Email Address
+        
+        Email Address Name = SalesforceCases
+        Accept Email From = Remove the email address
+        Click on save
+        Click Activate
+        
+        Now goto EmailAddress section and Find email address and copy that link and send an email from the email address you specified on the contact only
+        that should create as case record in Salesforce.
+
+Apex Class:
+----------
+public class InboundEmailServiceExample implements messaging.InboundEmailHandler {
+    public Messaging.InboundEmailResult handleInboundEmail(Messaging.InboundEmail email, Messaging.InboundEnvelope env){
+        Messaging.InboundEmailResult result = new Messaging.InboundEmailResult();
+        
+        string tosub = email.subject;
+        string todes = email.plainTextBody;
+        string toadd = email.fromAddress;
+        contact con = [select id, name, email from Contact where email =: email.fromAddress];
+        try{
+            case cs = new case();
+            cs.Subject = tosub;
+            cs.Description = todes;
+            cs.ContactId = con.id;
+            cs.Status = 'New';
+            cs.Origin = 'Email';
+            insert cs;
+            result.success = true;
+        }
+        catch(exception e){
+            system.debug('The following error message has occured' + e.getMessage());
+            result.success = false; 
+        }
+        return result;
+    }
+}
+
+
+Assigment: Create a Account record using Inbound email service?
+
+Note: We can convert the email to Account object record also
+-----
+
+Note:
+-----
+Governance limit of Email services in salesforce: Salesforce limits the total number of messages that all email services combined, including On-Demand Email-to-Case, can
+process daily. Messages that exceed this limit are bounced, discarded, or queued for processing the next day, depending on how you configure the failure response settings
+for each email service. Salesforce calculates the limit by multiplying the number of user licenses by 1,000, up to a daily maximum of 1,000,000
