@@ -1,0 +1,97 @@
+                                                                  Object Oriented Programming Structure (OOPS)
+                                                                  --------------------------------------------
+It is a concept that deals with 4 features
+        a.Abstraction
+        b.Encapsulation
+        c.Inheritance
+        d.Polymorphism
+        
+1.Abstraction: levels of hiding the programming elements.
+-------------
+2.Encapsulation: binding of programming elements.
+---------------
+3.Inheritance: Reusability of Programming elements.
+-------------
+4.Polymorphism: Mutliple behaviours of programming elements.
+--------------
+
+Note:Any programming language that deals with these four features are known as Programming driven archicture. Note: Apex uses OOPS structure.
+----
+                                                                        Encapsulation
+                                                                        -------------
+Levels of binding the programming elements 
+				2 keywords 
+				    a.Interface 
+				    b.Class
+Interface: It is a collection of method prototype only 
+---------
+	Syntax: 
+  ------
+  Datatypeoftheresult  methodName (input pa...., input pa); 
+
+Note: When you are writing a method, Every word First letter should be Lower case and there after every word first letter should be upper case.
+----
+	
+Class: Class has four definitions
+-----
+			a.It is a blueprint of Real world existance.
+			b.It is nothing but collection of features and bahaviour.
+			c.class is a collection of data members and member methods 
+			d.It is an user defined datatype.
+	
+Note: datamembers represents memory statements and memberMethods represents Functions or method
+----
+Example: if you want to construct a house? You need a Plan right?
+Like How many bedrooms, Kitchen,Hall..etc:: This represents the Structure Where we call that a Plan where Engineer will desing on the Piece of Paper:: Refered to Class
+By using the design we construct the house In RealTime right? That realtime Construction of the House::  Refered to the Object
+                        Design :: Class
+                        Realtime : Object
+Example:Book
+-------
+      Feature:Pages,Author,Bookname,Cover page,Edition
+			Behaviours :Chapters,Index
+														
+Syntax:
+------
+Class ClassName{
+					//features or data members
+					//behaviours or member methods
+					 }
+
+Note: While writing the class Every word first letter should be Upper case only.
+-----
+
+Example:
+-------
+Class Mobile{
+    //features 
+        String Company;
+        decimal Speed;
+        Integer length;
+        integer screenLength;
+        
+        // behaviour 
+        Datatypeoftheresult MakaaCall(String Name, Double MobileNumber){
+            //set of statements::Perfrom a well defined task;
+        }
+}
+
+Note:
+----
+In Interface :: We use Prototype 
+In Class :: We use Defination
+
+Note:Every member method must provide services to data members. 
+----
+
+Q) How to mark the features or data members?
+		Features are those characterstics in which we can use them to identify in the realworld existance only.
+
+Q) What are the uses of Method or Function?
+    Method performs a well defined task when it is called by its name and suitable inputs
+
+There are 4 different types of memberMethods
+		a.Create
+		b.Input
+		c.Action/process
+		d.Output
