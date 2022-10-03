@@ -34,7 +34,7 @@ statments independent from the rest of the operation by using future method.
 	@future 
 	public static void futurecall(parameters){
   
-  }
+  	}
 			
 	2. All the future methods should be defined as static .
 		
@@ -60,7 +60,7 @@ ParentJobId, LastProcessed, LastProcessedOffset, CronTriggerId FROM AsyncApexJob
 
 	8. How to track the status of the future method .
 		a. Write a soql query on AsyncApexJob
-    b. Declarative way to check the status 
+    		b. Declarative way to check the status 
 			   Setup ==> Moniter ==> Jobs ===> Apex Jobs
 								 
 	9. Future methods can be used to increase the governing limits .
@@ -103,6 +103,7 @@ Output:
 ShowLine one        ShowLine Two        ShowLine Three
 CallmeLine one      CallmeLine Two      CallmeLine Three
 DisplayLine one     DisplayLine         Two DisplayLine Three
+
 
 Example 2: Asychronous Apex
 
