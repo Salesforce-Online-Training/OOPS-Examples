@@ -1,0 +1,91 @@
+Question: Create a Business class: Square and also define the test class with following input values and display the output values in the log file.
+
+Apex class: Business Class
+
+public class Square {
+    integer side;
+    public void setValues(integer s ){
+        side = s;
+    }
+    public void getValues(){
+        system.debug('The value of Side is :' + side); 
+    }
+}
+
+Test Class:
+
+@isTest
+public class SquareTest {
+    public static testMethod void main(){
+        Square sq = new Square();
+        sq.setValues(10);
+        sq.getValues();
+    }	
+}
+
+Question:Create a Business class: Rectangle and also define the test class with following input values and display the output values in the log file.
+
+Apex class: Business Class
+
+public class Rectangle {
+	Integer Length;
+    Integer Breadth; 
+    public Rectangle(){
+        Length = 0;
+        breadth = 0;
+    }			 
+    public void setValues(Integer Len,Integer bre){
+        Length = len;
+        Breadth = bre;
+    }
+    public void getValues(){
+        System.debug('The Length is :' + Length);
+        System.debug('The breadth id ' + Breadth);
+    }
+}
+
+Test Class:
+
+@isTest  
+public class RectangleTest {     
+    public static testMethod void main(){
+        Rectangle r	= New rectangle();
+        r.getValues();  
+        r.setValues(10, 20);
+        r.getValues();
+    }
+}
+
+Q)Can we have two test classes for one business class?
+	  Yes
+Q)Can we have two test methods for one business class?
+	  Yes
+Q) Can we call One business class in another test class?
+	  Yes
+Q) How can we call one business class in another test class?
+	  By Creating a object
+	  ClassName objectName = New ClassName();
+    
+Q) In the Rectangle test class before I pass setValues I want to know what values does those variable will contain? 
+   Null State
+
+Tip: Invoke the getValues method soon after the object creation.
+
+Q) Suppose in the business try to write the program like this in the setvalues method?.
+
+public void setValues(Integer len,integer bre){
+    length +=len;
+    breadth += bre;	
+}
+
+Note: Adding the length to the length and pass it back to the lenth.
+
+Output : Attempt to de-reference a null object.
+
+Q) What is Lenght +=Len mean?
+	Lenth = length+len
+
+Null is a non-operational operator and Null + any thing = Null;
+
+Q) What to do to eliminate the null value behaviour?
+	By defining our own constructor.
