@@ -1,0 +1,56 @@
+                                                                    Abstraction
+                                                                    -----------
+Abstraction:Levels of hiding the programming elements
+
+Access Modifiers:
+-----------------
+a)Private : 
+    1. If you define method or variable as private then they can be accessed only with in the class in which they are defined. 
+    2. If you don't define any access -modifier by default it is private.
+    3. Only for Test classes we define private.
+ Syntax:
+ private class Sample {
+
+}
+b)Protected : 
+    1. If you define method or variable as Protected ,they can be accessed only with in the class  and with in child class or inherited class.
+Syntax:
+protected class Sample {
+
+}
+c)Public : 
+    1. If you define class, method ,variable as public ,they can be accessed with any class or any where within the Salesforce application.
+Syntax:
+ public class Sample {
+
+}
+
+d)Global : 
+    1.If you define class,method,variable as global ,they can be accessed anywhere i.e With in the application or outside the application.
+    2.Generally we declare Global for webservice (Integrations).
+Syntax:
+global class Sample {
+
+}
+
+Variable Declaration: Examples:
+global /public /protected/private dataType variableName;
+
+global String name;
+public Integer age;
+protected String lastName;
+private String city;
+
+memberMethod Declaration Examples:
+global/public/protected/private returnType methodName(parameters)
+
+public void callMe(){
+    
+}
+private void invoke(){
+    
+}
+
+global void show(){
+    
+}
