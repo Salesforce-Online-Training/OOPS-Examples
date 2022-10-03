@@ -25,9 +25,8 @@ Levels of binding the programming elements
 				    b.Class
 Interface: It is a collection of method prototype only 
 ---------
-	Syntax: 
-  ------
-  Datatypeoftheresult  methodName (input pa...., input pa); 
+Syntax: 
+      Datatypeoftheresult  methodName (input pa...., input pa); 
 
 Note: When you are writing a method, Every word First letter should be Lower case and there after every word first letter should be upper case.
 ----
@@ -46,17 +45,16 @@ Like How many bedrooms, Kitchen,Hall..etc:: This represents the Structure Where 
 By using the design we construct the house In RealTime right? That realtime Construction of the House::  Refered to the Object
                         Design :: Class
                         Realtime : Object
-Example:Book
--------
-      Feature:Pages,Author,Bookname,Cover page,Edition
-			Behaviours :Chapters,Index
+Example: Book Class
+         Feature:Pages,Author,Bookname,Cover page,Edition
+         Behaviours :Chapters,Index
 														
 Syntax:
 ------
 Class ClassName{
-					//features or data members
-					//behaviours or member methods
-					 }
+   //features or data members
+  //behaviours or member methods
+}
 
 Note: While writing the class Every word first letter should be Upper case only.
 -----
@@ -78,11 +76,10 @@ Class Mobile{
 
 Note:
 ----
-In Interface :: We use Prototype 
+In Interface :: We use Prototypes
 In Class :: We use Defination
 
 Note:Every member method must provide services to data members. 
-----
 
 Q) How to mark the features or data members?
 		Features are those characterstics in which we can use them to identify in the realworld existance only.
