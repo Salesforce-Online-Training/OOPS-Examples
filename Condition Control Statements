@@ -117,5 +117,15 @@ else{
 
                                                                                 Nested if
                                                                                 ---------
-one IF function inside of another
+one IF function inside of another if is known as Nested If
 
+Syntax:
+-------
+if(condition){
+    if(condition){
+        statement to be executed;
+    }
+    else{
+        
+    }
+}
