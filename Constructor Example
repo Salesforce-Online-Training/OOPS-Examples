@@ -1,0 +1,168 @@
+Constructor :
+    a.It is a special method defined in the business class.
+    b.Constructor name and ClassName must be same.
+    c.Constructor will not have any return type atleast void.
+    d.Constructor will be used to initialize the datamemebers of the class.
+    e.Constructor will be invoked only once's i.e at the time of creating an object or once in the lifetime of object created.
+
+Example: 
+
+Q)Create a apex class Example with a contructor 
+public class Example{
+    public Example(){
+        
+    }
+}
+
+Q)Create a apex class Student with a contructor?
+public class Student{
+    public Student(){
+        
+    }
+}
+
+Q)Create a apex class Employee with a constructor?
+public class Employee{
+    public Employee(){
+        
+    }
+}
+
+Q) Create a apex class WrappperList with a contructor?
+public class  WrapperList{
+    public WrapperList(){
+        
+    }
+}
+
+Q) Create a apex class Account_Handler with a constructor?
+public class Account_Handler{
+    public Account_Handler(){
+        
+    }
+}
+
+Q) Now coming back to our Rectangle program define the Constructor to eliminate the Null value behaviour?
+
+Apex class:
+
+public class Rectangle {
+    Integer length;
+    Integer breadth;		
+    public Rectangle(){							
+        Length =0;
+        breadth=0;
+        system.debug('I am a default constructor');
+    }
+    public void setValues(Integer len,integer bre){
+        length +=len;
+        breadth += bre;	
+    }
+    public void getValues(){							
+        System.debug('The Length of the Rectangle is :'+length);
+        system.debug('The breadth of the Rectangle is :'+breadth);
+    }
+}
+
+Test Class:
+
+@isTest
+public class RectangleTest {
+    public testMethod static void main(){
+        Rectangle rec = new Rectangle();
+        rec.getValues();		
+        rec.setValues(10,20);
+        rec.getValues();
+        
+    }
+}
+
+Parameterized Constructor:
+Null State to Zero State: Default Constructor
+Zero State to meaningful state: Parameterized Constructor
+
+Q) How to define the parameterised constructor?
+
+Apex Class:
+
+public class Rectangle {
+	Integer length;
+    Integer breadth;		
+   public Rectangle(){							
+        Length =0;
+        breadth=0;
+       system.debug('I am a default constructor');
+    }
+    public Rectangle(Integer len,Integer bre){							
+        Length =len;
+        breadth=bre;
+       system.debug('I am a Parameterized constructor');
+    }
+    
+    public void setValues(Integer len,integer bre){
+      length +=len;
+      breadth += bre;	
+   }
+	public void getValues(){							
+        System.debug('The Length of the Rectangle is :'+length);
+        system.debug('The breadth of the Rectangle is :'+breadth);
+    }
+}
+
+Test Class:
+
+@isTest
+public class RectangleTest {
+    public testMethod static void main(){
+        Rectangle rec = new Rectangle(100,200);
+        rec.getValues();		
+        rec.setValues(10,20);
+        rec.getValues();
+        
+    }
+}
+
+Q) Why do I need to pass different variable inside the method and in the data members?
+	because Local variables will dominate the object variables.
+
+So in-order to overcome the domination of Local variable we need to use a keyword called : This Keyword
+
+Apex Class:
+
+public class Rectangle {
+    Integer length;
+    Integer breadth;		
+    public Rectangle(){							
+        Length =0;
+        breadth=0;
+        system.debug('I am a default constructor');
+    }
+    public Rectangle(Integer length,Integer breadth){							
+        This.Length =length;
+        This.breadth=breadth;
+        system.debug('I am a Parameterized constructor');
+    }
+    
+    public void setValues(Integer len,integer bre){
+        This.length  = length;
+        This.breadth = breadth;	
+    }
+    public void getValues(){							
+        System.debug('The Length of the Rectangle is :'+length);
+        system.debug('The breadth of the Rectangle is :'+breadth);
+    }
+}
+
+Test class:
+
+@isTest
+public class RectangleTest {
+    public testMethod static void main(){
+        Rectangle rec = new Rectangle(100,200);
+        rec.getValues();		
+        rec.setValues(10,20);
+        rec.getValues();
+    }
+}
+
+
