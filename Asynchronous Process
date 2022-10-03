@@ -144,3 +144,152 @@ In future method there is no return type ID, that is why we dont know the status
 go to Apex jobs and find there.
 
 Note: All the Asynchronous processes will return the Job ID's but except Future Apex.
+
+									Mixed DML Operations
+									--------------------
+In Salesforce there are 2 types of Objects are there : 1.Setup object and 2.Non Setup object
+
+Setup objects are related to Salesforce Org
+	Ex:User, Profile, Role, Page layout..etc
+
+Non-setup objects are related to normal object in Salesforce
+	Ex: Account, Contact, Order, Student__c, Trainer.. etc
+
+In the same transcation or single transcation if we insert setup and Non-setup object we will get mixed DML error.
+
+Q) Create user record and Account record using Apex?
+
+Apex class:
+----------
+public class MixedDMLErrorExample {
+    public void createUserandAccount(){
+        //Non Setup Object
+        Account acc = new Account();
+        acc.Name = 'Test record 03-10-22';
+        acc.Phone ='1234567890';
+        acc.Rating = 'Rating';
+        insert acc;
+        // Setup object
+        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
+        UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO' LIMIT 1];
+        
+        User u = new User(alias ='students', email='capital@gmail.com', 
+                          emailencodingkey='UTF-8', lastname='krian', 
+                          languagelocalekey='en_US', 
+                          localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+                          timezonesidkey='America/Los_Angeles', 
+                          username='kiran@dev1.com');
+        insert u;
+    }
+}
+
+
+Execute the below code in the Anonymous window:
+----------------------------------------------
+MixedDMLErrorExample mdml = new MixedDMLErrorExample();
+mdml.createUserandAccount();
+
+Output: System.DmlException: Insert failed. First exception on row 0; first error: MIXED_DML_OPERATION, DML operation on setup object is not permitted after you have 
+updated a non-setup object (or vice versa): User, original object: Account: []
+
+
+Now create two seperate methods and make one method as Future method and try yo execute the below code?
+
+Apex Class:
+----------
+public class MixedDMLErrorExample {
+    public void createAccountRecord(){
+        //Non Setup Object
+        Account acc = new Account();
+        acc.Name = 'Test record 03-10-22';
+        acc.Phone ='1234567890';
+        acc.Rating = 'Rating';
+        insert acc;   
+    }
+    @future
+    public static void createUserRecord(){
+        // Setup object
+        Profile p = [SELECT Id FROM Profile WHERE Name='Standard Platform User'];
+        UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO' LIMIT 1];
+        
+        User u = new User(alias ='students', email='capital@gmail.com', 
+                          emailencodingkey='UTF-8', lastname='krian', 
+                          languagelocalekey='en_US', 
+                          localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+                          timezonesidkey='America/Los_Angeles', 
+                          username='ankith@gmail.com');
+        insert u;
+    }
+}
+
+Execute the below code in the Anonymous window:
+----------------------------------------------
+MixedDMLErrorExample mdml = new MixedDMLErrorExample();
+mdml.createAccountRecord();
+MixedDMLErrorExample.createUserRecord();
+
+Output: Both User and Account records are create automatically
+
+
+Q) I want to call one method inside another method
+
+public class MixedDMLErrorExample {
+    public void createAccountRecord(){
+        //Non Setup Object
+        Account acc = new Account();
+        acc.Name = 'Test record 03-10-22';
+        acc.Phone ='1234567890';
+        acc.Rating = 'Rating';
+        insert acc;
+        createUserRecord(acc.name);
+    }
+    @future
+    public static void createUserRecord(string acName){
+        // Setup object
+        Profile p = [SELECT Id FROM Profile WHERE Name='Standard Platform User'];
+        UserRole r = [SELECT Id FROM UserRole WHERE Name='CEO' LIMIT 1];
+        
+        User u = new User(alias ='students', email='capital@gmail.com', 
+                          emailencodingkey='UTF-8', lastname='krian' + acName, 
+                          languagelocalekey='en_US', 
+                          localesidkey='en_US', profileid = p.Id, userroleid = r.Id,
+                          timezonesidkey='America/Los_Angeles', 
+                          username='mynameisankith@gmail.com');
+        insert u;
+    }
+}
+
+Execute the below code in the Anonymous window:
+----------------------------------------------
+MixedDMLErrorExample mdml = new MixedDMLErrorExample();
+mdml.createAccountRecord();
+
+
+Drawbacks : 
+  1. Future method will not return jobId in the apex code.
+  2. Future method cannot be called from another future method.
+  3. Future method will not support sobjects as parameters .
+		
+Limits :
+  1. With in  a transaction we call 50 future methods .
+		
+UseCases : 
+  1. Handle Mixed DML operations 
+  2. To invoke Asyncrhronous webservices from trigger .
+  3. To invoke Asyncrhronous webservices from Schedule Apex.
+  4. To handle bulk dml  operations .
+		
+WorkAround UseCases: 
+  1. When we have requirement to pass sobject as parameter to future method how will you  
+	a. Pass RecordId instead of record .
+	b. Serialize the sobject as string using JSON/XML and pass string as parameter to future method.
+
+
+
+
+
+
+
+
+
+
