@@ -1,7 +1,8 @@
+Synchronous Process: One process will wait for another process to execute
+
 Asynchronous Process: 
----------------------
 1.It means that a process operating independently of other process
-2.One method will not wait for another method to execute
+2.One method will not wait for another method to execute.
 
 Difference between Asynchronous Process and Synchronous Process
 ---------------------------------------------------------------
@@ -12,3 +13,133 @@ Difference between Asynchronous Process and Synchronous Process
                 2.Duration is not priority                                                    2.Transcations are immediate and serial
                 
                 3.Higher Governor Limit                                                       3.Normal Governor Limit
+                
+There are 4 different types of Asynchronous Processes:
+          a.Future Apex
+          b.Batch Apex
+          c.Schedule Apex
+          d.Queuable Apex
+ 
+                                                                    Future Apex
+                                                                    -----------
+1. If a transaction has any long running operations /statements,and if this operations is not having any dependency on rest of the statements then we can run those
+statments independent from the rest of the operation by using future method.
+		
+  Q:: Long running Operaitons : 
+	Ex: Webservice calls ,Bulk DML operations 
+			
+2. Rules to define future methods .
+	1.All the future methods should have @future annotation.
+		
+	@future 
+	public static void futurecall(parameters){
+  
+  }
+			
+	2. All the future methods should be defined as static .
+		
+	3. All the future methods should have void as return type .
+		
+	4. Sobjects cannot be passsed as parameters (Why? :: For suppose I have written the future apex on Account object (List<Account>) to update Rating field from Hot 
+                                              to Cold, so now that code will not execute immediatly this will go to the Queue for execution. meanwhile I am upadating 
+                                              the same record from Hot to Warm, Now because the future job is Queue it will take Hot and update to cold which is
+                                              creating data inconsistancy).
+	Note: From the above example instead of passing S-object we can pass ID (primitive datatypes) and run the future apex it will resolve the issue
+  
+	5. When we invoke the future method they will be added queue and from the queue they will be executed.
+		   
+	6.If you want to invoke webservices from the future method then define 
+			    @future(callout=true)
+				
+	7. Any Asyncrhronous job that is running in salesforce will be registred with 
+	   AsyncApexJob object.
+	
+Query:
+SELECT Id, CreatedDate, CreatedById, JobType, ApexClassId, Status, JobItemsProcessed, TotalJobItems, NumberOfErrors, CompletedDate, MethodName, ExtendedStatus,
+ParentJobId, LastProcessed, LastProcessedOffset, CronTriggerId FROM AsyncApexJob where id = '7075i00001opmHl'
+
+	8. How to track the status of the future method .
+		a. Write a soql query on AsyncApexJob
+    b. Declarative way to check the status 
+			   Setup ==> Moniter ==> Jobs ===> Apex Jobs
+								 
+	9. Future methods can be used to increase the governing limits .
+			@future(limits=dml*2)
+
+Q) Why Future Apex?
+    TO avoid mixed DML error and to perform CallOut we use Future Apex
+
+Note:
+Callout: Salesforce will call other systems
+Callin : Other systems will call Salesforce
+
+Example 1: Synchronous Apex
+
+public class FutureExample {
+    public static void show(){
+        System.debug('ShowLine one');
+        System.debug('ShowLine two');
+        System.debug('ShowLine three');
+    }
+    public static void callme(){
+        System.debug('CallmeLine one');
+        System.debug('CallmeLine two');
+        System.debug('CallmeLine three');
+    }
+    public static void display(){
+        System.debug('DisplayLine one');
+        System.debug('DisplayLine two');
+        System.debug('DisplayLine three');
+        
+    }
+}
+
+Execute the below code from the Anonymous window:
+FutureExample.show();
+FutureExample.callme();
+FutureExample.display();
+
+Output:
+ShowLine one        ShowLine Two        ShowLine Three
+CallmeLine one      CallmeLine Two      CallmeLine Three
+DisplayLine one     DisplayLine         Two DisplayLine Three
+
+Example 2: Asychronous Apex
+
+public class FutureExample {
+    public static void show(){
+        System.debug('ShowLine one');
+        System.debug('ShowLine two');
+        System.debug('ShowLine three');
+    }
+    @future
+    public static void callme(){
+        System.debug('Callme Line one');
+        System.debug('Callme Line two');
+        System.debug('Callme Line three');
+    }
+    public static void display(){
+        System.debug('DisplayLine one');
+        System.debug('DisplayLine two');
+        System.debug('DisplayLine three');
+        
+    }
+}
+
+Execute the below code from the Anonymous window: 
+FutureExample.show();
+FutureExample.callme();
+FutureExample.display();
+
+Output:
+Log 1: Normal Log
+ShowLine one        ShowLine Two        ShowLine Three
+DisplayLine one     DisplayLine         Two DisplayLine Three
+
+Log 2: Future log
+CallmeLine one      CallmeLine Two      CallmeLine Three
+
+In future method there is no return type ID, that is why we dont know the status of Future Method, but if you want to know the status of the future method we need to
+go to Apex jobs and find there.
+
+Note: All the Asynchronous processes will return the Job ID's but except Future Apex.
