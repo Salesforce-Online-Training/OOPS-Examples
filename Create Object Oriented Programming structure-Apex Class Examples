@@ -1,0 +1,85 @@
+Class:
+    a.It is a collection of datamembers and member methods 
+            Datamembers are defined as features
+            memberMethods are defined as behaviours.
+    b.Class is a user defined Data-type
+    c.Class is a blue print of real world existance
+ 
+Syntax:
+ class ClassName {
+    //features or data members;
+    //behaviours or memberMethods;
+}
+
+Examples:
+1.Create a class Student with name,phone and age?
+
+class Student {
+    string name;
+    String phone;
+    Integer age;
+}
+
+2.Create a class Employee with lastName,firstName,exp and salary?
+
+class Employee{
+    String lastName;
+    String firstName;
+    Decimal exp;
+    Decimal salary;
+}
+
+3.Create a class Employee with lastName,firstName,exp and salary and Create a Display method which will print the lastName,firstName,exp and salary?
+
+class Employee{
+    String lastName;
+    String firstName;
+    Decimal exp;
+    Decimal salary;
+    void display(){
+        System.debug(lastName);
+        System.debug(firstName);	
+        System.debug(exp);
+        System.debug(salary);
+    }
+}
+
+4.Create a class Employee with lastName,firstName,exp and salary  and create a method setData whcih will set the data lastName=Gopanaboina, firstName=Anji and Exp=5?
+
+class Employee {
+    String lastName;
+    String firstName;
+    Decimal exp;
+    Decimal salary;
+    void setData(){
+        lastName='Anji';
+        firstName='Gopanaboina';
+        exp=5;
+    }
+}
+
+5.Create a class Employee with lastName,firstName,exp,salary and Create a method setData which will set data lastName as Anji, firstName as Gopana, exp as 5 
+ and salary : if exp > 5 then salary is 50k else 30k Create a method display which will print the data?
+ 
+ class Employee {
+    				String lastName;
+    				String firstName;
+    				Decimal exp;
+    				Decimal salary;
+    				void setData(){
+    					lastName='Anji';
+    					firstName='Gopanaboina';
+    					exp=5;
+    					if(exp>5){
+    						salary=50000;
+    					}else{
+    						salary=30000;
+    					}
+    				}
+    				void display(){
+    					System.debug(firstName);
+    					System.debug(lastName);
+    					System.debug(salary);
+    					System.debug(exp);
+    				}
+    			}
