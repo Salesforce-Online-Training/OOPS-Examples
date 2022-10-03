@@ -61,25 +61,27 @@ class Employee {
 5.Create a class Employee with lastName,firstName,exp,salary and Create a method setData which will set data lastName as Anji, firstName as Gopana, exp as 5 
  and salary : if exp > 5 then salary is 50k else 30k Create a method display which will print the data?
  
- class Employee {
-    				String lastName;
-    				String firstName;
-    				Decimal exp;
-    				Decimal salary;
-    				void setData(){
-    					lastName='Anji';
-    					firstName='Gopanaboina';
-    					exp=5;
-    					if(exp>5){
-    						salary=50000;
-    					}else{
-    						salary=30000;
-    					}
-    				}
-    				void display(){
-    					System.debug(firstName);
-    					System.debug(lastName);
-    					System.debug(salary);
-    					System.debug(exp);
-    				}
-    			}
+class Employee {
+    String lastName;
+    String firstName;
+    Decimal exp;
+    Decimal salary;
+    void setData(){
+        lastName='Anji';
+        firstName='Gopanaboina';
+        exp=5;
+        if(exp>5){
+            salary=50000;
+        }else{
+            salary=30000;
+        }
+    }
+    void display(){
+        System.debug(firstName);
+        System.debug(lastName);
+        System.debug(salary);
+        System.debug(exp);
+    }
+}
+
+
