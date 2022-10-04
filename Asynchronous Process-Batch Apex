@@ -44,8 +44,8 @@ Note:
 		
 		d.List<Sobject> contains the list of records in the batch job on which this execute method is running .
 		 
-		e. Example : If the start method fetched 1000 records and divided them into	five batches with 200 records in each batch.Then execute method will be called on 
-                  every batch separatly(execute method will be called 5 times);
+		e. Example : If the start method fetched 1000 records and divided them into five batches with 200 records in each batch.Then execute method will be 
+		   called on every batch separatly(execute method will be called 5 times);
 			  		  
 	9.finish :
 		a. This method will be called after executing all the execute method.
