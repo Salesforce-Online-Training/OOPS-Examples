@@ -1,1 +1,64 @@
-Batch Apex:
+Note:
+1. Number of DML rows we can perform on a single transcation is : 10K records
+2. Number of records we can process using import wizard is : 50k records
+3. Number of records we can process using Data loader is : 5 Million records
+
+                                                                          Batch Apex
+
+  1.When you want to process large number of records on daily basis or specific time in a day or weekly or monthly then there is a possibilty of encountering 
+	 the governing limits.
+   
+	2.To resolve the governing limits issue ,we will run the operation as asynchronous operation using batch apex.
+  
+	3.Batch Apex is exposed as an interface that must be implemented by the developer. Batch jobs can be programmatically invoked at runtime using Apex.
+	  
+	4.Batch Apex  will break the larger set of records into no of batches with small set of data and every batch will run independent from each other with fresh set of 
+	  governing limits. 
+	
+	5. If you want any Apex class to run like Batch Apex,That Apex class has to implement an Interface called:: database.Batchable interface .
+	   
+	6. Any Apex class which implements Database.Batchable interaface should define three methods
+		          a.Start 
+		          b.Execute
+		          c.Finish
+	7.start :
+		a. This method will be called at the starting of the Batch Job and collects the data on which the Batch job need to be operated.
+			 
+		b.Syntax : Database.QueryLocator |Iterable<SObject> start(Database.BatchableContext bc){}
+		
+		c.Database.QueryLocator : It will support 50 Million records
+		  
+		e.Iterable: If you use Iterable then it is still under Governor Limits only (We will use this in rear cases only like when you want to get data from different
+    objects and the update accordingly we will use Iterable).
+
+		g.Start method will break the list of records into no of batches and invoke	the execute method on every batch
+	
+	8. execute: 
+		a. This method will be invoked by the start method on every batch of recods.
+    
+		b. This method will contain business logic that need to performed on the records fetched from the start method .
+		   
+		c.Syntax : void execute(Database.BatchableContext bc,List<Sobject> scope)
+		
+		d.List<Sobject> contains the list of records in the batch job on which this execute method is running .
+		 
+		e. Example : If the start method fetched 1000 records and divided them into	five batches with 200 records in each batch.Then execute method will be called on 
+                  every batch separatly(execute method will be called 5 times);
+			  		  
+	9.finish :
+		a. This method will be called after executing all the execute method.
+    
+		b. This method is used to send confirmation emails or post batch operations.
+    
+		c. Syntax :  void finish(Database.BatchableContext)
+    
+    d. The other use of Batch Apex is We can call another Batch Apex inside Finish method.
+	
+	Example 1: Fetch all the opportunity which are created today and with with stagename as closed won and update their closeDate as closed won.
+	
+  Note: As Per my organization in day 15,000 to 20,000 opportunity records which will be closed. According to governing limits we can only perform DML operation on 
+        10,000 records with in a transaction ,so we are choosing batch apex to handle this operation.
+
+  Note: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm
+  
+  
