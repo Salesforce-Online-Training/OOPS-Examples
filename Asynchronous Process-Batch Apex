@@ -31,8 +31,10 @@ Note:
 		e.Iterable: If you use Iterable then it is still under Governor Limits only (We will use this in rear cases only like when you want to get data from 
 		   different objects and the update accordingly we will use Iterable).
 
-		g.Start method will break the list of records into no of batches and invoke	the execute method on every batch
-	
+		f.Start method will break the list of records into no of batches and invoke the execute method on every batch
+		
+		g.Database.BatchableContext: This is used to track the status of the Job
+		
 	8. execute: 
 		a. This method will be invoked by the start method on every batch of recods.
     
