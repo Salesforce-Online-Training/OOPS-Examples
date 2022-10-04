@@ -5,8 +5,8 @@ Note:
 
                                                                           Batch Apex
 
-  1.When you want to process large number of records on daily basis or specific time in a day or weekly or monthly then there is a possibilty of encountering 
-	 the governing limits.
+        1.When you want to process large number of records on daily basis or specific time in a day or weekly or monthly then there is a possibilty of encountering 
+	  the governing limits.
    
 	2.To resolve the governing limits issue ,we will run the operation as asynchronous operation using batch apex.
   
@@ -28,8 +28,8 @@ Note:
 		
 		c.Database.QueryLocator : It will support 50 Million records
 		  
-		e.Iterable: If you use Iterable then it is still under Governor Limits only (We will use this in rear cases only like when you want to get data from different
-    objects and the update accordingly we will use Iterable).
+		e.Iterable: If you use Iterable then it is still under Governor Limits only (We will use this in rear cases only like when you want to get data from 
+		   different objects and the update accordingly we will use Iterable).
 
 		g.Start method will break the list of records into no of batches and invoke	the execute method on every batch
 	
@@ -52,13 +52,13 @@ Note:
     
 		c. Syntax :  void finish(Database.BatchableContext)
     
-    d. The other use of Batch Apex is We can call another Batch Apex inside Finish method.
+    		d. The other use of Batch Apex is We can call another Batch Apex inside Finish method.
 	
-	Example 1: Fetch all the opportunity which are created today and with with stagename as closed won and update their closeDate as closed won.
+Example 1: Fetch all the opportunity which are created today and with with stagename as closed won and update their closeDate as closed won.
 	
-  Note: As Per my organization in day 15,000 to 20,000 opportunity records which will be closed. According to governing limits we can only perform DML operation on 
-        10,000 records with in a transaction ,so we are choosing batch apex to handle this operation.
+Note: As Per my organization in day 15,000 to 20,000 opportunity records which will be closed. According to governing limits we can only perform DML operation on 
+      10,000 records with in a transaction ,so we are choosing batch apex to handle this operation.
 
-  Note: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm
+Note: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm
   
   
