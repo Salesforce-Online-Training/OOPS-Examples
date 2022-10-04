@@ -328,3 +328,5 @@ Execute the code in the Anonymous window:
 FutureCallOutExample.calloutSAPServices();
 
 Refer to the below video :: https://www.youtube.com/watch?v=PR2hYlkq67g
+
+IQ: Can we call future methods in Triggers?
