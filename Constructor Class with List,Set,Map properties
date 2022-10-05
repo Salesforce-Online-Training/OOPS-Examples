@@ -1,0 +1,47 @@
+Question: Create a Business class: StudentExampleClass and also define the List,Set and Map variables with following input values and display the output values in the
+log file.
+
+Apex Class: With and Without parameters
+
+public class StudentExampleClass {
+    public string Name;
+    public integer Age;
+    public List<string> lststring;
+    public Map<integer,String> mapex;
+    public set<integer> setids;
+    
+    //without Parameters
+    public StudentExampleClass(){
+        Name = 'Anji';
+        Age = 30;
+        lststring = new List<string>{'abc','xyz','cde'};
+        mapex = new Map<integer,String>{1 =>'Ankit', 2 =>'Anil'};
+        setids = new set<integer>{001, 002, 002};
+        system.debug('The Student Name is :'+ Name);
+        system.debug('The Student age is :'+ Age);
+        system.debug('The elements in the list are :'+ lststring);
+        system.debug('The elements in the Map are : ' + mapex);
+        system.debug('The elements in the Set are : ' + setids);
+    }
+    //with parameters
+    public StudentExampleClass(string sName, Integer sage){
+        Name = sName;
+        Age = sage; 
+        system.debug('The Student Name is :'+ sName);
+        system.debug('The Student age is :'+ sage);
+    }
+    //action method
+    public string caluclateScore(){
+        string firstName = 'Anji';
+        string lastName = 'Gopanaboina';
+        string fullName = firstName + '_' + lastName;
+        return fullName;
+    }
+}
+
+
+Execute the below code in the Anonymous window:
+
+StudentExampleClass sea = new StudentExampleClass('abc',22);
+string result = sea.caluclateScore();
+system.debug('==result==' + result);
