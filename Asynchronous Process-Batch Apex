@@ -63,4 +63,47 @@ Note: As Per my organization in day 15,000 to 20,000 opportunity records which w
 
 Note: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm
   
-  
+Example 1: I want to fetch all Accounts and update the description through Batch Apex?
+
+Batch Apex Class:
+
+public class BatchApexExample implements Database.Batchable<sObject>{
+    public Database.QueryLocator start(Database.BatchableContext bc){
+        system.debug('Start Method');
+        return Database.getQueryLocator([select id,Name,Phone,Description from Account]);
+    }
+    public void execute(Database.BatchableContext bc , List<Account> lstacc){
+        system.debug('Execute Method');
+        for(Account acc : lstacc){
+            acc.description = 'Account description updated successfully through batch Apex';
+        }
+        update lstacc;
+    }
+    
+    public void finish(Database.BatchableContext bc){
+        system.debug('Finish Method');
+        AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+                          TotalJobItems, CreatedBy.Email
+                          FROM AsyncApexJob WHERE Id =:bc.getJobId()];
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new String[] {'anji.gopanaboina@gmail.com'};
+            mail.setToAddresses(toAddresses);
+        mail.setSubject('Apex Sharing Recalculation ' + a.Status);
+        mail.setPlainTextBody('The batch Apex job processed ' + a.TotalJobItems +' batches with '+ a.NumberOfErrors + ' failures.');
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    }
+}
+
+Execute the below code in Anonymous window:
+BatchApexExample be = new BatchApexExample();
+id jobId = Database.executeBatch(be, 150);
+system.debug('jobId ::' + jobId);
+
+Batch Apex : Finish method email notification example
+
+Q) How many ways we can call the Batch Apex?
+   Through Schedule Apex, Through Triggers, Apex class, through controllers, through Anonymous window.
+Note: In order to execute the Batch class we need to use Database.execute(BatchclassObjectName, Batch size)
+
+
+
