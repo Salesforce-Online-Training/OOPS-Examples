@@ -30,4 +30,39 @@ s.Area(2);
 s.Area(2,2,2);
 s.Area(4,5);
 
+Method overriding: When we create same method name in parent and child classes if we call child method it will override parent method.
+
+Q) How to call parent method inside the child class?
+By using extends keyword we can get parent class properties and methods to child class.
+
+
+Apex Class:
+
+/* This is the Parent Class */
+public class ParentClass {
+	public Integer pvalue;
+    
+    public void property(Integer parpro){
+        pvalue = parpro;
+        system.debug('parent property value is ::' + pvalue);
+    }
+}
+/* This is the Child Class */
+public class childClass extends ParentClass{
+    public Integer cproperty;
+     public void property(Integer prochi){
+        cproperty = prochi;
+        system.debug('Child property value is ::' + cproperty);
+    }
+}
+
+
+Execute the code in the Anonymous window:
+
+childClass c1 = new childClass();
+c1.property(10); //output of child
+
+Note:
+Method Overloading belong to same class
+Method overriding belongs to super class and child class.
 
