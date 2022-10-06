@@ -1,0 +1,55 @@
+public class PrimitiveDataTypesExamples {
+    public void datatypeExamples(){
+        
+        //String DataType : To store alphanumeric characters
+        string stdName = 'Anji';
+        system.debug('My Name is ::'+stdName);
+        
+        //Integer DataType : To store number values
+		Integer stdID = 123;
+		system.debug('The Student ID is ::'+ stdID);        
+        
+        //Long DataType :To store large values
+        long accountNumber = 2348755677243L;
+        system.debug('The Account Number is ::'+ AccountNumber);
+        
+        //Decimal DataType : To store Decimal values
+        decimal stdMarks = 45.5;
+        system.debug('The student marks are ::'+ stdMarks);
+        
+        //Double Datatype: To store large Decimal value
+        double stdAnnualFee = 34567.78888;
+        system.debug('The Student Annual Fee is ::'+ stdAnnualFee);
+        
+        //Boolean Datatype : To assign True or False
+        boolean feePaid = True;
+        system.debug('Did he paid fee ? ::'+ feePaid);
+        
+        //Date DataType : To store Date
+        date dateOfJoin = date.newInstance(2019, 05, 15);
+        system.debug('The Date of Join ::'+ dateOfJoin);
+        
+        //DateTime DataType : To store dateTime 
+        dateTime dobTime = datetime.newInstance(1993, 05, 15, 07, 30, 30);
+        system.debug('The Date of Birth is ::'+ dobTime);
+        
+        //Time DataType : To store Time
+        Time loginTime = time.newInstance(10, 23, 45, 33);
+        system.debug('My Login time is ::'+ loginTime);
+        
+        //ID DataType : To store Salesforce record ID
+        ID accountID = '0015i00000R4cdsAAB';
+        system.debug('The Account ID is ::'+ accountID);
+        
+        //Blob:To store attachments
+        
+    }
+}
+
+
+
+Execute the below in the Anonymous window
+
+PrimitiveDataTypesExamples pdt = new PrimitiveDataTypesExamples();
+pdt.datatypeExamples();
+
