@@ -1,0 +1,33 @@
+polymorphism: multiple behaviour of programming elements (or) One thing contains in many forms.
+Shapes: Traingle, Rectangle, Square,Rhombus..etc.
+
+It contains two keywords
+  1.Method Overloading
+  2.Method Overriding
+
+Method Overloading: In the same class if we have same Method names with different parameters.
+
+Example 1:
+
+Apex Class:
+
+public class ShapeExample {
+    public void Area(integer l){
+        Integer sqArea = l*l;
+    }
+    public void Area(Integer l,integer b,integer h){
+        decimal tArea = 0.5*(b*h);
+    }
+    public void Area(integer l,integer w){
+        Integer rArea = 2*(l*w);
+    }
+}
+
+Execute the below code in Anonymous window:
+
+ShapeExample s = new ShapeExample();
+s.Area(2);
+s.Area(2,2,2);
+s.Area(4,5);
+
+
