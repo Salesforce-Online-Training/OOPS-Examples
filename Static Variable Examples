@@ -1,0 +1,99 @@
+                                                                      Static Variables
+Static Varaibles: 
+   a.Static variables will maintain the state across the transcation
+   b.Static variables and methods can be called directly with the classname (No need to create object).
+   c.Recursive Triggers in Salesforce (Same functionality is executing mutliple times if you want to stop we use static variables)
+   
+Recursive Example:
+      For Example on the Student object There is a field called Student Fee in which its value is set to 10$
+     
+     Case1:
+      Now I have written a logic to make sure if Student fee is 10$ then update to 20$
+     Case2:
+      Again I have written a logic to make sure if Student fee is 20$ then update it 10$
+      Result:
+      It results in loops and that is what we call it as Recursive.
+
+Example:
+Apex Class:
+
+public class StaticVariableExample {
+    public integer num1 =0;
+    public static integer num2 =3;
+    
+    public StaticVariableExample(){
+        num1 = num1 + 10;
+        num2 = num2 + 10;
+        system.debug('Non Static value of Num1 is ::'+ num1);
+        system.debug('Static value of Num2 is ::'+ num2);
+        System.debug('====Transcation =====');
+    }
+}
+
+Execute the below code in Anonymous window:
+
+StaticVariableExample se = new StaticVariableExample();
+StaticVariableExample se1 = new StaticVariableExample();
+StaticVariableExample se2 = new StaticVariableExample();
+
+//Output:
+Non Static value of Num1 is ::10
+Static value of Num2 is ::13
+======Transaction==========
+Non Static value of Num1 is ::10
+Static value of Num2 is ::23
+======Transaction==========
+Non Static value of Num1 is ::10
+Static value of Num2 is ::33
+======Transaction==========
+
+
+Q) How to call Non Static variables?
+A) Create an object for the Business class and then using the objectName call the Non static variable as shown below
+
+StaticVariableExample se = new StaticVariableExample();
+se.num1 =10;
+
+Q) How to call Static variables?
+A) By using Business class Name
+
+StaticVariableExample.num2
+
+                                                                      Static Methods
+public class StaticVariableExample {
+    public  static integer num1 =0;
+    public static integer num2 =3;
+    
+    public static void staticMethod(){
+        num1 = num1 + 10; 	// Non Static variable cannot be called inside Static Methods
+        num2 = num2 + 10;	// Static variables can be called inside Static Methods
+        system.debug('The value of Num1 is ::'+ num1);
+        system.debug('The value of Num2 is ::'+ num2);
+    }
+    
+    public void nonStaticMethod(){
+        num1 = num1 +10;	// Non-Static variables can be called inside Non-Static Methods
+        num2 = num2 + 10;	// Static variables can be called inside Non-Static Methods
+        system.debug('The value of Num1 is ::'+ num1);
+        system.debug('The value of Num2 is ::'+ num2);
+    }
+}
+
+Execute the below code in Anonymous window:
+
+StaticVariableExample se = new StaticVariableExample();
+se.nonStaticMethod();
+StaticVariableExample.staticMethod();
+
+//Look at the Output
+
+Q) How to call Non Static Methods?
+A) Create an object for the Business class and then using the objectName call the Non static method as shown below
+
+StaticVariableExample se = new StaticVariableExample();
+se.nonStaticMethod();
+
+Q) How to call Static variables?
+A) By using Business class Name
+
+StaticVariableExample.staticMethod();
