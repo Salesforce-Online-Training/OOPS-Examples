@@ -1,1 +1,33 @@
 Inheritance: Getting parent properties in child (We will use extend keyword to get properties of Parent).
+
+
+Apex class:
+
+/* This is the Parent Class */
+public class ParentClass {
+	public Integer pvalue;
+    
+    public void property1(Integer parpro){
+        pvalue = parpro;
+        system.debug('parent property value is ::' + pvalue);
+    }
+}
+/* This is the Child Class */
+public class childClass extends ParentClass{
+    public Integer cproperty;
+     public void property2(Integer prochi){
+        cproperty = prochi;
+        system.debug('Child property value is ::' + cproperty);
+    }
+    public void property3(Integer prochi){
+        cproperty = prochi;
+        system.debug('Child property value is ::' + cproperty);
+    }
+    
+}
+
+Execute the below code in the Anonymous window
+----------------------------------------------
+childClass cc = new childClass();
+cc.property2(10);
+cc.property3(20);
