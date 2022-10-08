@@ -102,8 +102,12 @@ system.debug('jobId ::' + jobId);
 Batch Apex : Finish method email notification example
 
 Q) How many ways we can call the Batch Apex?
-   Through Schedule Apex, Through Triggers, Apex class, through controllers, through Anonymous window.
+   Through Schedule Apex, Through Triggers, through Apex class, through controllers, through Anonymous window.
+
 Note: In order to execute the Batch class we need to use Database.execute(BatchclassObjectName, Batch size)
+
+Requirement: When an Opportunity is Closed Won, then create a new Opportunity with same information name OpportunityName_cloned and stage Name = Prospecting?
+
 
 
 
