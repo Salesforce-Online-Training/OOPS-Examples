@@ -8,6 +8,17 @@ Create a Custom Tab:
 Customers
 
 Custom Fields
+Field Name      DataType      Required      Unique
+Name            Text          Yes           No
+ID              Number        Yes           Yes
+Amount          Number        Yes           No
+Payment Type    Text          No            No
+
+
+
+
+
+Field Name                                
 Field Name	Data Type	 Required	 Unique
 Name	      Text	     Yes	     No
 ID	        Number	   Yes       Yes
