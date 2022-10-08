@@ -14,18 +14,6 @@ ID              Number        Yes           Yes
 Amount          Number        Yes           No
 Payment Type    Text          No            No
 
-
-
-
-
-Field Name                                
-Field Name	Data Type	 Required	 Unique
-Name	      Text	     Yes	     No
-ID	        Number	   Yes       Yes
-Amount	    Number	   Yes       No
-Payment     Text	     No	       No
-Type
-
 Connected Apps:
   It is a framework that enables an external application to interact with Salesforce
   It accepts different protocols like SAML, openID connect and OAuth.
