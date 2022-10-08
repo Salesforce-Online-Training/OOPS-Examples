@@ -1,0 +1,63 @@
+Integration: Exchanging of data between two heterogeneous applications.
+
+Requirement:
+Create a custom object: 
+Customer
+
+Create a Custom Tab: 
+Customers
+
+Custom Fields
+Field Name	    Data Type	        Required	        Unique
+Name	            Text	            Yes	              No
+ID	              Number	          Yes             	Yes
+Amount	          Number	          Yes             	No
+Payment Type	    Text	            No	              No
+
+
+Connected Apps:
+  It is a framework that enables an external application to interact with Salesforce
+  It accepts different protocols like SAML, openID connect and OAuth.
+  In our module we will focus of OAuth enabled connected App for connecting external systems with Salesforce API.
+  OAuth (Open Authorization) is a token-based protocol for Authorization.
+  
+OAuth Parameters:
+    i) Client_id: It is a consumer key to identify itself to Salesforce.
+    ii) Client_secret: It is a consumer secret to establish the ownership of the Client_id
+    iii) Callback_URL: This URL is invoked after the OAuth authorization.
+    iv) Access Token: Salesforce will share the Access Token to the client to access its resources once the Authorization is successful.
+    v) Username: Profile User Name.
+    vi) Password: It should be used along with the security Token.
+    
+What is security Token?
+  It is utilized along with password to access the Salesforce API.
+    Password = Password + Security Token
+
+Create connected App :
+  Quick find : App Manager => New Connected App => Connected App Name       : Consumer connect
+                                                   API Name                 : Consumer_connect
+                                                   Contact Email            : anji.presentation@gmail.com
+                                                   Enable OAuth setting     : Enable
+                                                   Callback URL             : https://login.salesforce.com/services/oauth2/callback
+                                                   Selected OAuth Scopes    : Full Access
+                                                   Save
+                                                   Manage
+Under API (Enable OAuth settings) section click on Manage consumer details button
+Verification code is sent via registered Email id
+Verify
+Consumer Key: It will be generated automatically
+Consumer secret: It will be generated automatically
+
+Note: Save both Consumer key and Consumer secret in a Notepad file (These two values are used when client wants to use Salesforce).
+When client request to Salesforce we should provide Consumer key, COnsumer secret along with UserName and Password then Salesforce will authorize
+
+
+How to create Security Token:
+On the Username ==> settings ==> Reset my Security Token ==>  Click on Reset my Security Token ==> Check your inbox email ==> Get the security Token )save it in the
+notepad)
+
+
+
+ 
+
+
