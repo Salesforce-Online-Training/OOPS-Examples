@@ -1,0 +1,188 @@
+What are exceptions ?
+Exception note the errors and other events that disrupt the normal flow of execution.
+
+What happens when an exception occours?
+	 When exception occours, code execution halts.
+   
+	 Any DML operations that were processed before the exceptions are rolled back and aren't committed to the databse.
+	 
+   Exceptions are logged in Debug Logs.
+	
+   For Unhandled exception,that is,exceptions that the code doesn't catch,Salesforce send an Email that includes the exception information. 
+   The end user sees an error message in the salesforce user Interface.
+
+Try-Catch-Finally Statements:
+
+	 The Try statement identify the block of the code in which the exception can occour.
+   
+	 The catch statement identify the block of the code that can handle the particular type of exception
+   
+	 A Single try Statement can have Zero or more associated catch statements.
+   
+	 Each catch statement must have a unique exception type.Also one particular exception type is caught in one catch block, the remaining catch blocks, if any, 
+   aren't executed.
+
+   The Finally statement identify the block of the code that is guarnteed to execute and allow you to clean up the code.
+	
+   A Single Try statetement can have upto one associated finally statement.
+	
+    Code in the Finally Block aloways execute regardless of whether exeception was thrown or type of the execption that was thrown.Because the finally block always 
+    executes, use it for cleanup code,such as freeing up resource.
+    
+Syntax:
+try{
+        
+    }
+    catch(ExceptionType VariableName){
+        
+    }
+    catch (exception e){
+        
+    }
+    Finally{
+        
+    }   
+    
+Example 1: Create a Lead Record Name ='John' in GUI?
+	Goto Lead object ==> New ==> Lead Name = John ===> Click save then It will display an error Message : Company Mandatory and This is an Exception: 
+  This is how we create in GUI 
+
+Now lets create a Lead record through Apex:
+
+Execute the below code in the Anonymous window: Without Try-Catch Block
+-----------------------------------------------------------------------
+lead l = new lead();
+insert l;
+system.debug('Try to Insert a Lead Record');
+
+Output : System.DML operation : Required Field Missing
+
+Note: But what happened to the System.debug ==> it has to print the value right? it will print because whenever an expection occours the program will get halt.
+
+Execute the below code in the Anonymous window: With Try-Catch Block
+-------------------------------------------------------------------
+try{
+    lead l = new lead();
+    insert l;
+}
+catch(DMLException e){
+    system.debug('The following exception has occoured'+ e.getMessage());
+}
+system.debug('Try to Insert a Lead Record');
+
+//Output: 
+1. The following exception has occouredInsert failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, Required fields are missing: [LastName, Company]: 
+[LastName, Company]
+
+2.Try to Insert a Lead Record
+
+Execute the below code in the Anonymous window: With Try-Catch Block by Providing values to the Lead Record
+-----------------------------------------------------------------------------------------------------------
+try{
+    lead l = new lead(LastName= 'Anji', company='infosys');
+    insert l;
+}
+catch(DMLException e){
+    system.debug('The following exception has occoured'+ e.getMessage());
+}
+system.debug('Lead Record inserted successfully');
+
+//Output: Lead Record inserted successfully. Catch did not execute because try successfully exceuted with no errors.
+
+Built in Exceptions and common Methods:
+----------------------------------------
+Apex provides number of built in exceptions at run time, throws if errors are encountered during the execution.
+
+1.ListException:Any poblem with a List, such as attempting to access an Index that is out of bounds
+
+Execute the below code in the Anonymous window: Without Try-Catch Block
+-----------------------------------------------------------------------
+Integer first,sec;
+List<Integer> li = new List<Integer>();
+li.add(10);
+li.add(20);
+first = li[0];
+sec = li[4];
+system.debug('The List of elements are' + li);
+
+//Output:list index out of bound
+
+Execute the below code in the Anonymous window: With Try-Catch Block
+-------------------------------------------------------------------
+Integer first,sec;
+try{
+    List<Integer> li = new List<Integer>();
+    li.add(10);
+    li.add(20);
+    first = li[0];
+    sec = li[4];
+}
+catch(exception e){
+    system.debug('The Following exception has occoured' + e.getMessage());
+}
+finally{
+    system.debug('The Insertion is done');
+}
+
+//Output: list index out of bound and The Insertion is done.
+
+Note: Instead of remembering all the exception you can use "Exception e" which is the parent of all Exception.
+
+
+2.Null Pointer exception: Any problem with deferencing a Null value
+
+Execute the below code in the Anonymous window: With Try-Catch Block
+-------------------------------------------------------------------
+String s;
+boolean b;
+try{
+    b =  s.contains('abc');
+}
+catch(NullPointerException npe){
+    system.debug('The following exception has occoured'+ npe.getmessage());
+}
+finally{
+    system.debug('s contains abc' + b);
+}
+
+//Output: Null pointer Exception and True.
+
+3.Query exception: Any problems encountered with SOQL query
+
+Execute the below code in the Anonymous window: Without Try-Catch Block
+-----------------------------------------------------------------------
+List<lead> lm = [select Name from Lead Where name Like 'mike%'];
+system.debug('The size of the list is :'+ lm.size());
+lead l = [select Name from Lead where name like 'xyz%'];
+
+//Output: Error : System.QueryException
+
+Execute the below code in the Anonymous window: With Try-Catch Block
+--------------------------------------------------------------------
+try{
+    List<lead> lm = [select Name from Lead Where name Like '%Sontosh%'];
+    system.debug('The size of the list is :'+ lm.size());
+    lead l = [select Name from Lead where name like '%xyz%'];
+}
+catch(QueryException e){
+    System.debug('The following exception has occured :'+e.getMessage());
+}
+System.debug('good to go');
+
+4.S-objectException: anything related S-object such as attempting to change a field in an update statement that can only be changed during Insert.
+
+Execute the below code in the Anonymous window: With Try-Catch Block
+--------------------------------------------------------------------
+Account v;
+try{
+    Account acc = new Account(Name = 'Today Class',Description= 'New Account');
+    insert acc;	// Today class
+    v=[select id,Name from Account where id=:acc.Id];
+    string s = v.Description;	//result in s-object exception because description is not quired in the above line
+}
+catch(SobjectException e){
+    system.debug('The following exception has occoured:' + e.getMessage());
+}
+finally{
+    system.debug('Fetched Account is :' + v);
+}
