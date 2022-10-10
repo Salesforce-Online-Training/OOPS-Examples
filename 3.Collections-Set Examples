@@ -36,7 +36,7 @@ public class SetMethodsExample {
         setMarks1.add(70);
         setMarks1.add(99);
         
-        // 2.Size: Use size method to get count of elements in the list
+        // 2.Size: Use size method to get count of elements in the Set
         Integer count = setMarks1.size();
         system.debug('The size of the list is '+ count); //3
         
@@ -50,11 +50,11 @@ public class SetMethodsExample {
         
         Set<integer> setMarks2 = new Set<integer>{45,55};
             
-        // 5.AddAll: Using this method we can add one list or set to another list
+        // 5.AddAll: Using this method we can add one list or set to another Set
         setMarks2.AddAll(setMarks1);
         System.debug('The elements in the List'+setMarks2);
         
-        // 6.Clear: Use this method to delete all the elements in the list
+        // 6.Clear: Use this method to delete all the elements in the Set
         setMarks2.clear();
         system.debug('The elements in the List :' + setMarks2); //()
         
