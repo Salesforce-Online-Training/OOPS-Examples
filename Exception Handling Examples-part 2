@@ -1,0 +1,339 @@
+Common exception methods:
+  1.There are other exception methods are also available.Here are the description of some useful methods.
+  2.getCause:Return the cause of the exception as an exception object.
+  3.getLineNumber: Returns the line number from where the exception was thrown.
+  4.getMessage:Returns the error Message that display for the user.
+  5.getStackTraceString:Returns the stack trace as a string.
+  6.getTypeName:Returns the type of exception such as DMLException, ListException,Mathexception and so on.
+  
+  Execute the below code in the Anonymous window: With Try-Catch Block
+  ----------------------------------------------
+  try{
+    lead l = [select Name from Lead limit 1];
+    string des = l.description;	// throws an exception
+}
+catch(Exception e){
+    System.debug('Exception type caught :' +e.getTypeName());
+    System.debug('Message' +e.getMessage());
+    System.debug('Cause' + e.getCause());
+    System.debug('Line Number' + e.getLineNumber());
+    System.debug('Stack Trace' + e.getStackTraceString());
+}
+
+More Exception Method: Some Exception types, such as DMLException,have some specific exception methods that apply to only them and aren't common to other exception types.
+	1.getDmlFieldNames(Index of the Failed Records):Returns the Name of the Fields that caused the error for the specified failed records.
+	2.getDmlId(Index of the failed Record): Return the ID of the failed record the caused the error for the specified failed record.
+  3.getDmlMessage(Index of the failed Record): Returns the error message for the specified failed Record.
+  4.getNumDml:  Returns the number of failed records.
+  
+  
+ Execute the below code in the Anonymous window: With Try-Catch Block
+ ----------------------------------------------
+  Account m1 = new Account(Name = 'coffeeMaker', description='Kitchenware');
+	Account m2 = new Account(Name = 'coffeeMaker1', description='Kitchenware1');
+	Account m3 = new Account(Name = 'coffeeMaker2', description='Kitchenware2');
+	List<Account> MyList = new List<Account>();
+	MyList.add(m1);
+	MyList.add(m2);
+	MyList.add(m3);
+try{
+	insert MyList;	// throw exception
+}
+catch( Dmlexception de){
+	Integer numError = de.getNumDml();
+	system.debug('getNumDml' +numError);
+for(Integer i = 0; i<numError;i++){
+	system.debug('getDmlFieldNames ='+ de.getDmlFieldNames(i));
+	system.debug('getDmlMessage ='+ de.getDmlMessage(i));
+}	
+}
+finally{
+    system.debug('All good to go');
+}
+
+Now let us create a Lead Records: 
+
+ Execute the below code in the Anonymous window: With Try-Catch Block
+ --------------------------------------------------------------------
+Lead m1 = new Lead(LastName = 'coffeeMaker', company='Yuo');
+Lead m2 = new Lead(LastName = 'John');
+Lead m3 = new Lead(company='Reebok');
+Lead m4 = new Lead();
+List<Lead> MyList = new List<Lead>();
+MyList.add(m1);
+MyList.add(m2);
+MyList.add(m3);
+MyList.add(m4);
+try{
+    insert MyList;	// throw exception
+}
+catch( DML exception de){
+    Integer numError = de.getNumDml();
+    system.debug('getNumDml' +numError);
+    for(Integer i = 0; i<=numError;i++){
+        system.debug('getDmlFieldNames ='+ de.getDmlFieldNames(i));
+        system.debug('getDmlMessage ='+ de.getDmlMessage(i));
+    }
+}
+
+ Execute the below code in the Anonymous window: With Try-Catch Block
+ --------------------------------------------------------------------
+Lead m1 = new Lead(LastName='Coffeemaker',company='Yuo');
+Lead m2 = new Lead(LastName='John');
+Lead m3 = new Lead(company='Boop');
+Lead m4 = new Lead();
+Lead[] mlist =new List<Lead>();
+mlist.add(m1);
+mlist.add(m2);
+mlist.add(m3);
+mlist.add(m4);
+try{
+    insert mlist;
+}
+catch(DMLException de)
+{
+    Integer numErrors = de.getNumDml();
+    system.debug('getNumDml ='+numErrors);
+    for(Integer i=0;i<=numErrors;i++){
+        system.debug('getDmlFieldName'+de.getDmlFieldNames(i));
+        system.debug('getDmlMessage'+de.getDmlMessage(i));
+    }
+}
+ 
+
+Now lets have a look at Try block with mutliple catch blocks:
+
+Syntax:
+------
+try{
+//Try block
+**code_block**
+}
+catch(exceptionType variableName){		//DML Exception
+//initial catch block
+//At least the catch block or finally block must be present
+//code_block
+}
+catch(Exception e){				//S-object Exception
+//optional additional catch statement for other exception types.
+//Note that the general exception type.'Exception'.
+//Must be the last catch block when it is used.
+}
+finally{
+//finally block
+//Atleast the catch block or the finally block must be present.
+//code_block
+}
+
+ Execute the below code in the Anonymous window: With Try-Catch Block
+ --------------------------------------------------------------------
+try{
+    Account acc = [select Name from Account limit 1];
+    string s =acc.site;
+}
+catch(DMLException e)
+{
+    system.debug('DMLException occurred'+e.getMessage());
+}
+catch(SobjectException e)
+{
+    system.debug('SobjectException occurred'+e.getMessage());
+}
+catch(Exception e)
+{
+    system.debug('Exception occurred'+e.getMessage());
+}
+finally{
+    system.debug('Cleaning up resources in finally');  
+}
+
+Now comment string s =acc.site;
+
+try{
+   Account acc = [select Name from Account limit 1];
+   //string s =acc.site;
+}
+catch(DMLException e)
+{
+system.debug('DMLException occurred'+e.getMessage());
+}
+catch(SobjectException e)
+{
+system.debug('SobjectException occurred'+e.getMessage());
+}
+catch(Exception e)
+{
+system.debug('Exception occurred'+e.getMessage());
+}
+finally{
+  system.debug('Cleaning up resources in finally');  
+}
+
+Both Sobject Exception + generic Exception will be executed.
+
+try{
+   Account acc = [select Name from Account limit 1];
+   //string s =acc.site;
+}
+catch(DMLException e)
+{
+system.debug('DMLException occurred'+e.getMessage());
+}
+catch(SobjectException e)
+{
+system.debug('SobjectException occurred'+e.getMessage());
+}
+catch(Exception e)
+{
+system.debug('Exception occurred'+e.getMessage());
+}
+finally{
+  system.debug('Cleaning up resources in finally');  
+}
+
+Now only finally block will execute
+
+Note order of execution also matters.
+
+if you move the generic catch block above to the DMLException and SobjectException block then only genric will execute but not the other two excetion because
+exception is similar to if block.
+
+try{
+    Account acc = [select Name from Account limit 1];
+    //string s =acc.site;
+}
+catch(Exception e)
+{
+    system.debug('Exception occurred'+e.getMessage());
+}
+catch(DMLException e)
+{
+    system.debug('DMLException occurred'+e.getMessage());
+}
+catch(SobjectException e)
+{
+    system.debug('SobjectException occurred'+e.getMessage());
+}
+
+finally{
+    system.debug('Cleaning up resources in finally');  
+}
+
+Error Message: Exception type already cought:System.DMLException
+
+try{
+    string s;
+    Boolean b = s.contains('abc');
+}
+catch(DmlException e){
+    system.debug('DML Exception ocurred :'+ e.getMessage());
+}
+catch(SobjectException e){
+    system.debug('Sobject exception ocurred'+e.getMessage());
+}
+catch(Exception e){
+    system.debug('Exception ocurred'+e.getMessage());
+}
+
+Now which will execute : the generic exception only : message :Exception ocurredAttempt to de-reference a null object
+
+Now let us create an Account records without any values passing
+
+try{
+    string s ='Hello';
+    Boolean b = s.contains('abc');
+    Account a = new Account();
+    insert a;
+}
+catch(DmlException e){
+    system.debug('DML Exception ocurred :'+ e.getMessage());
+}
+catch(SobjectException e){
+    system.debug('Sobject exception ocurred'+e.getMessage());
+}
+catch(Exception e){
+    system.debug('Exception ocurred'+e.getMessage());
+}
+
+Error : DML Exception ocurred :Insert failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, Required fields are missing: [Name]: [Name]
+
+The above are all the Standard exceptions
+-----------------------------------------
+Now we will see how to create custom exceptions:
+
+Why do we need custom exceptions?
+	If you wanted to go ahead and add more information that you need to convey to the custom instead of just a simple error message.
+
+So to create a custom exception
+  1.Make sure your class Name ends with the word exception such as "MyException" or "purchaseException"
+  2.All the exception classes should extend by an exception class.
+
+Now let us create a custom exception class as follows: Developer console ===> File===> new ===> Apex Class ===> Name : AcctException
+
+Apex Class:
+public class AcctException extends Exception {
+
+}
+
+Test Class:
+public class AcctUtility {
+    
+    public static void mainProcessing(){
+        insertAccount();
+    }
+    public static void insertAccount(){
+        Account a = new Account();
+        insert a;
+    }
+}
+
+The above code will throw DML Exception : to control that we will write the try cath block as follows
+
+public class AcctUtility {
+    
+    public static void mainProcessing(){
+        insertAccount();
+    }
+    public static void insertAccount(){
+        try{
+            Account a = new Account();
+            insert a;
+        }
+        catch(DmlException de){
+            throw new AcctException('Account cannot be created because the required field name is missing',de);   
+        }
+    }
+}
+
+Now You are throwing the custom exception insert account now whose responsibility is to catch the exception. It is main processing because it is trying to
+insert the account
+
+public class AcctUtility {
+    public static void mainProcessing(){
+        try{
+        insertAccount();
+        } catch(AcctException ae){
+            system.Debug('Message'+ae.getMessage());
+            system.Debug('Cause'+ae.getCause());
+            system.Debug('LineNumber'+ae.getLineNumber());
+        }
+    }
+    public static void insertAccount(){
+        try{
+        Account a = new Account();
+        insert a;
+        }
+        catch(DmlException de){
+         throw new AcctException('Account cannot be created because the required field name is missing',de);   
+        }
+    }
+}
+
+Now goto the anonymous window and type :
+---------------------------------------
+Acctutility.mainProcessing();
+
+upon executing we will get the below messages.
+[7]|DEBUG|MessageAccount cannot be created because the required field name is missing.
+[8]|DEBUG|CauseSystem.DmlException: Insert failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, Required fields are missing: [Name]: [Name]
+[9]|DEBUG|LineNumber18
