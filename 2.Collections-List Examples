@@ -10,44 +10,9 @@ List:
 list<String> colors = new list<string>();
 list<Double> Salaries = new list<Double>();
 list<String> teamMembers = new List<String>();
-                                                              Add Method in List
-                                                              ------****--------
-Example 1: I want to store colors in a List
----------
-list<String> colors = new list<string>();
-colors.add('Blue');
-colors.add('Red');
-colors.add('Yellow');
-system.debug('The color are :'+ colors);
-//Output: The color are :(Blue, Red, Yellow)
-
-Example 2:  I want to store Salaries in a List
----------
-list<Double> Salaries = new list<Double>();
-Salaries.add(10000000);
-Salaries.add(20000000);
-Salaries.add(30000000);
-system.debug('The Salaries are :'+ Salaries);
-// Output: The Salaries are :(1.0E7, 2.0E7, 3.0E7)
 
                                                             List with Duplicate Values
-                                                            ---------********---------
-Example 3: I want to store team member names in a list
----------
-list<String> teamMembers = new List<String>();
-teamMembers.add('Sachin');
-teamMembers.add('Sehwag');
-teamMembers.add('Dravid');
-teamMembers.add('Sachin');
-system.debug('The teamMember Names are :' + teamMembers);
-//Output: The teamMember Names are :(Sachin, Sehwag, Dravid,Sachin)
-
-Example 4: 
----------
-List<Integer> rollNumbers = new List<Integer>{001,002,003,004,001};
-system.debug('RollNumbers are :' + rollNumbers);
-//Output: RollNumbers are :(1, 2, 3, 4, 1)
-                                                          
+                                                            ---------********---------                                                       
 Example 5:Apex Class that contains all the list methods with example
 -------------------------------------------------------------------
 public class ListMethodsExample {
@@ -116,19 +81,12 @@ system.assertEquals(10,x);  //true
 
 Example 7: getSobjectType()
 ----------------------------
-// Create a generic sObject variable.
-SObject sObj = Database.query('SELECT Id FROM Account LIMIT 1');
+//Create a generic sObject variable.
+Sobject sObj = Database.query('select id from Account limit 1');
+//Verify if that sObject  variable is an Account token.
+system.assertEquals(Account.SobjectType, sObj.getSobjectType());
 
-// Verify if that sObject  variable is an Account token.
-System.assertEquals(
-   Account.sObjectType, 
-   sObj.getSObjectType());
-
-// Create a list of generic sObjects.
+//Create a list of generic sObjects.
 List<sObject> q = new Account[]{};
-
-// Verify if the list of sObjects 
-// contains Account tokens.
-System.assertEquals(
-   Account.sObjectType, 
-   q.getSObjectType());
+// Verify if the list of sObjects contains Account tokens.
+system.assertEquals(Account.sObjectType, q.getSobjectType());
