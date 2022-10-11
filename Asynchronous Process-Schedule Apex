@@ -1,12 +1,11 @@
-	Schedule Apex:
-  
-  1. If you want To run Apex classes at a specific time then we use schedule apex .
-  2. If you want to schedule Apex class ,then apex class has to implement schedulable Interface
+Schedule Apex:
+  1. If you want to run Apex classes at a specific time then we use schedule apex .
+  2. If you want to schedule Apex class,then apex class has to implement schedulable Interface
 
 Example:
 public class Example implements Schedulable{  }
 
-3. Any Apex class which implements  Schedulable Interface has to define execute method .
+3. Any Apex class which implements Schedulable Interface has to define execute method .
 
 Example:
 public void execute( SchedulableContext sc){
@@ -16,34 +15,27 @@ public void execute( SchedulableContext sc){
 4. Operation or Logic which you want to schedule should be defined with in the execute method.
 
 5. If want to schedule the class we have to define time trigger /cronExpression in the form of 	
-		-----------------------------------------------------------------------------------
-			SECS	MINS	HRS		DAY_MONTH 	MONTH_YEAR	DAY_WEEK	YEAR
-		-----------------------------------------------------------------------------------
+		----------------------------------------------------------------------------------------------------
+			SECS	MINS		HRS		DAY_MONTH 	MONTH_YEAR	DAY_WEEK	YEAR
+		----------------------------------------------------------------------------------------------------
 Symbol		 Meaning
-------------------
-*		        Every (Every day,Every Month ,Every hour ,Every Min)
-L		        Last ( Last Day  ,Last Month , Last firday )
-W		        Nearest Working Day
-?		        Not sure 
-,		        3,5,7 ( every 3rd ,5th ,7th)
+-------------------------
+*	Every (Every day,Every Month ,Every hour ,Every Min)
+L	Last ( Last Day  ,Last Month , Last firday )
+W	Nearest Working Day
+?	Not sure 
+,	3,5,7 ( every 3rd ,5th ,7th)
 
 6. How to schedule the job .
-
-		Id jobId=System.schedule(jobName, cronExpression,object) ;
+	Id jobId=System.schedule(jobName, cronExpression,object) ;
 	
-		a. JobName  	  : it can be any unique string 
-
-		b. CronExpression : Time at which the job has to fire 
-
-		c. Object  	  	  : object of the class which implemented the schedulable interface  
-		                    should be passed as parameter.
+a. JobName:It can be any unique string 
+b. CronExpression : Time at which the job has to fire 
+c. Object: object of the class which implemented the schedulable interface should be passed as parameter.
 Example :
-
-		ScheduleExample se=new ScheduleExample();
-
-		String expression=' 0  30  6   15   3   ? ';
-		
-		Id jobId=System.schedule('DataCleaning', expression,se);
+	ScheduleExample se=new ScheduleExample();
+	String expression=' 0  30  6   15   3   ? ';
+	Id jobId=System.schedule('DataCleaning', expression,se);
 
 7. Any job that is scheduled in the salesforce will be registred CRONTRIGGER object .
 
@@ -53,7 +45,7 @@ Example :
 9. We can also schedule apex class manually  using declarative process.
    Setup |---Build |---Develop |---Apex Classes |---Schedule Apex
 
-10.	Steps to create schedule Job
+10.Steps to create schedule Job
     Step 1: Choose the apex class 
     Step 2 : Enter the job Name
     Step 3: Define the Time Trigger
