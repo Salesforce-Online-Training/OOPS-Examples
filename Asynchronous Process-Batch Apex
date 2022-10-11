@@ -118,7 +118,9 @@ There is no relation between each other
 I want to know which records executed successfully and which records failed which executing each batch?
 
 Q)What is Stateless?
-There is connection between the batch execution. By default Batch Apex is Stateless
+a.Changes made by one execute will not  be transfered to another execute in the batch apex .
+b.If you want to transfer  the state of the data from batch to another batch we need to implement Database.Stateful interface.
+c.When a batch apex class implements Database.stateful interface state of the non-static data will be transfered  one execute to another execute method.
 
 Note: In batch Apex we cannot use Static keyword.
 
