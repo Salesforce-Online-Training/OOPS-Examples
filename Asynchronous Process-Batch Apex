@@ -240,5 +240,8 @@ No because there are Asynchronous process
 
 Q) Maximum number of callouts we can perform is :100
 
-
-
+Limitations :
+a. At a time only 5 batch jobs will run .
+b. At a time 100 jobs can be added to flexqueue.
+c. In a batch job if any of the batch fails ,only that batch will fail rest of the batch will execute normally.
+d. If the finish method fails,only finish method will fail and changes made by the all the execute methods will be commited.
