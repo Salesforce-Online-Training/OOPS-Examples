@@ -26,8 +26,12 @@ W	Nearest Working Day
 ?	Not sure 
 ,	3,5,7 ( every 3rd ,5th ,7th)
 
+Q) Job has to run at  8 PM on Every saturday
+	0	0	20	?	*	7
+Note :Sunday : 1 and Saturday : 7
+     
 6. How to schedule the job .
-	Id jobId=System.schedule(jobName, cronExpression,object) ;
+Id jobId=System.schedule(jobName, cronExpression,object) ;
 	
 a. JobName:It can be any unique string 
 b. CronExpression : Time at which the job has to fire 
@@ -50,3 +54,49 @@ Example :
     Step 2 : Enter the job Name
     Step 3: Define the Time Trigger
     Step 4: Save
+    
+10. How to stop the scheduled jobs .
+    System.abortJob(jobId) : This method will be used to stop the jobs which are scheudled /running.: Pass the id of the job which we want to stop.
+    
+11. How many jobs we can schedule at a time ?
+ANS : 100 apex jobs we can schedule .
+
+12. If we schedule the job ,will the job run exactly at the same time ?
+ANS : We cannot assure ,as all the schedule jobs are added to the queue and they will be execute once resources are available .
+
+13. Can we call webservices from the Schedule apex ?
+ANS : 1. Schedule apex will not support synchronous webservices .
+      2. If you want to call webservices ,define the webservices in the future method and call the future method in schedule apex.
+      
+14. Can we schedule the batch apex ?
+ANS : Yes we can schedule the Batch apex .
+
+1. System.scheduleBatch(object, jobName, minututesfromnow , size ofbatch);
+This method is used to run the batch one time after given minutes from now
+		
+Ex: BatchExample be =new BatchExample();
+System.scheduleBatch(be,'MyJob',30,500);
+	
+2. If you want to schedule the batch apex at a particular reccursive then 'invoke the batch apex with in the execute method.
+
+
+Requirement: Every month 1st I want to insert one account record?
+
+Apex class:
+----------
+public class ScheduleApexExample implements schedulable {
+    public void  execute(System.SchedulableContext sc){
+        system.debug('Job Id is :' + sc.getTriggerId());
+        Account acc = new Account();
+        acc.Name = 'Schedule Apex Account';
+        acc.Phone ='1234';
+        acc.Description = 'new Account record created through schedule apex';
+        insert acc;
+    }
+}
+
+Execute the below code in the Anonymous window:
+----------------------------------------------
+string cronexp = '0 0 13 * * ?';
+ScheduleApexDemo sa = new ScheduleApexDemo();
+system.schedule('schjob', cronexp, sa);
