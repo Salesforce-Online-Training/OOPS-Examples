@@ -12,8 +12,8 @@ Note:
   
 	3.Batch Apex is exposed as an interface that must be implemented by the developer. Batch jobs can be programmatically invoked at runtime using Apex.
 	  
-	4.Batch Apex  will break the larger set of records into no of batches with small set of data and every batch will run independent from each other with fresh set of 
-	  governing limits. 
+	4.Batch Apex  will break the larger set of records into no of batches with small set of data and every batch will run independent from each other with fresh 
+	set of governing limits. 
 	
 	5. If you want any Apex class to run like Batch Apex,That Apex class has to implement an Interface called:: database.Batchable interface .
 	   
@@ -36,7 +36,7 @@ Note:
 		g.Database.BatchableContext: This is used to track the status of the Job
 		
 	8. execute: 
-		a. This method will be invoked by the start method on every batch of recods.
+		a. This method will be invoked by the start method on every batch of records.
     
 		b. This method will contain business logic that need to performed on the records fetched from the start method .
 		   
@@ -108,6 +108,135 @@ Note: In order to execute the Batch class we need to use Database.execute(Batchc
 
 Requirement: When an Opportunity is Closed Won, then create a new Opportunity with same information name OpportunityName_cloned and stage Name = Prospecting?
 
+Scenario: Lets say if we have 6000 records and you are updating 2000 as batch size so it will execute 3 times.	
+		2000		2000		2000
+		Batch1		Batch2		Batch3
+
+Q) Is there any relation between Batch1 and Batch2?
+There is no relation between each other
+
+I want to know which records executed successfully and which records failed which executing each batch?
+
+Q)What is Stateless?
+There is connection between the batch execution. By default Batch Apex is Stateless
+
+Note: In batch Apex we cannot use Static keyword.
+
+In the above code lets make these modification.
+Step1: Declare a variable
+Step2: In order to make batch Apex stateful we use database.statefull in the Batch apex
+
+Q)Why we cannot use static keyword in the Batch Apex?
+  
+ Apex Class:
+ 
+ public class BatchApexExample implements Database.Batchable<sObject>,database.stateful {
+	public integer totalCount=0;
+    public Database.QueryLocator start(Database.BatchableContext bc){
+        system.debug('Start Method');
+        return Database.getQueryLocator([select id,Name,Phone,Description from Account]);
+    }
+    public void execute(Database.BatchableContext bc , List<Account> lstacc){
+        system.debug('Execute Method');
+        for(Account acc : lstacc){
+            acc.description = 'Account description updated successfully through batch Apex';
+            totalCount = totalCount + 1;
+        }
+        system.debug('The count is :'+ totalCount);
+        update lstacc;
+    }
+    
+    public void finish(Database.BatchableContext bc){
+        system.debug('Finish Method');
+        system.debug('The count is :'+ totalCount);
+        AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+                          TotalJobItems, CreatedBy.Email
+                          FROM AsyncApexJob WHERE Id =:bc.getJobId()];
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new String[] {'anji.gopanaboina@gmail.com'};
+            mail.setToAddresses(toAddresses);
+        mail.setSubject('Apex Sharing Recalculation ' + a.Status);
+        mail.setPlainTextBody('The batch Apex job processed ' + a.TotalJobItems +' batches with '+ a.NumberOfErrors + ' failures.');
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    }
+}
+
+Execute the below code in the Anonymous window
+----------------------------------------------
+BatchApexExample be = new BatchApexExample();
+database.executeBatch(be, 100);
+
+
+Requirement: Can we use callouts in Batch Apex?
+			Yes
+Step1 : We have Future callout class copy that code from Http method and then paste the same in the execute method
+Step2: Upon executing the batch Apex we will get issue are Too many callouts are not allowed.
+Step3: If you want to use callouts in the Batch Apex then we need to use Database.AllowsCallouts in the batch apex
+
+Apex Class:
+
+public class BatchApexExample implements Database.Batchable<sObject>, database.AllowsCallouts {
+	public integer totalCount=0;
+    public Database.QueryLocator start(Database.BatchableContext bc){
+        system.debug('Start Method');
+        return Database.getQueryLocator([select id,Name,Phone,Description from Account]);
+    }
+    public void execute(Database.BatchableContext bc , List<Account> lstacc){
+        system.debug('Execute Method');
+ 		
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+            // Deserialize the JSON string into collections of primitive data types.
+            Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+            // Cast the values in the 'animals' key as a list
+            List<Object> animals = (List<Object>) results.get('animals');
+            System.debug('Received the following animals:');
+            for(Object animal: animals) {
+                System.debug(animal);
+            }
+        }
+    }
+    
+    public void finish(Database.BatchableContext bc){
+        system.debug('Finish Method');
+        system.debug('The count is :'+ totalCount);
+        AsyncApexJob a = [SELECT Id, Status, NumberOfErrors, JobItemsProcessed,
+                          TotalJobItems, CreatedBy.Email
+                          FROM AsyncApexJob WHERE Id =:bc.getJobId()];
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new String[] {'anji.gopanaboina@gmail.com'};
+            mail.setToAddresses(toAddresses);
+        mail.setSubject('Apex Sharing Recalculation ' + a.Status);
+        mail.setPlainTextBody('The batch Apex job processed ' + a.TotalJobItems +' batches with '+ a.NumberOfErrors + ' failures.');
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+    }
+}
+
+Execute the below code in the Anonymous window
+----------------------------------------------
+BatchApexExample be = new BatchApexExample();
+database.executeBatch(be, 100);
+
+Q)Can we execute One Batch apex in another batch Apex?
+Yes but make sure you write in the finish method only
+
+Q)What happens when we call the batch apex in the Start method?
+It gives you an error: Database.executeBatch cannot be called from the Batch start, batch execute or Finish method
+
+Note: In the future method also we cannot call the Batch Apex.
+
+Q) Can we call future method in Batch Apex?
+A) No Error: Too many future calls
+
+Q) Can we call one future Apex in another future Apex?
+No because there are Asynchronous process
+
+Q) Maximum number of callouts we can perform is :100
 
 
 
