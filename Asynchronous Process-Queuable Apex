@@ -1,1 +1,27 @@
-Queuable Apex:
+Queuable Apex: 
+   If we want to run Apex class Asynchornously,Then we use the concept of the Queueable apex .
+	 
+   These are used to run the long running operations like external webservice call, Bulk Database operations asychronously.
+	   
+	 If you want to run apex class as Quaueable apex then ,Apex class has to implement queuable interface.
+	   
+	 Any Apex class which implements Queueable  interface has to define execute  method and Business Logic which we want to run  asynchronous is defined  
+	 within the execute method..
+	   
+ Syntax : 
+	   public void execute(QueueableContext qc){  }
+	
+	 When we invoke the queueable job using System.enqueueJob() method ,This will return Id of the asynchronous job .Using which we can track the status of the job.
+	   
+	 Note :Future method will not return the Id of the Job ,when we invoke it.
+	   
+	 Using non-primitive types: Your queueable class can contain member variables of non-primitive data types, such as sObjects or custom Apex types. 
+	  
+   Note : Future method will not accept non-primitive dataTypes as parameters.
+	  
+	Chaining jobs: We can invoke queable Apex from Other queable Apex .
+				: We can order the execution by invoking Queueable2 from queueable 1
+	
+  Note : Future method cannot be called from another future method.
+  
+  59mins
