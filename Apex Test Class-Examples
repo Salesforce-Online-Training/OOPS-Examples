@@ -1,0 +1,113 @@
+Apex Test Class:
+----------------
+  1.Any apex test class must have an Annotation called @isTest.
+  2.Apex test class will not follow Governor limit.
+  3.All DML or SOQL statements we use in Apex class will not hit database.
+  4.Tip: Try running you apex test classes Asynchrnously
+        On the Apex developer console ==> Test ==> Enable Always run Asynchrnously
+  5.Any Apex test class must have a static test method.
+      Syntax: public static testMethod void testMethod(){   }
+  6. For Any apex class or trigget must have Apex test class with minimum code coverage of 75%.
+  7.Tip: If your Org contains 90% code coverage and your apex class contains 65% code coverage, it will still deploy to Production but ideally not a good choice to do.
+  
+ Example 1: Apex Class:
+ ---------------------
+ 
+ /*Date 							Developer					Comments
+ * 14-10-2022					Anji G					US-001 :Add New Methods Add,Sub,Res
+ * ***************************************************************************************/
+public class CaluclatorExample {
+    public integer num1{set;get;}
+    public integer num2{set;get;}
+    public integer result{set;get;}
+    
+    public CaluclatorExample(){
+        num1 = 200;
+        num2 = 100;
+    }
+    public integer add(){
+        result = num1+num2;
+        system.debug('The Sum of Result is :'+ result);
+        return result;
+    }
+    public integer sub(){
+        result = num1-num2;
+        system.debug('The Sub of Result is :'+ result);
+        return result;
+    }
+    public void reset(){
+        num1 = null;
+        num2 = null;
+        result = null;
+    }
+}
+
+
+Test Class:
+----------
+
+@isTest
+public class CaluclatorExampleTest {
+    public static testmethod void calEx(){
+        CaluclatorExample calex = new CaluclatorExample();
+        calex.num1 = 40;
+        calex.num2 = 30;
+        integer resAdd = calex.add();
+        system.assertEquals(70, resAdd);
+        integer resSub = calex.sub();
+        system.assertEquals(10, resSub);
+        calex.reset();
+    } 
+}
+
+Example 2: Apex Class:
+---------
+
+public class Student {
+    public string stdName{set;get;}
+    public integer stdAge{set;get;}
+    public list<integer> lstMarks {set;get;}
+    public Student(){
+        stdName = 'Anji';
+        stdAge = 29;
+        lstMarks = new list<integer>{45,70,50,70};
+        system.debug('Student Name :'+ stdName);
+        system.debug('Student Age :'+ stdAge);
+        system.debug('Student marks :'+ lstMarks);
+    }
+    public Student(string sName,integer sAge, list<Integer> lstMark){
+        This.stdName = sName;
+        This.stdAge = sAge;
+        This.lstMarks = lstMark;
+        system.debug('Student Name :'+ stdName);
+        system.debug('Student Age :'+ stdAge);
+        system.debug('Student marks :'+ lstMarks);
+    }
+    public string caluclateScore(){
+     string firstName = 'Anji';
+     string lastName ='Gopanaboina';
+     string fullName = firstName +' - ' +lastName;
+     return fullName;
+    }
+}
+
+
+Apex Test Class:
+---------------
+
+@isTest
+public class StudentTest {
+    public static testMethod void studentMethod1(){
+        //default constructor
+        Student st = new Student();
+        string fname = st.caluclateScore();
+        system.assertEquals('Anji - Gopanaboina',fname);
+        
+    }
+    public static testMethod void studentMethod2(){
+        //Parameterized Constructor
+        Student st1 = new Student('Prashanth',33, new List<integer>{1,2,3});
+    }
+}
+
+Tip: Remove - between Anji and Gopanaboina and show them the error
