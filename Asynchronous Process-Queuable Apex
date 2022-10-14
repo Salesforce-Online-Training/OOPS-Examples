@@ -31,4 +31,74 @@ Example:
 	It is not possible to call Queuable job 2 and Queuable Job 3 in Queuable job 1
 Note : Future method cannot be called from another future method.
 
+Apex class: Queueable Apex to Insert Account record
+
+public class QueueableApexExample implements Queueable{
+    public void execute(System.QueueableContext qc){
+        Account acc = new Account();
+        acc.Name = 'Queueable Account record';
+        acc.Phone = '12345';
+        insert acc;
+    }
+}
+
+Execute the below code in Anonymous window
+------------------------------------------
+QueueableApexExample  qa = new QueueableApexExample();
+id jobId =system.enqueueJob(qa);
+system.debug('The Job Id is :'+ jobId);
+
+
+Q) Call one Queueable Apex inside another Queueable Apex
+
+Apex Class:
+
+public class QueueableApexExample implements Queueable{
+    public void execute(System.QueueableContext qc){
+       
+        //1.Insert Account record
+        Account acc = new Account();
+        acc.Name = 'Queueable Account record';
+        acc.Phone = '12345';
+        insert acc;
+        
+        //3.Call the queueableApexExample1 class here  and pass intersted account as input for the constructor
+        QueueableApexExample1 qa1 = new QueueableApexExample1(acc);
+        string jobId = system.enqueueJob(qa1);
+        system.debug('Job id is :'+ jobId);
+    }
+}
+
+Apex Class:
+
+public class QueueableApexExample1 implements Queueable{
+    Account acct;
+    //2.create a constructor and call that QueuableApexExample1 result
+    public QueueableApexExample1(Account acct){
+        this.acct = acct;
+    }
+    public void execute(System.QueueableContext qc){
+        //4.create new contact
+        contact con = new Contact();
+        con.LastName = acct.Name + 'QueueableApex record 2';
+        con.AccountId = acct.Id;
+        insert con;
+    }
+}
+
+Execute the below code in the Anonymous window
+----------------------------------------------
+QueueableApexExample  qa = new QueueableApexExample();
+id jobId =system.enqueueJob(qa);
+system.debug('The Job Id is :'+ jobId);
+
+Tip:We cannot two or more Queuable job in the same Queueable class
+
+For the above statements follow the below steps:
+Step2: Create a new QueueableApexExample2 class
+Step3: Create a method and copy the code from QueueableApexExample1 code and paste it in QueueableApexExample2
+Step4: Now call QueueableApexExample2 inside QueueableApexExample Apex class (create and object and call)
+Steps: Execute the QueueableApexExample class from the Anonymous window.
+Step6: Execute : It will throw an error : Too many Queueable jobs are added to the Queue2.
+
 
