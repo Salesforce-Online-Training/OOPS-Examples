@@ -111,3 +111,51 @@ public class StudentTest {
 }
 
 Tip: Remove - between Anji and Gopanaboina and show them the error
+
+Requirement: For updating and deleting the data we need data to be available in the database but our test class will not get the get from the object.
+             How to do that?
+@testSetup
+
+Apex Example:
+
+public class UpateandDeleteAccountClass {
+    public void updateAccount(){
+        List<Account> lstacc = [SELECT Id,Rating FROM Account];
+        for(Account acc : lstacc){
+            acc.rating='Hot';
+        }
+        update lstacc;
+    }
+    public void DeleteAccount(){
+        List<Account> lstacc = [SELECT id FROM Account WHERE Industry='Energy'];
+        delete lstacc;
+    }
+}
+
+
+Test Class:
+----------
+@isTest
+public class UpateandDeleteAccountClassTest {
+    public @testsetup static void testdata(){
+        Account acc = new Account();
+		acc.name='Test123';
+        acc.Rating='Hot';
+        acc.Industry='Energy';
+        insert acc;
+    }
+    public static testMethod void testupdateAccount(){
+        UpateandDeleteAccountClass aa = new UpateandDeleteAccountClass();
+        aa.updateAccount();
+        Account a = [SELECT id,Rating FROM Account];
+        system.assertEquals('Hot', a.Rating);
+    }
+    public static testMethod void testdeleteAccount(){
+        UpateandDeleteAccountClass aa = new UpateandDeleteAccountClass();
+        aa.DeleteAccount();
+        Integer count = [SELECT count() FROM Account WHERE Industry = 'Energy'];
+		system.assertEquals(0,count);
+    }
+    
+}
+
