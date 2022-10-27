@@ -67,23 +67,29 @@ trigger OpportunityTrigger on Opportunity(before insert,before update,Before del
     }
 }
 
-Scenario-1: Create a New Opportunity record with Name, Closed Date, Stage,Probability,Type,LeadSource and Click on Save
-----------  Which events will fire : Before Inset   and   After Insert
-                                         Trigger.New           Trigger.New and Trigger.NewMap
+Scenario-1:
+----------
+Create a New Opportunity record with Name,Closed Date,Stage,Probability,Type,LeadSource and Click on Save.Which events will fire?
+If you insert new records, before Insert and After insert operations will fire
+       a. In Before Insert, Trigger.new will fire.
+       b. In After Insert, Trigger.New and Trigger.NewMap will fire.
 
-Scenario-2: Edit the above created record by changing Stage,LeadSource and Click Save
-----------  Which events will fire:               Before Update                                       and                               After Update
-                                    Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap                    Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap
-    
-Scenario-3: Now Delete the above edited record.
-----------Which events will fire:                 Before Delete             and             After Delete
-                                            Trigger.old and Trigger.oldMap              Trigger.old and Trigger.old
+Scenario-2:
+----------
+Edit the above created record by changing Stage from Prospecting to Qualification and LeadSource from Web to Phone enquiry and Click Save. Which events will fire?
+We are modifying the existing records so we will get both new and old records, so it will fire all the operations.
+       a. In Before Update, Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap operations will fire.
+       b. In After Update, Trigger.New,Trigger.NewMap, Trigger.old and Trigger.OldMap operations will fire.
 
-Scenario-4: Now Un-delete the same deleted record from the recycle bin
----------- Which events will fire:                     After Un-delete
-                                             Trigger.New and Trigger.NewMap
+Scenario-3:
+----------
+Now Delete the above edited record.Which events will fire?
+We are deleting already existing records from the object, so we will get only Trigger.old and Trigger.oldMap operations.
+       a. In Before Delete, Trigger.old and Trigger.oldMap operations will fire.
+       b. In After Delete, Trigger.old and Trigger.oldMap operations will fire.
 
-
-
-
-
+Scenario-4:
+-----------
+Now Un-delete the same deleted record from the recycle bin. Which events will fire?
+After undeleting, records are coming from Recycle bin to the object, so those are new records and that record also contains the Id, we get Trigger.new and Trigger.newMap
+       a. In After Un-delete, Trigger.New and Trigger.NewMap
