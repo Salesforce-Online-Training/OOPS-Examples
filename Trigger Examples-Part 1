@@ -116,10 +116,36 @@ Trigger Context variables (TCV):
    7.Trigger.Old:It will hold the list of old records in the format of List<S-object> listOldRecords                    Ex: List<Account> listOldRecords
    8.Trigger.OldMap: It will hold the list of old records in the format of Map<id,value> mapOlsRecords                  Ex: Map<id,Account> olsMapAccts
 
-From the above four events When to use which? Refer to diagram
+Q)In the before Insert operation can we use Trigger.new?
+A) Goto the Account object ==> Click New to create new record ==> before the record stores into the database ==> We will get the records details which are new records.
+
+Q)In the Before Insert operation can we get Trigger.old?
+A) In the Before insert operation we will get only new records, then how come we get old records? so it is not possible.
+
+Q) In the Before Insert operation can we get Trigger.newMap?
+A) It is not possible because in newMap we have ID as one parameter, ID will only be generated once the record is saved to the database, so we cannot use Trigger.newMap
+
+Q) In the Before Insert operation can we get Trigger.oldMap?
+A) In the before insert we cannot get old id, because those are newly created records.
+
+Note: 
+1.Before Insert or After Insert
+If you are inserting completly new records, we cannot get old records, so we cannot use old or old map but we can use only Trigger.new in before Insert and
+Trigger.newMap in the After Insert.
+
+2.Before Update or After Update
+In this we will get all Trigger.new, Trigger.newMap,Trigger.old and Trigger.old
+
+3.Before Delete or After Delete
+In this we will get only Trigger.old and Trigger.oldMap because we are deleting already existing records
+
+4.After undelete
+In this we will get only Trigger.new and Trigger.newMap
+      
+Refer to diagram
    
 Syntax:
-------
+--- ---
 Trigger TriggerName on S-object (Events){
   //Validations or Automations logic
 }
