@@ -124,16 +124,6 @@ Trigger TriggerName on S-object (Events){
   //Validations or Automations logic
 }
     
-      
-Example1: Write a Triiger if the course fee is lessthan 5000 then do not enter those records
-Trigger crstrigger on course__c(before Insert){
-    List<course__c> courses = Trigger.new;
-    for(course__c crs: courses){
-        if(crs.fee < 5000){
-            crs.addError('Cheap courses are not allowed');
-        }
-    }
-}
   
 Example 2: Write a Trigger on Contact object to update the Contact description for a newly created records
 trigger ContactTrigger on contact(before Insert){
