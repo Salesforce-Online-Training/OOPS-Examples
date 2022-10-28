@@ -107,14 +107,24 @@ trigger AccountTrigger3 on Account (before delete) {
     }
 }
 Note: The above solution will also work but we should never write SOQL quiries inside the for loop and also for suppose you are attempting to delete 200 records while
-using data loader, from the above code for loop will execute 100 times because limit 100 SOQL and it will hit the governor limit
+using data loader, from the above code for loop will execute 100 times because limit 100 SOQL and it will hit the governor limit.
 
                                                         
                                                         Trigger Best Practices
-a.One Trigger One Object
-b.Always create a logic less Trigger ( Create a helper class for each trigger and put your logic in Helper classs and class the helper class in the Trigger)
+Note: 
+a.If you look at the above Trigger, we are writting complete logic in the trigger itself which is not a good practice.
+b.One Trigger One Object.
+c.Always create logic less Trigger(Create helper class for each trigger and put your logic in Helper class and call helper class in the Trigger).
 
-Now write the same above Trigger using best pratices
+Example: Now write the same above Trigger using best pratices.
+
+Steps:
+    a.Create a Class
+    b.Create seperate methods
+            i.phoneValidation(list<Account> lstNewAccs)
+            ii.UpdateFax(list<Account> lstNewAccs)
+            iii.accountDeletion(list<Account> lstOldAccs, Map<id,oldAccMap)
+     c.Make necessary modification in the Trigger.
 
 public class AccountTriggerHelper {
     //Q)1.Write a Trigger on the Account object to make Phone field mandatory?
