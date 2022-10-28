@@ -53,7 +53,7 @@ Summarize:
 	c.Flow fill the gaps
 	d.Flow downside-learning curve.
 
-Triggers:
+4.Triggers:
     a. Trigger is a apex code that executes automatically whenever an appropriate DML operation is performed.
     b. The DML operations are Insert, Update, delete and Un-delete
     c.There are two types of Triggers - Before Triggers and After Triggers
@@ -104,13 +104,13 @@ Trigger Context variables (TCV):
 			Is delete 
 			Is undelete
 			
-   c.What is this Is: When we write something with Is or Has it means these are Boolean type variable which defines it as either True or False.
-   d.Syntax to call the Trigger events: Trigger.TCV
+  c.What is this Is: When we write something with Is or Has it means these are Boolean type variable which defines it as either True or False.
+  d.Syntax to call the Trigger events: Trigger.TCV
    
-   e.Trigger.New: It will hold the list of newly created records in the format of List<S-object> listNewRecords         Ex: List<Account> listNewRecords
-   f.Trigger.NewMap: It will hold the list of newly created records in the format of Map<id,value> mapNewRecords        Ex: Map<id,Account> newMapAccts
-   g.Trigger.Old:It will hold the list of old records in the format of List<S-object> listOldRecords                    Ex: List<Account> listOldRecords
-   h.Trigger.OldMap: It will hold the list of old records in the format of Map<id,value> mapOlsRecords                  Ex: Map<id,Account> olsMapAccts
+  e.Trigger.New: It will hold the list of newly created records in the format of List<S-object> listNewRecords         Ex: List<Account> listNewRecords
+  f.Trigger.NewMap: It will hold the list of newly created records in the format of Map<id,value> mapNewRecords        Ex: Map<id,Account> newMapAccts
+  g.Trigger.Old:It will hold the list of old records in the format of List<S-object> listOldRecords                    Ex: List<Account> listOldRecords
+  h.Trigger.OldMap: It will hold the list of old records in the format of Map<id,value> mapOlsRecords                  Ex: Map<id,Account> olsMapAccts
 
 Q)In the before Insert operation can we use Trigger.new?
 A) Goto the Account object ==> Click New to create new record ==> before the record stores into the database ==> We will get the records details which are new records.
