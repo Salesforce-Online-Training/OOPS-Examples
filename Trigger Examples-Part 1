@@ -1,11 +1,10 @@
 Validation Rules:
-----------------
-    1.Validation rules are the mechanisam which is used to filter bad data and allow good data to enter into the Organization.
-    2.Validation will work only on Before Insert and Before Update operations only.
+    a.Validation rules are the mechanisam which is used to filter bad data and allow good data to enter into the Organization.
+    b.Validation will work only on Before Insert and Before Update operations only.
 
-1.Workflows:
-============
-Good:				                            		| Bad:
+Workflows: Workflows are the automation tools that let's you automate the business process.
+
+Good:				                            		Bad:
   a.Easy to use			                    			|a.It can perform only four action
   b.Mature Technology		                				i.Assign a Task
   c.Approval process can be used       		      				ii.Send an outbound message to an another software application
@@ -16,7 +15,7 @@ Good:				                            		| Bad:
 				                                	|d.It can only access some fields on related master object.there has to be a Master detail relationship between objects.If you have lookup 
 		                                          		relationship between objects you cannot apply lookup.
 2.Process builder:
-=================
+
 Good:							                                       Bad:
   a.Process builder supports far more actions than workflow such as chatter                    |a.PB can create the records,but it cannot grab the ID of a newly
  post,updating the child records ,Creating record,it also support versioning                      created record and do something with it.
@@ -26,16 +25,16 @@ Good:							                                       Bad:
    interface in the process builder.and it supports mutiple IF/THEN statements.                   display the screen and run the process based on the user input into
                                                                                                   that screen.
  
- c.Process builder can be invoked by record changes similar to workflows but                    |c.Process bulider cannot delete records.
+ c.Process builder can be invoked by record changes similar to workflows but                   |c.Process bulider cannot delete records.
    also by another process.Process builder also has an ability to trigger the 
    platform events which are things happening between salesforce and external
    systems which requires coding.
   
-  d.Process builder can update any related records regardless of whether                        |d.Scheduled actions cannot as yet be tracked back to the record.
+  d.Process builder can update any related records regardless of whether                       |d.Scheduled actions cannot as yet be tracked back to the record.
     the objects has mater detail or lookup relationship relationships.
 
 3.Flow builder:
---------------
+
 Good:							                                          Bad:
   a.Fow supports user interaction.We can create screens where the user input                      |a.Complexity-coder code and system admins run away when they see
     the data into and then we can use input in the following flow very handy.                     flow builder.they do that because if you can use flow you really
@@ -49,72 +48,69 @@ Good:							                                          Bad:
   d.Flow can call othe flows.
   
 Summarize:
----------
-	1.Workflow is limited and static
-	2.Process builder cannot interact with users and delete the records.
-	3.Flow fill the gaps
-	4.Flow downside-learning curve.
+	a.Workflow is limited and static
+	b.Process builder cannot interact with users and delete the records.
+	c.Flow fill the gaps
+	d.Flow downside-learning curve.
 
 Triggers:
----------
-    1. Trigger is a apex code that executes automatically whenever an appropriate DML operation is performed.
-    2. The DML operations are Insert, Update, delete and Un-delete
-    3.There are two types of Triggers - Before Triggers and After Triggers
+    a. Trigger is a apex code that executes automatically whenever an appropriate DML operation is performed.
+    b. The DML operations are Insert, Update, delete and Un-delete
+    c.There are two types of Triggers - Before Triggers and After Triggers
+    
 Before Triggers:
----------------
-         1.This will fire before the records commits to the database
-         2.Before Triggers is a extension to Validation Rules
-         3.Before Triggers are used for Validations
-         2.In which cases do we write Before trigger
+         i.This will fire before the records commits to the database
+         ii.Before Triggers is a extension to Validation Rules
+         iii.Before Triggers are used for Validations
+         iv.In which cases do we write Before trigger
                 a) To perform complex logics.
                        Example: Every Account will have contacts associated to it. So now, whenever we try to delete the Account it should show an error saying that 
                                 we cannot delete Account because it has contacts associated to it.
                 b) If you want to set default values on a field based on some condition on the same object.
                        Example: When AccountType = 'Banking', set Description as = 'This is the B to B Business'.
  After Trigger:
- -------------
-        1.This will fire ones the records are committed to the database.
-        2. After Triggers is an extension to Workflow, Process builders and Flows.
-        3.After Triggers are used for Automations.
-        4) In which cases do we write After Triggers
+        i.This will fire ones the records are committed to the database.
+        ii.After Triggers is an extension to Workflow, Process builders and Flows.
+        iii.After Triggers are used for Automations.
+        iv.In which cases do we write After Triggers
                a)If you want to update related object records then we use After Triggers.
                       Ex: Rollup summary can be applied in Lookup relationship as well.
                b) To sent email notification we use After Triggers.
+
 Note: Generally, Rollup summary relationship can be applied only when there is Master detail relationship between two objects, Now by using After Trigger we apply 
       rollup summary relationship even if there is lookup relationship between the objects.
      
 Trigger Events:
---------------
-    There are 7 Trigger events
-    
-    Before events               After events
-    -------------               ------------
-    1.Before Insert             1. After Insert
-    2.Before Update             2.After Update
-    3.Before Delete             3.After Delete
-                                4.After Un-delete
+There are 7 Trigger events
+ Before events               After events
+ ----------------------------------------
+ a.Before Insert             a.After Insert
+ b.Before Update             b.After Update
+ c.Before Delete             c.After Delete
+                             d.After Un-delete
 
 Trigger Context variables (TCV):
--------------------------------
-  1.Where trigger is fires in thebackground, ARE is going to take care of the Trigger execution automatically. It is the responsibility of developer to use this code 
+  a.Where trigger is fires in thebackground, ARE is going to take care of the Trigger execution automatically. It is the responsibility of developer to use this code 
   and perform the operation.TCV responsibility is to creates variables (TCV's) and using these variables we can validate or Automate.The ARE creates these TCV’s and 
   loads them with appropriate contents.ARE keeps checking which DML operation is being performed.
   
-  2.All these four events (Insert,Update, Delete and Un-Delete can be placed in 2 different places.As we said the trigger is piece of code that gets fired either 
+  b.All these four events (Insert,Update, Delete and Un-Delete can be placed in 2 different places.As we said the trigger is piece of code that gets fired either 
   before the DML operation is performed or after the DML operation is performed.
-	                            		Before Event                       After Event 
-			                          Is Before  			     Is After 
-                                              			Is Insert 
-					                        Is Update 
-					                        Is delete 
-					                        Is undelete
-   3.What is this Is: When we write something with Is or Has it means these are Boolean type variable which defines it as either True or False.
-   4.Syntax to call the Trigger events: Trigger.TCV
+
+	Before Event                       After Event 
+	Is Before  			   Is After 
+        		Is Insert
+			Is Update 
+			Is delete 
+			Is undelete
+			
+   c.What is this Is: When we write something with Is or Has it means these are Boolean type variable which defines it as either True or False.
+   d.Syntax to call the Trigger events: Trigger.TCV
    
-   5.Trigger.New: It will hold the list of newly created records in the format of List<S-object> listNewRecords         Ex: List<Account> listNewRecords
-   6.Trigger.NewMap: It will hold the list of newly created records in the format of Map<id,value> mapNewRecords        Ex: Map<id,Account> newMapAccts
-   7.Trigger.Old:It will hold the list of old records in the format of List<S-object> listOldRecords                    Ex: List<Account> listOldRecords
-   8.Trigger.OldMap: It will hold the list of old records in the format of Map<id,value> mapOlsRecords                  Ex: Map<id,Account> olsMapAccts
+   e.Trigger.New: It will hold the list of newly created records in the format of List<S-object> listNewRecords         Ex: List<Account> listNewRecords
+   f.Trigger.NewMap: It will hold the list of newly created records in the format of Map<id,value> mapNewRecords        Ex: Map<id,Account> newMapAccts
+   g.Trigger.Old:It will hold the list of old records in the format of List<S-object> listOldRecords                    Ex: List<Account> listOldRecords
+   h.Trigger.OldMap: It will hold the list of old records in the format of Map<id,value> mapOlsRecords                  Ex: Map<id,Account> olsMapAccts
 
 Q)In the before Insert operation can we use Trigger.new?
 A) Goto the Account object ==> Click New to create new record ==> before the record stores into the database ==> We will get the records details which are new records.
