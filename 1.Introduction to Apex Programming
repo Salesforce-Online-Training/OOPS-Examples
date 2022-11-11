@@ -1,0 +1,49 @@
+i.Apex is an High level language.
+ii. How Apex Programming language is similar to Natural Language?
+
+        Natural Level Language	            High Level Language
+              Paragraph	                        Program
+              Sentences	                        Statements
+              Words	                            Syntax
+              Grammar	                          Tokens
+Tokens:
+i.A smallest unit of a program that conveys a meaning 
+ii.These tokens are categorized into 5 types
+
+1.Keyword: Keywords is a word which has a well-defined meaning and its meaning cannot be changed from program to program.
+    Ex: Integer, String, Decimal, Double, Float................Etc.,
+    
+2.Identifier: Identifiers are the words in which its meaning can be changed from program to program.
+		Ex: Integer x;
+‘X’ is an Identifier which holds both positive and negative values.
+		Ex: String x;
+‘X’ is an Identifier which holds both Numbers and Character.
+ 
+ Integer                x                  =                       10;
+//	Keyword          Identifier     Assignment Operator   Literal/constant
+
+String			            x	                =			              'Test123';
+//Keyword          Identifier     Assignment Operator  	       String
+So by this we can conclude Identifier meaning can be changed from Program to Program.
+
+3.Operators: These are the symbols that perform a well-defined task.
+		Ex: 5 + 7 => 12
+Operators are of 3 types
+
+Unary: One value one operator:
+     sqrt(25)  (or)        3! 
+     OP value   (or)      Value OP 
+
+Binary: Two values one or more Operators:  
+                      sqrt(25) + sqrt(36)
+    								OP Value1 + OP value2 
+    									    (Or)
+    								Value1 OP + Value2 OP
+Ternary: Three are more values and operator: BODMAS Rules
+    		Ex: Quadratic equations
+       
+4.String: Collection of Alpha Numeric characters 
+		Ex: French, Italy, London123, SF Training…Etc., 
+
+5.Literals/Constant: These are constant values 
+		Ex: 5, 6, 8, 7, 7.8, -3.4.........Etc.,
