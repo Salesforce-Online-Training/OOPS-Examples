@@ -61,11 +61,11 @@ Do While: It will execute for the first time even if doesn't meet the condition.
 
 Note:Even if the condition is false it will execute for one time, and after that it will terminate.
 Syntax:
-Do {
-//set of statements
-inc/dec
-}
-while (Condition);
+	Do {
+	   //set of statements
+	inc/dec
+	}
+	while (Condition);
 
 Example:
 integer i=1;
