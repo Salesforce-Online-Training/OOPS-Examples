@@ -38,3 +38,49 @@ Symbol	            Meaning
   New	              Dynamic memory allocation
   This	            Reference to current class object
   :	                Contains or Includes
+
+Rules to define Identifiers:
+i.Length should be 1 to 256 characters only.
+ii.A to Z (UC and LC).
+iii.No special characters are allowed except Underscore (_).
+iv.0 to 9 ===> But identifier should not start with Numbers.
+v.It should not be a keyword.
+
+Example:
+WHeel5 =====> yes 
+_3wheel=====> Yes
+Wheel3& ====> No
+6Wheel =====> No 
+Integer Integer ====> No
+
+Naming Convention::
+
+1.Upper Camel:
+	In this naming convention, every word first letter should be capital.
+	This naming convention is used to define names for Class and Interface
+Example: 
+	Student, Invoice_Data, Employee_Info
+
+2.Lower Camel: 
+	In this naming convention, first word first letter should be small and every word first letter should be capital
+	This naming convention is used to define names for methods and variables.
+Example:
+    	setName, invokeData, getData, callMe, getStudentData
+
+3.Upper Case: 
+    	In this naming convention every word every letter should be capital.
+    	This is used for defining names for Constants.
+Example:
+    	MAX_AGE, MIN_SALARY, MAX_AMOUNT, DML_EXCEPTION
+
+4.Lower Case
+	In this naming convention every word, every letter should be small.
+    	This is used to define names for keywords and packages.
+Example:
+	for, if, while, for each loop…Etc.,
+
+Comments:
+
+There are two ways to write comments in Apex Programming 
+	Single Line Comment:  //
+	Multi-line comment:  /*     comments      */
