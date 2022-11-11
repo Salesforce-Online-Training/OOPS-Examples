@@ -1,9 +1,5 @@
 Object Oriented Programming Structure (OOPS): It is a concept that deals with 4 features
-        i.Abstraction
-        ii.Encapsulation
-        iii.Inheritance
-        iv.Polymorphism
-        
+
 i.Abstraction: levels of hiding the programming elements.
 ii.Encapsulation: binding of programming elements.
 iii.Inheritance: Reusability of Programming elements.
@@ -81,3 +77,64 @@ There are 4 different types of memberMethods
 		b.Input
 		c.Action/process
 		d.Output
+		
+Q) What is the Structure of Apex Programming?
+	Every apex program must be a encapsulation or ClassName
+	Apex classes are catogerised into 2 types.
+		    1.Business class
+            	    2.Test Class
+
+Business Class: This is where we write the actual logic of the program
+Syntax:
+	Class ClassName{
+    		//Data members 
+    		// member methods
+	}
+
+Test Class: Test Class is used to test the behavoiur of business class
+Syntax:
+	@isTest
+	Class ClassNameTest{
+    		//Data members 
+    		// member methods
+	}
+
+Q)How to distinguish between business class and test class?
+A)Append the class with word Test and use @isTest annotation on top of the class
+
+Q) Steps to create a class and Test Class?
+A)On the setup Navigation => Click on Developer Console => Goto File => New => Apex  Class => Name of the Apex class
+
+Q) Where does the execution of the program will start ?
+A) THe execution of the program will always start from the test class only by just clicking on "Runtest"  button.
+
+Q)How to call the business class inside the Test Class ?	
+	By creating an object for the business class.
+
+Q) What is object?
+    1.It is a instance of a class.
+
+Syntax: 
+    a. Step 1: new keyword will create a object 
+    b. Step 2: Once the object is created by new then constructor will be fired and it will initialize the datamembers .
+    c. Refference varaible will be created for the class to reffer to the object created using new keyword.
+    d. generally we call refference variable as object.
+    
+    ClassName objectName =  new ClassName();
+       |	   |	     |    |
+       c	   d	     a	  b
+Q)What is the syntax to define an object for a business class?
+	ClassName    objectName    =  new  ClassName();
+        
+Q) How to call memberMethods inside a Test class. 
+        objectname.methodname;
+ 
+Q) How does the Apex class will determine its difference from test class to business class?
+	By defining an Annotation called : @isTest
+
+Note : In apex programming the program execution will not start from the main method but from the testMethod keyword
+
+Q) What is the initial state of any data member?
+	Null (Nothing not even '0') 
+
+Note: The execution of the program will take place from the test class only.  
