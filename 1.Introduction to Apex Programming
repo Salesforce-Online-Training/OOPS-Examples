@@ -4,8 +4,8 @@ ii. How Apex Programming language is similar to Natural Language?
         Natural Level Language	            High Level Language
               Paragraph	                        Program
               Sentences	                        Statements
-              Words	                            Syntax
-              Grammar	                          Tokens
+              Words	                        Syntax
+              Grammar	                        Tokens
 Tokens:
 i.A smallest unit of a program that conveys a meaning 
 ii.These tokens are categorized into 5 types
@@ -20,10 +20,11 @@ ii.These tokens are categorized into 5 types
 ‘X’ is an Identifier which holds both Numbers and Character.
  
  Integer                x                  =                       10;
-//	Keyword          Identifier     Assignment Operator   Literal/constant
+//Keyword          Identifier     Assignment Operator   Literal/constant
 
-String			            x	                =			              'Test123';
+String			x	           =		      'Test123';
 //Keyword          Identifier     Assignment Operator  	       String
+
 So by this we can conclude Identifier meaning can be changed from Program to Program.
 
 3.Operators: These are the symbols that perform a well-defined task.
