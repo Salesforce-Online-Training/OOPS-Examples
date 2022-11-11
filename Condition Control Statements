@@ -1,15 +1,28 @@
-                                                                Simple Condition Control Statements
-                                                                -----------------------------------
-                                                                          If Statement
-                                                                          ------------
-Syntax:
-------
-if(condition){
-    //statements to be executed
-}
+Control Statements
+        Generally the execution of the program will take place from top to bottom but this might not be desired flow of execution as some statements might execute
+repeatedly or some statements might be skipped based on a condition. This is flow of execution is done through control statements.
 
-Example 1:
-----------
+There are 3 different types of Control statements 
+
+i.Simple condition control statement: These statements either execute once or skip the execution of the program based on the condition 
+	        Ex: if, if else, series of if, Nested if ...Etc.,
+          
+ii.Iterative condition control statement: These statements either execute several times or skip the execution of the program based on a condition 
+	        Ex: While loop, do while loop, for loop, for each loop... Etc.,
+          
+iii.Jump Condition Control Statements: This statement has nothing to do with the condition. But this statement will jump from one part of the program to another
+    part of the program.
+	        Ex: Break, goto, Function call, Return Statements.
+                                                          
+                                                              
+                                                              Simple Condition Control Statements
+If Statement:
+      Syntax:
+            if(condition){
+                //statements to be executed
+            }
+
+Example1:
 Integer age =18;
 if(age>=18){
     system.debug('You are eligible to vote');
@@ -17,15 +30,14 @@ if(age>=18){
 //Output:You are eligible to vote
 
 Example 2:
----------
 Integer marks =55;
 if(marks>=35){
     system.debug('You passed the exam');
 }
 //Output:You passed the exam
 
-                                                                                if-else condition
-                                                                                -----------------
+
+if-else condition
 Syntax:
 ------
 if(condition){
