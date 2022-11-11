@@ -1,0 +1,40 @@
+Statements in Apex Programming language:
+
+1.Input statements	: In Apex there are no input statements.
+2.Output statements: In Apex there is no output statements.
+System.debug(): Which is used to print the content in the "Log file".
+
+This System.Debug can exist in three modes
+
+1.Only Value
+  Ex: System.debug(12);
+
+2.Only Message
+	Ex: System.debug('Hi welcome to Salesforce');
+
+3.Value + Message
+	Ex: System.Debug('Hai welcome to Salesforce' + 12);
+
+Note: For input and output statements in apex we use an XML (Extended Markup language) Language: Visualforce/Lightning/LWC.
+
+3.Memory statement: Allocates memory (RAM)
+        Integer, string, Decimal, Double, Bolb, Date, DateTime, Time, Long, Boolean
+        
+4.ALU Statements: ALU statements stands for Arthematic and logical statements
+                    i.Assignment Operator: =
+                    ii.Relational Operator: >,<,>=,<=,==,!=,
+                    iii.Logical Operator: AND, OR, NOT
+                    iv.Increment/Decrement Operator: Post/Pre Increment and Post/Pre Decrement
+                    v.Special Operators: These are not mathematical operator
+
+Symbol	            Meaning
+----------------------------
+  ,	                Separator
+  {}	              Starting and ending point
+  ;	                Delimiter or End of the Statement
+  []	              Index
+  ()	              Enclosure
+  .	                Member access operator
+  New	              Dynamic memory allocation
+  This	            Reference to current class object
+  :	                Contains or Includes
