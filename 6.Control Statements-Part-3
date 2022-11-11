@@ -1,0 +1,51 @@
+Jump Condition control statements: It has nothing to do with the condition it will jump from one part of the program to another part of the program.
+Ex: Function call/return statement.
+
+Functions: It is a set of statements that performs a well-defined task whenever it is called by its name and suitable inputs.	
+
+Q) How to write a function?
+Function has 2 parts
+    i. Prototype
+    ii. Definition
+
+Q) How to write Prototype?
+We can define the prototype in 4 parts 
+    i.Datetype of the result
+    ii.methodName
+    iii.List and sequence of input declarations that are enclosed in brackets and separated by comma
+    iv.	;(End of the Statement)
+
+Syntax:
+  datatypeoftheresult  methodName(input dec1,input dec2);
+  
+Q) How to write Definition?
+    It contains 2 parts
+      i.Header
+      ii.	Body
+
+Header: It contains 3 parts
+    a.datatpye of the result
+		b.methodName
+		c.List and sequence of input declaration seperated by comma and enclosed in brackets.
+
+Body: It contains one part
+    {
+      //set of statements that performs a well-defined task
+    }
+
+Syntax: 
+	  Datatypeoftheresult  methodName(input declaration,input declaration....){
+		        // set of statements that performs a well-defined task
+	}
+  
+Q) How do the function or Method works?
+      a. For a function to work it should have calling point and the definition point
+		            i.Calling Point : Header and Body
+		            ii.Definition point: Method/Function Name and the suitable inputs
+When a function is called:
+      b. The Control gets transformed from calling point to the definition point
+      c. Values from the Calling point will be copied to the Header section of the definition point in the sequence of left to right.
+      d. After loading the values it executes the body.
+      e. And after executing the body the control goes back to the calling point  or either after executing the all the statements in the body and generates the 
+         return statements.
+      f. The calling point is replaced by the return statements.
