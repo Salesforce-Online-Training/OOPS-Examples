@@ -16,7 +16,7 @@ iii.Jump Condition Control Statements: This statement has nothing to do with the
                                                           
                                                               
                                                               Simple Condition Control Statements
-If Statement:
+If Statement:It will execute only when the condition is "True"
       Syntax:
             if(condition){
                 //statements to be executed
@@ -37,18 +37,16 @@ if(marks>=35){
 //Output:You passed the exam
 
 
-if-else condition
-Syntax:
-------
-if(condition){
-//statments to be executed    
-}
-else{
-
-}
+if-else condition: If the Condition is true then Execute all IF Statements, or else Execute else Statement.
+	Syntax:
+		if(condition){
+			//statments to be executed    
+		}
+		else{
+			//statements to be executed
+		}
 
 Example 1:
----------
 Integer Age = 20;
 if(age<=18){   // if condition ==> true
     System.Debug('You are eligible to vote');
@@ -59,7 +57,6 @@ else {
 //Output: You are not eligible to vote
 
 Example 2:
----------
 Integer marks=25;
 if(marks>=35){
     system.debug('You passed the exam');
@@ -68,27 +65,24 @@ else{
     system.debug('You are not qualified for the exam');
 }
 //Output: You are not qualified for the exam
-                                                                                  if-else-if condition
-                                                                                  ---------------------
-Syntax:
--------
-if(condition){
+                                                                                  
+if-else-if condition: It will execute till the condition becomes true.
+	Syntax:
+		if(condition){
     
-}
-else
-    if(condition){
+		}
+		else
+    		   if(condition){
         
-    }
-else
-    if(condition){
-        
-    }
-else{
+    		}
+		else
+    		  if(condition){
+        	}
+		else{
     
-}
+		}
 
 Example 1:
----------
 integer a =10;
 integer b =20;
 integer c =30;
@@ -110,7 +104,6 @@ else{
 //Output: D is big
 
 Example 2:
----------
 integer marks = 25;
     if(marks >=35 && marks <=75){
         system.debug('You are under C grade');
@@ -127,9 +120,7 @@ else{
     system.debug('You failed the exam');
 }
 
-                                                                                Nested if
-                                                                                ---------
-one IF function inside of another if is known as Nested If
+Nested if: One IF function inside of another if is known as Nested If
 
 Syntax:
 -------
