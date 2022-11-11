@@ -6,13 +6,13 @@ System.debug(): Which is used to print the content in the "Log file".
 
 This System.Debug can exist in three modes
 
-1.Only Value
+i.Only Value
   Ex: System.debug(12);
 
-2.Only Message
+ii.Only Message
 	Ex: System.debug('Hi welcome to Salesforce');
 
-3.Value + Message
+iii.Value + Message
 	Ex: System.Debug('Hai welcome to Salesforce' + 12);
 
 Note: For input and output statements in apex we use an XML (Extended Markup language) Language: Visualforce/Lightning/LWC.
@@ -40,11 +40,11 @@ Symbol	            Meaning
   :	                Contains or Includes
 
 Rules to define Identifiers:
-i.Length should be 1 to 256 characters only.
-ii.A to Z (UC and LC).
-iii.No special characters are allowed except Underscore (_).
-iv.0 to 9 ===> But identifier should not start with Numbers.
-v.It should not be a keyword.
+	i.Length should be 1 to 256 characters only.
+	ii.A to Z (UC and LC).
+	iii.No special characters are allowed except Underscore (_).
+	iv.0 to 9 ===> But identifier should not start with Numbers.
+	v.It should not be a keyword.
 
 Example:
 WHeel5 =====> yes 
