@@ -1,0 +1,76 @@
+Iterative condition control statement:
+          These are of two types
+                  i.Range based loops
+                  ii.Condition based loops
+Range based: It is a loop statement which executes the statements as long as the initial value reaches the final value once the condition reaches the final value
+             then control automatically comes out of the loop.
+	                        Ex: For loop and for each loop
+For loop:
+
+For (initialization; Condition; Increment/decrement) {
+         //set of statements
+}
+
+i.Initialization: It will execute only once during beginning of the loop
+ii.Condition: Boolean Expression which determines (True/False) and it will execute till loops condition becomes fails
+iii.Increment/Decrement: It executes after each iteration of the loop
+
+Example 1: 
+Integer i;
+for(i=1;i<=10;i++){
+system.debug(‘Salesforce Training’);
+}
+
+Example 2:
+integer i;
+for(i=1;i<=10;i++){
+system.debug('The value of i is' + i );
+}
+
+Example 3:
+integer i;
+for(i=2;i<=10;i=i+2){
+system.debug('The value of i is' + i );
+}
+
+Example 4:
+integer i;
+for(i=10;i>=2;i=i-2){
+    system.debug('The value of i is' + i);
+}
+
+Condition based:  It is a loop statement which executes the statement as long as the given condition is satisfied. Once if the condition is failed then control will 
+automatically come out of the loop.
+                    Ex: While and Do while Loop.
+                    
+While Loop:  In While loop if the condition does not meet for the first time, it will not run at all.
+Syntax:
+  while (Condition){
+      //set of statements
+  }
+  
+Example:
+integer i=1;
+while(i<=0){
+system.debug('the value of i is' + i);
+i++;
+}
+
+
+Do While: It will execute for the first time even if doesn't meet the condition.
+
+Note:Even if the condition is false it will execute for one time, and after that it will terminate.
+Syntax:
+Do {
+//set of statements
+inc/dec
+}
+while (Condition);
+
+Example:
+integer i=1;
+do{
+system.debug('the value of i is '+ i);
+i++;
+}
+while(i<=10);
