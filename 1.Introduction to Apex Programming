@@ -37,9 +37,9 @@ Unary: One value one operator:
 
 Binary: Two values one or more Operators:  
                       sqrt(25) + sqrt(36)
-    								OP Value1 + OP value2 
-    									    (Or)
-    								Value1 OP + Value2 OP
+    		     OP Value1 + OP value2 
+    			    (Or)
+    		     Value1 OP + Value2 OP
 Ternary: Three are more values and operator: BODMAS Rules
     		Ex: Quadratic equations
        
