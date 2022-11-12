@@ -1,0 +1,38 @@
+Annotations:
+      i.Annotations are keywords that start with  ‘@’ symbol and convey a special meaning to the server to treat the code in a different way.
+      ii.Annotations are additional descriptions given to a class or a method.
+      iii.Purpose: Server to treat the components in different way.
+      iv.When we specify the Class with “@” symbol then the behavior of the regular controller class,will changes to Test class .Whatever we write inside the Test
+         class will not fallow the "governor limits" and this would not reflect in the model.
+
+Note: While creating a method in Apex test class, testMethod keyword is very important to declare not the main method. In Salesforce main method can be replaced with
+any method name because execution of the test class will begin from the testMethod keyword.
+
+1.@isTest Annotation: To differentiate Business class with Test Class
+
+@isTest
+public class SampleTest{
+    public static testmethod void main(){
+        
+    }
+}
+
+2.@TestVisible Annotations : To access private data members in the Apex class.
+
+Apex Class:
+
+public class sampleClass {
+    @TestVisible private Integer num;
+}
+
+Apex Test Class:
+
+@isTest
+public class sampleClassTest {
+    public static testmethod void main(){
+        sampleClass s = new sampleClass();
+        s.num = 89;
+    }
+}
+
+3.@future Annotayion: This is an Asynchronous process which will execute in the background.
