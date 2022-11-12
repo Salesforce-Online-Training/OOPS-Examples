@@ -1,12 +1,10 @@
 Assertion:
-----------
-   1.Assertions are the conditions based on which the execution of the program either continues or terminates.
-   2.If the condition is True, then the program execution continues. If False, the execution of the program will Terminates.
-   3.The message in the system.assert will only be displayed if the statement is false.If true, then it will not display the message.
-   4.Syntax: System.assert(Condition);
+   i.Assertions are the conditions based on which the execution of the program either continues or terminates.
+   ii.If the condition is True, then the program execution continues. If False, the execution of the program will Terminates.
+   iii.The message in the system.assert will only be displayed if the statement is false.If true, then it will not display the message.
+   iv.Syntax: System.assert(Condition);
 
 Example 1:
----------
 List<Integer> num= new List<Integer>();
 num.add(10);
 system.debug('The number is :'+ num);
@@ -15,9 +13,9 @@ integer x = num[0];
 system.assertEquals(10,x);
 
 Example 2:
-----------
 System.assert(system.today().year()==2022);
 
+Example 3:
 Integer i=0;
 Integer j=1;
 system.assert(i==0,'Yes I value is True');
@@ -25,7 +23,6 @@ system.assert(i==0,'Yes I value is True');
 //Output: Nothing
 
 Example 4:
----------
 Integer i=0;
 Integer j=1;
 System.assert(i==0);
@@ -36,7 +33,6 @@ system.assertNotEquals(i,j );
 system.assertNotEquals(i,j,'Yes the expression is True');
 
 Example 5: I want to know which element is removed through system.assert
-------------------------------------------------------------------------
 List<string> colors = new string[3];
 colors[0] = 'Red';
 colors[1] = 'Blue';
@@ -45,45 +41,21 @@ string s1 = colors.remove(2);
 system.assertEquals('Yellow', s1);
 
 Example 6: Compare two sets an then check their size is equal or not
---------------------------------------------------------------------
 set<integer> myset = new set<integer>();
 myset.add(10);
 myset.add(20);
 set<integer> myset2 = new set<integer>(myset);
 system.assert(myset2.size()==2);
 
-Example 1:
----------
-String s1 = 'xyzw';
-String s2 = 'xyz';
-Boolean s3= s1.contains(s2);
-system.assertEquals(true, s3);
 
-Example 2: toUpperCase() Method
---------------------------------
-String className = 'Saelesforce Online Training';
-String Name = className.toUpperCase();
-System.debug('Name is :' + Name);
-System.assertEquals('SAELESFORCE ONLINE TRAINING', Name);
-//Output:Name is :SAELESFORCE ONLINE TRAINING
-
-Example 3: toLowerCase() Method
--------------------------------
-String className = 'SALESFORCE ONLINE TRAINING';
-String Name = className.tolowerCase();
-System.debug('Name is :' + Name);
-System.assertEquals('salesforce online training', Name);
-
-Examples4: ContainsAny() Method
--------------------------------
+Example 7: ContainsAny() Method
 String s ='hello';
 Boolean b1 = s.containsAny('hx');
 Boolean b2 = s.containsAny('x');
 system.assertEquals(true, b1);
 system.assertEquals(false, b2);
 
-Example 5: Method to get Today's Date
--------------------------------------
+Example 8: Method to get Today's Date
 Date todaydate = system.today();
 system.debug('Todays date is :' + todaydate);
 
