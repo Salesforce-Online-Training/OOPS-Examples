@@ -5,43 +5,6 @@ Constructor :
     d.Constructor will be used to initialize the datamemebers of the class.
     e.Constructor will be invoked only once's i.e at the time of creating an object or once in the lifetime of object created.
 
-Example: 
-
-Q)Create a apex class Example with a contructor 
-public class Example{
-    public Example(){
-        
-    }
-}
-
-Q)Create a apex class Student with a contructor?
-public class Student{
-    public Student(){
-        
-    }
-}
-
-Q)Create a apex class Employee with a constructor?
-public class Employee{
-    public Employee(){
-        
-    }
-}
-
-Q) Create a apex class WrappperList with a contructor?
-public class  WrapperList{
-    public WrapperList(){
-        
-    }
-}
-
-Q) Create a apex class Account_Handler with a constructor?
-public class Account_Handler{
-    public Account_Handler(){
-        
-    }
-}
-
 Q) Now coming back to our Rectangle program define the Constructor to eliminate the Null value behaviour?
 
 Apex class:
@@ -164,5 +127,3 @@ public class RectangleTest {
         rec.getValues();
     }
 }
-
-
