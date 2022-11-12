@@ -1,0 +1,96 @@
+Q) Create an Action method to caluclate Area of the Rectangle?
+
+Apex class:
+
+public class Rectangle {
+    Integer length;
+    Integer breadth;		
+    public Rectangle(){							
+        Length =0;
+        breadth=0;
+        system.debug('I am a default constructor');
+    }
+    public Rectangle(Integer len,Integer bre){							
+        Length =len;
+        breadth=bre;
+        system.debug('I am a Parameterized constructor');
+    }
+    
+    public void setValues(Integer len,integer bre){
+        length =len;
+        breadth = bre;	
+    }
+    public void calArea(){		// definition point
+        Integer Area;
+        Area = Length * Breadth;
+        system.debug('The area of the Rectangle is :'+Area);
+    }
+    public void getValues(){							
+        System.debug('The Length of the Rectangle is :'+length);
+        system.debug('The breadth of the Rectangle is :'+breadth);
+    }
+}
+
+Test Class:
+
+@isTest
+public class RectangleTest {
+    public testMethod static void main(){
+        Rectangle rec = new Rectangle(100,200);
+        rec.getValues();		
+        rec.setValues(10,20);
+        rec.calArea();
+        rec.getValues();
+        
+    }
+}
+
+
+Passing return type for the Business class:
+
+public class RectangleClass {
+    integer length;
+    integer breadth;
+    public RectangleClass(){
+        length = 0;
+        breadth = 0;
+        system.debug('I am default constructor');
+    }
+    public RectangleClass(integer len, integer bre){
+        length = len;
+        breadth = bre;
+        system.debug('I am a parameterized constructor');
+    }
+    public void setValues(integer len, integer bre){  
+        length += len;
+        breadth += bre;
+    }
+    public integer areaOfRectangle(){
+        integer area; 
+        area = length * breadth;
+        return area;
+    } 
+    public integer perOfRectangle(){
+        integer perimeter;
+        perimeter = 2 * (length + breadth);
+        return perimeter;
+    }
+    public void getValues(){
+        system.debug('The length of the Rectangle is ::'+ length);
+        system.debug('The breadth of the Rectangle is ::'+ breadth);
+    } 
+}
+
+Apex Test Class:
+
+@isTest
+public class RectangleClass_Test {
+    public static @istest void main(){ 
+        RectangleClass rec = new RectangleClass(5,10);
+        rec.getValues();
+        rec.setValues(10,20);
+        rec.getValues();
+        system.debug('The area of rectangle is ::'+ rec.areaOfRectangle());
+        system.debug('The perimeter of rectangle is ::'+ rec.perOfRectangle());
+    }
+}
