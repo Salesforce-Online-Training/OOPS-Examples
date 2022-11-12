@@ -35,8 +35,7 @@ public class RectangleTest {
         Rectangle rec = new Rectangle();
         rec.getValues();		
         rec.setValues(10,20);
-        rec.getValues();
-        
+        rec.getValues();       
     }
 }
 
@@ -80,15 +79,36 @@ public class RectangleTest {
         Rectangle rec = new Rectangle(100,200);
         rec.getValues();		
         rec.setValues(10,20);
-        rec.getValues();
-        
+        rec.getValues();        
     }
 }
 
-Q) Why do I need to pass different variable inside the method and in the data members?
-	because Local variables will dominate the object variables.
+Variables:
 
-So in-order to overcome the domination of Local variable we need to use a keyword called : This Keyword
+There are three types of variables in a class
+i.Local Variables
+ii.Object Variables
+iii.Class Variables
+
+i.Local Variables:
+	These are declared either in the header or body of a method.
+	They are created when the method is called and retained as long as the method is executed and are destroyed on completion of the method.
+	These variables can be accessed only within that method in which they are declared.
+
+ii.Object Variables:
+	These are declared within the class and outside the member methods.
+	They are created only when an object gets created and are destroyed once the object is no longer required.
+	For every object an exclusive copy is created in the memory.
+
+iii.Class Variables:
+	It is declared same as data members/object variables but it is preceded by the keyword ” Static ”.
+	Memory gets allocated when the class starts its execution.
+	One copy is created in the memory irrespective to the number of objects existing.
+	
+Note: Both Local Variables and Object variables can have same names but local variables dominate object variables. This mechanism is known as “Name Shadowing”.
+
+Q) Why do I need to pass different variable inside the method and in the data members?
+   because Local variables will dominate the object variables. So in-order to overcome the domination of Local variable we need to use a keyword called : This Keyword
 
 Apex Class:
 
