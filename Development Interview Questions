@@ -1,4 +1,31 @@
 Development Interview Questions:
 -------------------------------
 
-Q) 
+Q) What is Apex?
+i) Apex is a Salesforce proprietary programming language Which can be used only on Salesforce platform to build complex logics.
+ii)Apex is strongly typed object oriented programming structure that allows developers to execute code on Salesforce platoform
+iii)Apex programming allows developers to write code to call an API (Application programming interface)
+iv) Using Apex we can build complex business logics to most system events, including button clicks, related records updates and many more....
+
+Q) When should we use Apex?
+i) Create web services
+ii) create email services
+iii) Perform complex validations over mutliple objects
+iv) Create complex business logics that are supported by the automation tools like Workflows, Process builder and Flows
+
+Q) What are different types of datatypes available in Apex?
+i)Primitive
+ii)Collection
+iii)S-object
+iv) Enum
+
+Q)What are Primitive datatypes?
+A) Integer, decimal, double, Boolean, date, Time, DateTime, string, Long and ID
+
+Q)What are collection in Apex?
+A) List, Set and Map
+
+Q) What is S-object datatype?
+A) S-object refers to any object (both Standard and Custom objects) can be stored data in the Salesforce platform database.
+
+Q)
