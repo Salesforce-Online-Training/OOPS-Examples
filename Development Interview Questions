@@ -28,4 +28,95 @@ A) List, Set and Map
 Q) What is S-object datatype?
 A) S-object refers to any object (both Standard and Custom objects) can be stored data in the Salesforce platform database.
 
-Q)
+Q) How to access the fields from the S-object
+A) Contact con = new Contact();
+   con.lastName = 'Anji';
+   con.firstName = 'Gopanaboina';
+   insert con;
+
+Q) What is the difference between single DML vs Bulk DML operation?
+A) Updating one record at a time is single DML where as updating mutliple records using list of S-object is Bulk DML operation
+
+Single DML:
+   Contact con = new Contact();
+   con.lastName = 'Anji';
+   con.firstName = 'Gopanaboina';
+   insert con;
+   
+Bulk DML:
+  Contact con = new Contact();
+  list<Contact> lstcon = new list<Contact>();
+  con.lastName = 'Anji';
+  con.firstName = 'Gopanaboina';
+  lstcon.add(con);
+  con.lastName = 'Test';
+  con.firstName = 'Record';
+  lstcon.add(con);
+  insert lstcon;
+  
+Note: Always perform DMl operation to avoid hitting governor limit
+
+Q)Difference between DML statements vs database class methods?
+A) Apex perfoms DML operations in 2 ways
+      i)using DML operations: insert, update, delete, undelete, merge,upsert
+        if one record fails in the transcation then DMl will fail for the entire transcation
+      ii)using database class methods:
+        if one record fail in the transcation then only that record will fail not the entire transcation (partial execution will be done).
+ Example 1:
+   Contact con = new Contact();
+   con.lastName = 'Anji';
+   con.firstName = 'Gopanaboina';
+   insert con;
+   
+  Contact con = new Contact();
+  con.lastName = 'Test';
+  con.firstName = 'Record';
+  insert con;
+   
+  Example 2:
+  
+  list<Contact> lstcon = new list<Contact>();
+  lstcon.add(new contact(name='Anji Gopanaboina'));
+  lstcon.add(new contact(name='Test record'));
+  Database.saveResult[] srlist = database.insert(lstcon,false)
+
+Q)Why do we use transcational control statements? 
+A) we use transcational control statements in a scenario where we are executing multiple DML statements and we want to rollback all the DML's if one DML fails.
+
+Use case: If you want to insert contact as soon as Account is inserted, let's say you want if contact record insertion fails, then we dont want account also to insert.
+
+Q)What are transcational control statements?
+A) Database.savepoint and database.rollback
+Note: first write Database.savepoint and write your logic and  then database.rollback if you wish to rollback your code.
+      These are available in the Database class
+
+Q) Example for transcational control statements?
+A) https://www.youtube.com/watch?v=-9lH2lHkIQ0
+Account acc = new Account(name = 'Test record');
+
+//create a savepoint where AccountNumber is Null
+savepoint sp = database.setSavepoint();
+
+//change the account number
+acc.AccountNumber = '123';
+update acc;
+
+//rollback to the previous null value
+database.rollback(sp);
+
+Q)What is mixed DML errors in Salesforce?
+  When you try to perform DML operation on both setup and non-setup object in the same transcation then we face mixed DML operation.
+  
+Example: Inserting an Account record and user with role record with in the same transcation.
+
+Q) What are setup and Non-setup object in salesforce?
+A) https://www.forcetalks.com/salesforce-topic/what-are-the-setup-and-non-setup-object/#:~:text=Hi%20Saddam%2C,category%20of%20Non%2DSetup%20Objects
+   Setup Object is:  1.Profiles   2.Users   3.Record Type
+   Non-Setup Object :1.Lead       2.Account 3.Contact  5.Any Custom Object
+   
+Q) Can you tell me few objects that will not support DML operations?
+A) There are few standard objects which are also known as system objects which does not support DML operation like BusinessHours, Business process and categoryNode,
+   currencyType, DatedConversionRate, ProcessInstance,Profile, RecordType, SelfServiceUser,StaticResources, Teritory2 etc.
+   
+Q) What is record locking or locking statement in Apex?
+A) 
