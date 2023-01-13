@@ -38,10 +38,11 @@ public class PrimitiveDataTypesExamples {
         system.debug('My Login time is ::'+ loginTime);
         
         //ID DataType : To store Salesforce record ID
+	// ID is basically a 18 digit or 15 digit number (18 digit is case Insensitive and 15 is case sensitive)
         ID accountID = '0015i00000R4cdsAAB';
         system.debug('The Account ID is ::'+ accountID);
         
-        //Blob:To store attachments
+        //Blob:To store attachments, files
         
     }
 }
