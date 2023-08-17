@@ -1,11 +1,10 @@
 Synchronous Process: One process will wait for another process to execute
 
 Asynchronous Process: 
-1.It means that a process operating independently of other process
+1.Any process operating independently of other process.
 2.One method will not wait for another method to execute.
 
-Difference between Asynchronous Process and Synchronous Process
----------------------------------------------------------------
+Differences:::
                 Asynchronous Process                                                         Synchronous Process
                 --------------------                                                         --------------------
                 1.Actions that will not block the Transcation or process                      1.Quick and Immediate actions
